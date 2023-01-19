@@ -7,6 +7,8 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Login from './pages/login/Login';
+import SideBar from './components/sidebar/Sidebar';
+import { loggedIn } from './utils/auth';
 
 function App() {
   const httpLink = createHttpLink({
@@ -34,6 +36,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div className="dashboard-container">
+          {loggedIn() && <SideBar />}
           <div className="dashboard-body">
             <Routes>
               <Route path="/login" element={<Login />} />

@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import Logo from '../../components/logo/Logo';
 import './style.css';
 import LOGIN from '../../requests/mutation';
-import authLogin from '../../utils/auth';
+import { authLogin } from '../../utils/auth';
 
 function Login() {
   const [email, setEmail] = useState('');
