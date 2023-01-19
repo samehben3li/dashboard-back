@@ -9,3 +9,141 @@
     flex-direction: column;
     background-color: #F0F2F5;
 }
+
+.dashboard-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow: auto;
+    position: relative;
+}
+
+.dashboard-content-container {
+    margin: 1em;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 25px;
+    overflow: auto;
+}
+
+.dashboard-content-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dashboard-content-header h2 {
+    margin-top: auto;
+    margin-bottom: auto;
+    color: black;
+    font-size: xx-large;
+    font-weight: 700;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    margin: auto;
+}
+
+th {
+    text-align: left;
+    padding: 12px 24px;
+    background: transparent;
+    box-shadow: none;
+    color: #2D83B5;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.035em;
+    border-bottom: 0.05rem solid rgb(240, 242, 245);
+}
+
+tbody {
+    display: table-row-group;
+}
+
+tr,
+thead {
+    color: inherit;
+    display: table-row;
+    vertical-align: middle;
+    outline: 0px;
+}
+
+td {
+    text-align: left;
+    padding: 12px 24px;
+    background: transparent;
+    box-shadow: none;
+    border-bottom: 0.05rem solid rgb(240, 242, 245);
+}
+
+td div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+td span {
+    margin: 0px;
+    font-size: 0.75rem;
+    line-height: 1.25;
+    letter-spacing: 0.035em;
+    opacity: 1;
+    text-transform: none;
+    vertical-align: unset;
+    text-decoration: none;
+    color: gray;
+    font-weight: 700;
+}
+
+.dashboard-content-icon {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    height: max-content;
+    padding: 8px 8px;
+    border: 2px solid;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.icon-container.update {
+    border-color: aqua;
+}
+
+.icon-container.update:hover {
+    background-color: aqua;
+}
+
+.icon-container.delete {
+    border-color: tomato;
+}
+
+.icon-container.delete:hover {
+    background-color: tomato;
+}
+
+.icon {
+    font-size: 18px;
+}
+
+.icon.icon-update {
+    color: aqua;
+}
+
+.icon.icon-delete {
+    color: tomato;
+}

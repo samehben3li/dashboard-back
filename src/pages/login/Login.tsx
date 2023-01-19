@@ -1,15 +1,21 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import Logo from '../../components/logo/Logo';
 import './style.css';
-import LOGIN from '../../requests/mutation';
-import { authLogin } from '../../utils/auth';
+import LOGIN from '../../requests/mutations';
+import { authLogin, loggedIn } from '../../utils/auth';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState({ status: false, message: '' });
   const [login, { loading }] = useMutation(LOGIN);
+
+  useEffect(() => {
+    if (loggedIn()) {
+      window.location.assign('/');
+    }
+  }, []);
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
