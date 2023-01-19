@@ -38,12 +38,7 @@ function Users() {
           {users?.length > 0 ? (
             <tbody>
               {users?.map((user, index) => (
-                <User
-                  key={user.id}
-                  user={user}
-                  index={index}
-                  setUsers={setUsers}
-                />
+                <User key={user.id} user={user} index={index} />
               ))}
             </tbody>
           ) : null}

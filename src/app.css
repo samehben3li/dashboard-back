@@ -26,7 +26,7 @@
     padding: 1em;
     display: flex;
     flex-direction: column;
-    position: relative;
+    /* position: relative; */
     gap: 25px;
     overflow: auto;
 }
@@ -122,6 +122,7 @@ td span {
 
 .icon-container.update {
     border-color: aqua;
+    background-color: white;
 }
 
 .icon-container.update:hover {
@@ -130,6 +131,7 @@ td span {
 
 .icon-container.delete {
     border-color: tomato;
+    background-color: white;
 }
 
 .icon-container.delete:hover {
@@ -146,4 +148,72 @@ td span {
 
 .icon.icon-delete {
     color: tomato;
+}
+
+.alert-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert-wrapper {
+    background-color: white;
+    padding: 10px 30px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btns {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn {
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.btn.btn-delete {
+    color: tomato;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid tomato;
+}
+
+.btn.btn-delete:hover {
+    color: white;
+    background-color: tomato;
+}
+
+.btn.btn.btn-delete:disabled {
+    cursor: not-allowed;
+    background-color: rgba(255, 99, 71, 0.196);
+    border-color: rgba(255, 99, 71, 0.196);
+}
+
+.btn.btn-cancel {
+    color: gray;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid gray;
+}
+
+.btn.btn-cancel:hover {
+    color: white;
+    background-color: gray;
 }

@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-const LOGIN = gql`
+export const LOGIN = gql`
   mutation ($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       accessToken
@@ -14,4 +14,8 @@ const LOGIN = gql`
   }
 `;
 
-export default LOGIN;
+export const DELETE_USER = gql`
+  mutation DeleteUser($id: ID!) {
+    deleteUser(id: $id)
+  }
+`;

@@ -2,7 +2,7 @@ import { FormEvent, useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import Logo from '../../components/logo/Logo';
 import './style.css';
-import LOGIN from '../../requests/mutations';
+import { LOGIN } from '../../requests/mutations';
 import { authLogin, loggedIn } from '../../utils/auth';
 
 function Login() {
