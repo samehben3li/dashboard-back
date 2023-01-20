@@ -3,6 +3,7 @@ import IUser from '../../interfaces';
 import DoneIcon from '../../assets/icons/done.svg';
 import CancelIcon from '../../assets/icons/cancel.svg';
 import DeleteUserWrapper from './deleteUserWrapper/DeleteUserWrapper';
+import UpdateUserWrapper from './updateUserWrapper/UpdateUserWrapper';
 
 interface IProps {
   user: IUser;
@@ -12,6 +13,7 @@ interface IProps {
 
 function User({ user, setUsers, index }: IProps) {
   const [alertDelete, setAlertDelete] = useState(false);
+  const [alertUpdate, setAlertUpdate] = useState(false);
 
   return (
     <tr>
@@ -24,6 +26,7 @@ function User({ user, setUsers, index }: IProps) {
             setUsers={setUsers}
           />
         )}
+        {alertUpdate && <UpdateUserWrapper setAlertUpdate={setAlertUpdate} />}
         <span>{index + 1}</span>
       </td>
       <td>
@@ -50,9 +53,13 @@ function User({ user, setUsers, index }: IProps) {
         </div>
       </td>
       <td>
-        <div className="icon-container update">
+        <button
+          type="button"
+          className="icon-container update"
+          onClick={() => setAlertUpdate(true)}
+        >
           <i className="fa-solid fa-pen-to-square icon icon-update" />
-        </div>
+        </button>
       </td>
       <td>
         <button
