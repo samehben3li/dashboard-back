@@ -30,3 +30,24 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const UPDATE_USER = gql`
+  mutation UpdateUser(
+    $id: ID!
+    $username: String
+    $email: String
+    $password: String
+  ) {
+    updateUser(
+      id: $id
+      username: $username
+      email: $email
+      password: $password
+    ) {
+      email
+      id
+      isAdmin
+      username
+    }
+  }
+`;

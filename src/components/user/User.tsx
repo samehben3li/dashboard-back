@@ -26,7 +26,9 @@ function User({ user, setUsers, index }: IProps) {
             setUsers={setUsers}
           />
         )}
-        {alertUpdate && <UpdateUserWrapper setAlertUpdate={setAlertUpdate} />}
+        {alertUpdate && (
+          <UpdateUserWrapper setAlertUpdate={setAlertUpdate} user={user} />
+        )}
         <span>{index + 1}</span>
       </td>
       <td>

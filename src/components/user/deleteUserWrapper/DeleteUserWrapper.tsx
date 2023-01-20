@@ -33,7 +33,7 @@ function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
   return (
     <div className="alert-container">
       <div className="alert-wrapper">
-        {error && <span className="error">something went wrong</span>}
+        {error && <span className="error">something went wrong !</span>}
         <span className="question">do you want to delete {username} ?</span>
         <div className="btns">
           <button
