@@ -11,6 +11,7 @@ import SideBar from './components/sidebar/Sidebar';
 import { getToken, loggedIn } from './utils/auth';
 import Users from './pages/users/Users';
 import './app.css';
+import RiskCategories from './pages/riskCategories/RiskCategories';
 
 function App() {
   const httpLink = createHttpLink({
@@ -42,6 +43,10 @@ function App() {
           <div className="dashboard-body">
             <Routes>
               <Route path="/" element={loggedIn() ? <Users /> : <Login />} />
+              <Route
+                path="/riskCategories"
+                element={loggedIn() ? <RiskCategories /> : <Login />}
+              />
               <Route path="/login" element={<Login />} />
             </Routes>
           </div>
