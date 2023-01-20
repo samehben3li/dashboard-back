@@ -21,7 +21,7 @@ function Users() {
         btnText="New User"
         onClick={() => setAlertAddUser(true)}
       />
-      {alertAddUser && <AddUser />}
+      {alertAddUser && <AddUser setAlertAddUser={setAlertAddUser} />}
       <div className="dashboard-content-container">
         <div className="dashboard-content-header">
           <h2>Users List</h2>
