@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import DashboardHeader from '../../components/dashboardHeader/DashboardHeader';
+import AddUser from '../../components/user/addUser/AddUser';
 import User from '../../components/user/User';
 import IUser from '../../interfaces';
 import GET_USERS from '../../requests/queries';
@@ -20,6 +21,7 @@ function Users() {
         btnText="New User"
         onClick={() => setAlertAddUser(true)}
       />
+      {alertAddUser && <AddUser />}
       <div className="dashboard-content-container">
         <div className="dashboard-content-header">
           <h2>Users List</h2>
