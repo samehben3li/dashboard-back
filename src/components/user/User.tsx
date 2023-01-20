@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import IUser from '../../interfaces';
 import DoneIcon from '../../assets/icons/done.svg';
 import CancelIcon from '../../assets/icons/cancel.svg';
@@ -7,9 +7,10 @@ import DeleteUserWrapper from './deleteUserWrapper/DeleteUserWrapper';
 interface IProps {
   user: IUser;
   index: number;
+  setUsers: Dispatch<SetStateAction<IUser[]>>;
 }
 
-function User({ user, index }: IProps) {
+function User({ user, setUsers, index }: IProps) {
   const [alertDelete, setAlertDelete] = useState(false);
 
   return (
@@ -20,6 +21,7 @@ function User({ user, index }: IProps) {
             username={user.username}
             id={user.id}
             setAlertDelete={setAlertDelete}
+            setUsers={setUsers}
           />
         )}
         <span>{index + 1}</span>

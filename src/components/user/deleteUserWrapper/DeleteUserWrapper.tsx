@@ -1,14 +1,16 @@
 import { useMutation } from '@apollo/client';
 import { Dispatch, SetStateAction, useState } from 'react';
+import IUser from '../../../interfaces';
 import { DELETE_USER } from '../../../requests/mutations';
 
 interface IProps {
   username: string;
   id: string;
   setAlertDelete: Dispatch<SetStateAction<boolean>>;
+  setUsers: Dispatch<SetStateAction<IUser[]>>;
 }
 
-function DeleteUserWrapper({ username, id, setAlertDelete }: IProps) {
+function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
   const [deleteUser, { loading }] = useMutation(DELETE_USER);
   const [error, setError] = useState(false);
   const handleDelete = async () => {
@@ -20,6 +22,7 @@ function DeleteUserWrapper({ username, id, setAlertDelete }: IProps) {
         },
       });
       if (responseMutation?.data?.deleteUser === 'USER_DELETED') {
+        setUsers(prev => prev?.filter(u => u.id !== id));
         setAlertDelete(false);
       }
     } catch (err) {

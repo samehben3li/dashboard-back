@@ -7,7 +7,7 @@ import GET_USERS from '../../requests/queries';
 
 function Users() {
   const [alertAddUser, setAlertAddUser] = useState(false);
-  const [users, setUsers] = useState<[IUser] | []>([]);
+  const [users, setUsers] = useState<IUser[]>([]);
   const { data } = useQuery(GET_USERS);
 
   useEffect(() => {
@@ -38,7 +38,12 @@ function Users() {
           {users?.length > 0 ? (
             <tbody>
               {users?.map((user, index) => (
-                <User key={user.id} user={user} index={index} />
+                <User
+                  key={user.id}
+                  user={user}
+                  setUsers={setUsers}
+                  index={index}
+                />
               ))}
             </tbody>
           ) : null}
