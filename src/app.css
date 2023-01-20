@@ -10,6 +10,15 @@
     background-color: #F0F2F5;
 }
 
+.error {
+    width: 100%;
+    align-self: center;
+    background: rgba(248, 105, 105, 0.253);
+    text-align: center;
+    color: red;
+    border: 1px solid red;
+}
+
 .dashboard-content {
     display: flex;
     flex: 1;
@@ -244,4 +253,9 @@ td span {
 .btn.btn-add:hover {
     color: white;
     background-color: teal;
+}
+
+.btn.btn-add:disabled {
+    cursor: not-allowed;
+    background-color: rgba(0, 128, 128, 0.2);
 }
