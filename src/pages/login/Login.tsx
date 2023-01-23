@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import Logo from '../../components/logo/Logo';
-import './style.scss';
 
 function Login() {
   const { t } = useTranslation();

@@ -1,5 +1,4 @@
 import TomatoTrolleyLogo from '../../assets/images/TomatoTrolleyLogo';
-import './style.scss';
 
 function Logo() {
   return (
