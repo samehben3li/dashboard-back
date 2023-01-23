@@ -1,5 +1,5 @@
 import Logo from '../../components/logo/Logo';
-import './style.css';
+import './style.scss';
 
 function Login() {
   return (
