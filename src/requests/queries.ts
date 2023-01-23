@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-const GET_USERS = gql`
+export const GET_USERS = gql`
   query GetUsers {
     getUsers {
       email
@@ -11,4 +11,17 @@ const GET_USERS = gql`
   }
 `;
 
-export default GET_USERS;
+export const GET_RISK_CATEGORIES = gql`
+  query GetRiskCategories {
+    getRiskCategories {
+      id
+      imgUrl
+      name
+      riskCategoryTypes {
+        id
+        imgUrl
+        name
+      }
+    }
+  }
+`;
