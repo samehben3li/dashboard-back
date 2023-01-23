@@ -22,6 +22,7 @@ i18n
         },
       },
     },
-  });
+  })
+  .catch(() => new Error('Invalid translation'));
 
 export default i18n;
