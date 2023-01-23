@@ -1,3 +1,4 @@
+import React from 'react';
 import TomatoTrolleyLogo from '../../assets/images/TomatoTrolleyLogo';
 
 function Logo() {
