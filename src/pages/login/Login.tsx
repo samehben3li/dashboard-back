@@ -1,13 +1,15 @@
-import { FormEvent, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useMutation } from '@apollo/client';
+
+import { useTranslation } from 'react-i18next';
 import Logo from '../../components/logo/Logo';
-import './style.css';
 import LOGIN from '../../requests/mutation';
-import authLogin from '../../utils/auth';
+import { authLogin } from '../../utils/auth';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { t } = useTranslation();
   const [error, setError] = useState({ status: false, message: '' });
   const [login, { loading }] = useMutation(LOGIN);
 
@@ -25,12 +27,12 @@ function Login() {
         authLogin(mutationResponse?.data?.login?.accessToken);
         window.location.assign('/');
       } else {
-        setError({ status: true, message: 'Your Not Admin !' });
+        setError({ status: true, message: 'NOT_ADMIN' });
       }
-    } catch (err) {
+    } catch ({ message }) {
       setError({
         status: true,
-        message: 'Wrong credentials !',
+        message: message as string | 'INCORRECT_CREDENTIALS',
       });
     }
   };
@@ -40,12 +42,14 @@ function Login() {
       <div className="modal">
         <Logo />
         <form className="form-login" onSubmit={handleLogin}>
-          {error.status && <span className="error">{error.message}</span>}
+          {error.status && (
+            <span className="error">{t(`errors.${error.message}`)}</span>
+          )}
           <div className="input-group">
             <input
               type="text"
               name="email"
-              placeholder="email"
+              placeholder={`${t('login.email')}`}
               onChange={e => setEmail(e.target.value)}
               value={email}
             />
@@ -55,14 +59,14 @@ function Login() {
             <input
               type="password"
               name="password"
-              placeholder="password"
+              placeholder={`${t('login.password')}`}
               onChange={e => setPassword(e.target.value)}
               value={password}
             />
             <div className="input-icon" />
           </div>
           <button type="submit" disabled={loading}>
-            {loading ? '...' : 'Log In'}
+            {loading ? '...' : t('login.login')}
           </button>
         </form>
       </div>
