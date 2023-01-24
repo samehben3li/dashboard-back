@@ -36,7 +36,11 @@ function RiskCategories() {
           {riskCategories?.length !== 0 ? (
             <tbody>
               {riskCategories?.map((riskcategory: IRiskCategory, index) => (
-                <RiskCategoryItem key={riskcategory.id} />
+                <RiskCategoryItem
+                  key={riskcategory.id}
+                  riskCategory={riskcategory}
+                  index={index}
+                />
               ))}
             </tbody>
           ) : null}

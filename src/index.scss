@@ -6,7 +6,8 @@
 'components/logo',
 'components/dashboardHeader',
 'components/sidebar',
-'components/user';
+'components/user',
+'components/riskCategoryItem';
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -25,4 +26,8 @@ code {
     text-align: center;
     color: $error-color;
     border: 1px solid $error-color;
+}
+
+.link {
+    text-decoration: none;
 }
