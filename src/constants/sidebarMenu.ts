@@ -1,5 +1,5 @@
-import UserIcon from '../assets/icons/user.svg';
-import CategoriesIcon from '../assets/icons/categories.svg';
+import UserIcon from '../assets/icons/UserIcon';
+import CategoriesIcon from '../assets/icons/CategoryIcon';
 
 const sidebarMenu = [
   {

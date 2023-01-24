@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/client';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DashboardHeader from '../../components/dashboardHeader/DashboardHeader';
 import AddUser from '../../components/user/addUser/AddUser';
 import User from '../../components/user/User';
-import IUser from '../../interfaces';
+import { IUser } from '../../interfaces';
 import { GET_USERS } from '../../requests/queries';
 
 function Users() {

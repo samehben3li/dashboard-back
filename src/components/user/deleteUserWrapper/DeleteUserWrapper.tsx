@@ -1,6 +1,6 @@
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { Dispatch, SetStateAction, useState } from 'react';
-import IUser from '../../../interfaces';
+import { IUser } from '../../../interfaces';
 import { DELETE_USER } from '../../../requests/mutations';
 
 interface IProps {

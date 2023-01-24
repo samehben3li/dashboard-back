@@ -1,4 +1,4 @@
-import './style.css';
+import React from 'react';
 
 interface IProps {
   btnText: string;

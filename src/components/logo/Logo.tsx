@@ -1,11 +1,11 @@
-import logo from '../../assets/images/IUNU_tomato-trolley_Logo.svg';
-import './style.css';
+import React from 'react';
+import TomatoTrolleyLogo from '../../assets/images/TomatoTrolleyLogo';
 
 function Logo() {
   return (
     <div className="logo">
       <i className="fa fa-bug" aria-hidden="true" />
-      <img src={logo} alt="logo" />
+      <TomatoTrolleyLogo />
     </div>
   );
 }

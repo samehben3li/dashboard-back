@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
@@ -7,18 +8,18 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Login from './pages/login/Login';
+import { IContext } from './interfaces';
 import SideBar from './components/sidebar/Sidebar';
 import { getToken, loggedIn } from './utils/auth';
 import Users from './pages/users/Users';
-import './app.css';
 import RiskCategories from './pages/riskCategories/RiskCategories';
 
 function App() {
   const httpLink = createHttpLink({
-    uri: `${process.env.REACT_APP_SERVER}/`,
+    uri: `${process.env.REACT_APP_SERVER || ''}/`,
   });
 
-  const authLink = setContext((_, { headers }) => {
+  const authLink = setContext((_, { headers }: IContext): IContext => {
     // get the authentication token from local storage if it exists
     const token = getToken();
     // return the headers to the context so httpLink can read them

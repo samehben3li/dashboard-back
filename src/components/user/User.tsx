@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction, useState } from 'react';
-import IUser from '../../interfaces';
-import DoneIcon from '../../assets/icons/done.svg';
-import CancelIcon from '../../assets/icons/cancel.svg';
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import { IUser } from '../../interfaces';
+import DoneIcon from '../../assets/icons/DoneIcon';
+import CancelIcon from '../../assets/icons/CancelIcon';
 import DeleteUserWrapper from './deleteUserWrapper/DeleteUserWrapper';
 import UpdateUserWrapper from './updateUserWrapper/UpdateUserWrapper';
 
@@ -38,21 +38,7 @@ function User({ user, setUsers, index }: IProps) {
         <span>{user.email}</span>
       </td>
       <td>
-        <div>
-          {user.isAdmin ? (
-            <img
-              src={DoneIcon}
-              alt="paid-icon"
-              className="dashboard-content-icon"
-            />
-          ) : (
-            <img
-              src={CancelIcon}
-              alt="canceled-icon"
-              className="dashboard-content-icon"
-            />
-          )}
-        </div>
+        <div>{user.isAdmin ? <DoneIcon /> : <CancelIcon />}</div>
       </td>
       <td>
         <button

@@ -1,8 +1,7 @@
+import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
-import IUser from '../../../interfaces';
+import { IUser } from '../../../interfaces';
 import { ADD_USER } from '../../../requests/mutations';
-import '../style.css';
 
 interface IProps {
   setAlertAddUser: Dispatch<SetStateAction<boolean>>;

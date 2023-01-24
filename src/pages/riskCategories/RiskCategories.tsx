@@ -1,8 +1,9 @@
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { useEffect, useState } from 'react';
 import DashboardHeader from '../../components/dashboardHeader/DashboardHeader';
 import RiskCategoryItem from '../../components/riskCategoryItem/RiskCategoryItem';
 import { GET_RISK_CATEGORIES } from '../../requests/queries';
+import { IRiskCategory } from '../../interfaces';
 
 function RiskCategories() {
   const [alertAddRiskCategory, setAlertAddRiskCategory] = useState(false);
@@ -34,8 +35,8 @@ function RiskCategories() {
           </thead>
           {riskCategories?.length !== 0 ? (
             <tbody>
-              {riskCategories?.map((riskcategory, index) => (
-                <RiskCategoryItem />
+              {riskCategories?.map((riskcategory: IRiskCategory, index) => (
+                <RiskCategoryItem key={riskcategory.id} />
               ))}
             </tbody>
           ) : null}

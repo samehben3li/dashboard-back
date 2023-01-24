@@ -1,9 +1,9 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
-import './style.css';
 
 interface IItem {
   id: number;
-  icon: string;
+  icon: () => JSX.Element;
   path: string;
   title: string;
 }
@@ -18,11 +18,7 @@ function SidebarItem({ item, active }: IProps) {
       to={item.path}
       className={active ? 'sidebar-item-active' : 'sidebar-item'}
     >
-      <img
-        src={item.icon}
-        alt={`icon-${item.icon}`}
-        className="sidebar-item-icon"
-      />
+      <item.icon />
       <span className="sidebar-item-label">{item.title}</span>
     </Link>
   );
