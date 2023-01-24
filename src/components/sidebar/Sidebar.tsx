@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import SidebarItem from './SidebarItem';
-
 import sidebarMenu from '../../constants/sidebarMenu';
-
-import './style.css';
-import logo from '../../assets/images/IUNU_tomato-trolley_Logo.svg';
-import LogoutIcon from '../../assets/icons/logout.svg';
+import TomatoTrolleyLogo from '../../assets/images/TomatoTrolleyLogo';
+import LogoutIcon from '../../assets/icons/LogoutIcon';
 import { logout } from '../../utils/auth';
 
 function SideBar() {
@@ -20,13 +17,13 @@ function SideBar() {
         setActive(element.id);
       }
     });
-  }, [sidebarMenu, location.pathname]);
+  }, [location.pathname]);
 
   return (
     <nav className="sidebar">
       <div className="sidebar-container">
         <div className="sidebar-logo-container">
-          <img src={logo} alt="logo" />
+          <TomatoTrolleyLogo />
         </div>
 
         <div className="sidebar-container">
@@ -39,11 +36,7 @@ function SideBar() {
           </div>
           <button type="button" className="sidebar-footer" onClick={logout}>
             <span className="sidebar-item-label">LOGOUT</span>
-            <img
-              src={LogoutIcon}
-              alt="icon-logout"
-              className="sidebar-item-icon"
-            />
+            <LogoutIcon />
           </button>
         </div>
       </div>

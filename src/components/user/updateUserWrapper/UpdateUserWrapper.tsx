@@ -1,6 +1,6 @@
+import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
-import IUser from '../../../interfaces';
+import { IUser } from '../../../interfaces';
 import { UPDATE_USER } from '../../../requests/mutations';
 
 interface IProps {

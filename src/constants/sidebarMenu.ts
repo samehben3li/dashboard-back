@@ -1,4 +1,4 @@
-import UserIcon from '../assets/icons/user.svg';
+import UserIcon from '../assets/icons/UserIcon';
 
 const sidebarMenu = [
   {
