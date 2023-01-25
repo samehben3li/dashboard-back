@@ -1,0 +1,16 @@
+.main {
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(ellipse farthest-corner at center top, #d8dbe2 0%, #a9bcd0 100%);
+    font-family: 'Noto Sans', sans-serif;
+    .modal {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: $modal-color;
+        background-size: cover;
+        border-radius: 5px;
+        padding: 20px 80px 40px 80px;
+    }
+}
