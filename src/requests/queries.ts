@@ -25,3 +25,18 @@ export const GET_RISK_CATEGORIES = gql`
     }
   }
 `;
+
+export const GET_RISK_CATEGORY = gql`
+  query GetRiskCategory($id: ID!) {
+    getRiskCategory(id: $id) {
+      id
+      imgUrl
+      name
+      riskCategoryTypes {
+        id
+        imgUrl
+        name
+      }
+    }
+  }
+`;

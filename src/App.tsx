@@ -13,6 +13,7 @@ import SideBar from './components/sidebar/Sidebar';
 import { getToken, loggedIn } from './utils/auth';
 import Users from './pages/users/Users';
 import RiskCategories from './pages/riskCategories/RiskCategories';
+import RiskCategory from './pages/riskCategory/RiskCategory';
 
 function App() {
   const httpLink = createHttpLink({
@@ -47,6 +48,10 @@ function App() {
               <Route
                 path="/riskCategories"
                 element={loggedIn() ? <RiskCategories /> : <Login />}
+              />
+              <Route
+                path="/riskCategories/:id"
+                element={loggedIn() ? <RiskCategory /> : <Login />}
               />
               <Route path="/login" element={<Login />} />
             </Routes>
