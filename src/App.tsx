@@ -7,7 +7,7 @@ import {
   InMemoryCache,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import Login from './pages/login/Login';
+import Login from './pages/Login';
 import { getToken } from './utils/auth';
 import IContext from './interfaces';
 
@@ -36,8 +36,8 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="dashboard-container">
-          <div className="dashboard-body">
+        <div className="container">
+          <div className="body">
             <Routes>
               <Route path="/login" element={<Login />} />
             </Routes>

@@ -1,0 +1,19 @@
+.btn {
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-top: 20px;
+    &.btn-primary {
+        background: $btn-primary-color;
+        color: $white-color;
+        &:disabled {
+            cursor: not-allowed;
+            background-color: $btn-primary-color-disabled;
+        }
+    }
+}
