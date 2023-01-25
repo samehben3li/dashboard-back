@@ -5,7 +5,7 @@ function Logo() {
   return (
     <div className="logo">
       <i className="fa fa-bug" aria-hidden="true" />
-      <TomatoTrolleyLogo />
+      <TomatoTrolleyLogo className="logo-icon" />
     </div>
   );
 }
