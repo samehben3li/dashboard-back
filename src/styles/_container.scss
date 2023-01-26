@@ -39,21 +39,21 @@
                     align-items: center;
                     justify-content: flex-start;
                     cursor: pointer;
+                    &-active {
+                        padding: 1.5em;
+                        padding-left: 2em;
+                        display: flex;
+                        color: $white-color;
+                        list-style: none;
+                        text-decoration: none;
+                        align-items: center;
+                        justify-content: flex-start;
+                        background-color: $secondary-color;
+                        cursor: pointer;
+                    }
                     &:hover {
                         background-color: $secondary-color;
                     }
-                }
-                .sidebar-item-active {
-                    padding: 1.5em;
-                    padding-left: 2em;
-                    display: flex;
-                    color: $white-color;
-                    list-style: none;
-                    text-decoration: none;
-                    align-items: center;
-                    justify-content: flex-start;
-                    background-color: $secondary-color;
-                    cursor: pointer;
                 }
                 .sidebar-item-icon {
                     width: 20px;
