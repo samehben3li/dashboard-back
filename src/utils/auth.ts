@@ -7,10 +7,6 @@ interface IDecodedToken {
   isAdmin: boolean;
 }
 
-export const authLogin = (token: string) => {
-  localStorage.setItem('access-token', token);
-};
-
 const isTokenExpired = (token: string) => {
   try {
     const decoded: IDecodedToken = decode(token);

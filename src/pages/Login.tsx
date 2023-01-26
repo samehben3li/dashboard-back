@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import Logo from '../components/Logo';
 import LOGIN from '../requests/mutation';
-import { authLogin } from '../utils/auth';
+import useAuth from '../hooks/useAuth';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -12,6 +12,7 @@ function Login() {
   const { t } = useTranslation();
   const [error, setError] = useState({ status: false, message: '' });
   const [login, { loading }] = useMutation(LOGIN);
+  const { authLogin } = useAuth();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,7 +26,6 @@ function Login() {
       });
       if (mutationResponse?.data?.login?.user?.isAdmin) {
         authLogin(mutationResponse?.data?.login?.accessToken);
-        window.location.assign('/');
       } else {
         setError({ status: true, message: 'NOT_ADMIN' });
       }
