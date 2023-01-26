@@ -2,8 +2,8 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import { IUser } from '../../interfaces';
 import DoneIcon from '../../assets/icons/DoneIcon';
 import CancelIcon from '../../assets/icons/CancelIcon';
-import DeleteUserWrapper from './deleteUserWrapper/DeleteUserWrapper';
-import UpdateUserWrapper from './updateUserWrapper/UpdateUserWrapper';
+import DeleteUserWrapper from './DeleteUserWrapper';
+import UpdateUserWrapper from './UpdateUserWrapper';
 
 interface IProps {
   user: IUser;
@@ -11,7 +11,7 @@ interface IProps {
   setUsers: Dispatch<SetStateAction<IUser[]>>;
 }
 
-function User({ user, setUsers, index }: IProps) {
+function UserItem({ user, setUsers, index }: IProps) {
   const [alertDelete, setAlertDelete] = useState(false);
   const [alertUpdate, setAlertUpdate] = useState(false);
 
@@ -62,4 +62,4 @@ function User({ user, setUsers, index }: IProps) {
   );
 }
 
-export default User;
+export default UserItem;

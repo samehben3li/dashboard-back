@@ -20,7 +20,7 @@ i18n
             password: 'Password',
           },
           errors: {
-            NOT_ADMIN: 'Your Not Admin !',
+            NOT_ADMIN: "You're not an Admin",
             INCORRECT_CREDENTIALS: 'Wrong credentials',
           },
         },

@@ -1,53 +1,26 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import {
-  ApolloClient,
-  ApolloProvider,
-  createHttpLink,
-  InMemoryCache,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import Login from './pages/login/Login';
-import { IContext } from './interfaces';
-import SideBar from './components/sidebar/Sidebar';
-import { getToken, loggedIn } from './utils/auth';
-import Users from './pages/users/Users';
+import { Routes, Route } from 'react-router-dom';
+import { ApolloProvider } from '@apollo/client';
+import Login from './pages/Login';
+import client from './utils/client';
+import Users from './pages/Users';
+import SideBar from './components/Sidebar/Sidebar';
+import useAuth from './hooks/useAuth';
 
 function App() {
-  const httpLink = createHttpLink({
-    uri: `${process.env.REACT_APP_SERVER || ''}/`,
-  });
-
-  const authLink = setContext((_, { headers }: IContext): IContext => {
-    // get the authentication token from local storage if it exists
-    const token = getToken();
-    // return the headers to the context so httpLink can read them
-    return {
-      headers: {
-        ...headers,
-        authorization: token ? `Bearer ${token}` : '',
-      },
-    };
-  });
-
-  const client = new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache(),
-  });
+  const { isLoggedIn } = useAuth();
 
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <div className="dashboard-container">
-          {loggedIn() && <SideBar />}
-          <div className="dashboard-body">
-            <Routes>
-              <Route path="/" element={loggedIn() ? <Users /> : <Login />} />
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </div>
+      <div className="container">
+        <SideBar />
+        <div className="body">
+          <Routes>
+            <Route path="/" element={isLoggedIn ? <Users /> : <Login />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
         </div>
-      </Router>
+      </div>
     </ApolloProvider>
   );
 }

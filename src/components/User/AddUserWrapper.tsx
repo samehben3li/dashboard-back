@@ -1,14 +1,14 @@
 import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { IUser } from '../../../interfaces';
-import { ADD_USER } from '../../../requests/mutations';
+import { IUser } from '../../interfaces';
+import { ADD_USER } from '../../requests/mutations';
 
 interface IProps {
   setAlertAddUser: Dispatch<SetStateAction<boolean>>;
   setUsers: Dispatch<SetStateAction<IUser[]>>;
 }
 
-function AddUser({ setAlertAddUser, setUsers }: IProps) {
+function AddUserWrapper({ setAlertAddUser, setUsers }: IProps) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -40,7 +40,7 @@ function AddUser({ setAlertAddUser, setUsers }: IProps) {
       <div className="alert-wrapper">
         <span className="alert-title">Information of new user</span>
         <div className="hr" />
-        <form className="add-user-form" onSubmit={handleAddUser}>
+        <form onSubmit={handleAddUser}>
           {error.status && <span className="error">{error.message}</span>}
           <div className="field">
             <span>username : </span>
@@ -90,4 +90,4 @@ function AddUser({ setAlertAddUser, setUsers }: IProps) {
   );
 }
 
-export default AddUser;
+export default AddUserWrapper;

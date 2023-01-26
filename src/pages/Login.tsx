@@ -1,10 +1,9 @@
-import React, { FormEvent, useState, useEffect } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useMutation } from '@apollo/client';
-
 import { useTranslation } from 'react-i18next';
-import Logo from '../../components/logo/Logo';
-import { LOGIN } from '../../requests/mutations';
-import { authLogin, loggedIn } from '../../utils/auth';
+import Logo from '../components/Logo';
+import useAuth from '../hooks/useAuth';
+import { LOGIN } from '../requests/mutations';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -12,12 +11,7 @@ function Login() {
   const { t } = useTranslation();
   const [error, setError] = useState({ status: false, message: '' });
   const [login, { loading }] = useMutation(LOGIN);
-
-  useEffect(() => {
-    if (loggedIn()) {
-      window.location.assign('/');
-    }
-  }, []);
+  const { authLogin } = useAuth();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,7 +25,6 @@ function Login() {
       });
       if (mutationResponse?.data?.login?.user?.isAdmin) {
         authLogin(mutationResponse?.data?.login?.accessToken);
-        window.location.assign('/');
       } else {
         setError({ status: true, message: 'NOT_ADMIN' });
       }
@@ -44,10 +37,10 @@ function Login() {
   };
 
   return (
-    <div className="login">
+    <div className="main">
       <div className="modal">
         <Logo />
-        <form className="form-login" onSubmit={handleLogin}>
+        <form onSubmit={handleLogin}>
           {error.status && (
             <span className="error">{t(`errors.${error.message}`)}</span>
           )}
@@ -55,6 +48,7 @@ function Login() {
             <input
               type="text"
               name="email"
+              className="input-email"
               placeholder={`${t('login.email')}`}
               onChange={e => setEmail(e.target.value)}
               value={email}
@@ -65,13 +59,14 @@ function Login() {
             <input
               type="password"
               name="password"
+              className="input-password"
               placeholder={`${t('login.password')}`}
               onChange={e => setPassword(e.target.value)}
               value={password}
             />
             <div className="input-icon" />
           </div>
-          <button type="submit" disabled={loading}>
+          <button type="submit" className="btn btn-primary" disabled={loading}>
             {loading ? '...' : t('login.login')}
           </button>
         </form>

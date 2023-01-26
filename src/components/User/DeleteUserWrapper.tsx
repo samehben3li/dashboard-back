@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { IUser } from '../../../interfaces';
-import { DELETE_USER } from '../../../requests/mutations';
+import { IUser } from '../../interfaces';
+import { DELETE_USER } from '../../requests/mutations';
 
 interface IProps {
   username: string;
@@ -34,7 +34,7 @@ function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
     <div className="alert-container">
       <div className="alert-wrapper">
         {error && <span className="error">something went wrong !</span>}
-        <span className="question">do you want to delete {username} ?</span>
+        <span>do you want to delete {username} ?</span>
         <div className="btns">
           <button
             type="button"

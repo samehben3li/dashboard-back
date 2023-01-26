@@ -7,9 +7,9 @@ interface IProps {
 
 function DashboardHeader({ btnText, onClick }: IProps) {
   return (
-    <div className="dashbord-header-container">
+    <div className="header-container">
       {btnText && (
-        <button type="button" className="dashbord-header-btn" onClick={onClick}>
+        <button type="button" className="btn btn-header" onClick={onClick}>
           {btnText}
         </button>
       )}

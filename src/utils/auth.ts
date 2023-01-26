@@ -7,17 +7,6 @@ interface IDecodedToken {
   isAdmin: boolean;
 }
 
-export const authLogin = (token: string) => {
-  localStorage.setItem('access-token', token);
-};
-
-export const logout = () => {
-  // Clear user token and profile data from localStorage
-  localStorage.removeItem('access-token');
-  // this will reload the page and reset the state of the application
-  window.location.assign('/login');
-};
-
 const isTokenExpired = (token: string) => {
   try {
     const decoded: IDecodedToken = decode(token);
@@ -30,7 +19,8 @@ const isTokenExpired = (token: string) => {
   }
 };
 
-export const getToken = () => localStorage.getItem('access-token') || '';
+export const getToken = () =>
+  JSON.parse(localStorage.getItem('access-token') || '');
 
 export const loggedIn = () => {
   const token = getToken();

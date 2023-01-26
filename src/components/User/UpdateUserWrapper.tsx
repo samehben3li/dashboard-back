@@ -1,7 +1,7 @@
 import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { IUser } from '../../../interfaces';
-import { UPDATE_USER } from '../../../requests/mutations';
+import { IUser } from '../../interfaces';
+import { UPDATE_USER } from '../../requests/mutations';
 
 interface IProps {
   setAlertUpdate: Dispatch<SetStateAction<boolean>>;
@@ -39,7 +39,7 @@ function UpdateUserWrapper({ setAlertUpdate, user }: IProps) {
       <div className="alert-wrapper">
         <div className="alert-title">Update user</div>
         <div className="hr" />
-        <form className="update-user-form" onSubmit={handleUpdate}>
+        <form onSubmit={handleUpdate}>
           {error.status && <span className="error">{error.message}</span>}
           <div className="field">
             <span>username : </span>
@@ -79,12 +79,7 @@ function UpdateUserWrapper({ setAlertUpdate, user }: IProps) {
             >
               Cancel
             </button>
-            <button
-              type="submit"
-              className="btn btn-add"
-              value="Update"
-              disabled={loading}
-            >
+            <button type="submit" className="btn btn-add" disabled={loading}>
               Update
             </button>
           </div>

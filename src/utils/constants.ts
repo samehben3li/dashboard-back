@@ -1,6 +1,8 @@
 import UserIcon from '../assets/icons/UserIcon';
 
-const sidebarMenu = [
+export const serverURL = `${process.env.REACT_APP_SERVER || ''}/`;
+
+export const sidebarMenu = [
   {
     id: 1,
     icon: UserIcon,
@@ -8,5 +10,3 @@ const sidebarMenu = [
     title: 'USERS',
   },
 ];
-
-export default sidebarMenu;

@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import 'https://fonts.googleapis.com/css?family=Noto+Sans';
-@import 'colors',
-'app',
-'pages/login',
-'components/logo',
-'components/dashboardHeader',
-'components/sidebar',
-'components/user';
+@import './colors',
+'./container',
+'./main',
+'./table',
+'./form',
+'./logos_icons',
+'./buttons',
+'./alert';
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -21,8 +22,16 @@ code {
 .error {
     width: 100%;
     align-self: center;
-    background: $error-light-color;
+    background: rgba(248, 105, 105, 0.253);
     text-align: center;
-    color: $error-color;
-    border: 1px solid $error-color;
+    color: red;
+    border: 1px solid red;
+}
+
+.hidden {
+    display: none;
+}
+
+.link {
+    text-decoration: none;
 }

@@ -1,10 +1,10 @@
-import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
-import DashboardHeader from '../../components/dashboardHeader/DashboardHeader';
-import AddUser from '../../components/user/addUser/AddUser';
-import User from '../../components/user/User';
-import { IUser } from '../../interfaces';
-import GET_USERS from '../../requests/queries';
+import { useQuery } from '@apollo/client';
+import DashboardHeader from '../components/DashboardHeader';
+import AddUser from '../components/User/AddUserWrapper';
+import User from '../components/User/UserItem';
+import { IUser } from '../interfaces';
+import GET_USERS from '../requests/queries';
 
 function Users() {
   const [alertAddUser, setAlertAddUser] = useState(false);
@@ -16,7 +16,7 @@ function Users() {
   }, [data]);
 
   return (
-    <div className="dashboard-content">
+    <div className="content">
       <DashboardHeader
         btnText="New User"
         onClick={() => setAlertAddUser(true)}
@@ -24,8 +24,8 @@ function Users() {
       {alertAddUser && (
         <AddUser setAlertAddUser={setAlertAddUser} setUsers={setUsers} />
       )}
-      <div className="dashboard-content-container">
-        <div className="dashboard-content-header">
+      <div className="content-container">
+        <div className="content-header">
           <h2>Users List</h2>
         </div>
 
