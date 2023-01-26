@@ -1,5 +1,6 @@
 import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 import { IUser } from '../../interfaces';
 import { ADD_USER } from '../../requests/mutations';
 
@@ -14,6 +15,7 @@ function AddUserWrapper({ setAlertAddUser, setUsers }: IProps) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState({ status: false, message: '' });
   const [createUser, { loading }] = useMutation(ADD_USER);
+  const { t } = useTranslation();
 
   const handleAddUser = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,36 +40,36 @@ function AddUserWrapper({ setAlertAddUser, setUsers }: IProps) {
   return (
     <div className="alert-container">
       <div className="alert-wrapper">
-        <span className="alert-title">Information of new user</span>
+        <span className="alert-title">{`${t('titles.NEW_USER_INFO')}`}</span>
         <div className="hr" />
         <form onSubmit={handleAddUser}>
           {error.status && <span className="error">{error.message}</span>}
           <div className="field">
-            <span>username : </span>
+            <span>{`${t('login.USERNAME')}`} : </span>
             <input
               type="text"
               name="username"
-              placeholder="username"
+              placeholder={`${t('login.USERNAME')}`}
               onChange={e => setUsername(e.target.value)}
               value={username}
             />
           </div>
           <div className="field">
-            <span>email : </span>
+            <span>{`${t('login.EMAIL')}`} : </span>
             <input
               type="text"
               name="email"
-              placeholder="email"
+              placeholder={`${t('login.EMAIL')}`}
               onChange={e => setEmail(e.target.value)}
               value={email}
             />
           </div>
           <div className="field">
-            <span>password : </span>
+            <span>{`${t('login.PASSWORD')}`} : </span>
             <input
               type="password"
               name="password"
-              placeholder="password"
+              placeholder={`${t('login.PASSWORD')}`}
               onChange={e => setPassword(e.target.value)}
               value={password}
             />
@@ -78,10 +80,10 @@ function AddUserWrapper({ setAlertAddUser, setUsers }: IProps) {
               className="btn btn-cancel"
               onClick={() => setAlertAddUser(false)}
             >
-              Cancel
+              {`${t('actions.CANCEL')}`}
             </button>
             <button type="submit" className="btn btn-add" disabled={loading}>
-              Create
+              {`${t('actions.CREATE')}`}
             </button>
           </div>
         </form>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 import DashboardHeader from '../components/DashboardHeader';
 import AddUser from '../components/User/AddUserWrapper';
 import User from '../components/User/UserItem';
@@ -10,6 +11,7 @@ function Users() {
   const [alertAddUser, setAlertAddUser] = useState(false);
   const [users, setUsers] = useState<IUser[]>([]);
   const { data } = useQuery(GET_USERS);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setUsers(data?.getUsers);
@@ -18,7 +20,7 @@ function Users() {
   return (
     <div className="content">
       <DashboardHeader
-        btnText="New User"
+        btnText={`${t('header.NEW_USER')}`}
         onClick={() => setAlertAddUser(true)}
       />
       {alertAddUser && (
@@ -26,17 +28,17 @@ function Users() {
       )}
       <div className="content-container">
         <div className="content-header">
-          <h2>Users List</h2>
+          <h2>{`${t('titles.USERS_LIST')}`}</h2>
         </div>
 
         <table>
           <thead>
-            <th>ID</th>
-            <th>USERNAME</th>
-            <th>EMAIL</th>
-            <th>IS ADMIN</th>
-            <th>UPDATE</th>
-            <th>DELETE</th>
+            <th>{`${t('login.ID')}`}</th>
+            <th>{`${t('login.USERNAME')}`}</th>
+            <th>{`${t('login.EMAIL')}`}</th>
+            <th>{`${t('login.IS_ADMIN')}`}</th>
+            <th>{`${t('actions.UPDATE')}`}</th>
+            <th>{`${t('actions.DELETE')}`}</th>
           </thead>
 
           {users?.length > 0 ? (

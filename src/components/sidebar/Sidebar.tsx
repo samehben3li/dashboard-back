@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import SidebarItem from './SidebarItem';
 import TomatoTrolleyLogo from '../../assets/images/TomatoTrolleyLogo';
@@ -10,6 +11,7 @@ function SideBar() {
   const location = useLocation();
   const [active, setActive] = useState(1);
   const { logout, isLoggedIn } = useAuth();
+  const { t } = useTranslation();
 
   useEffect(() => {
     sidebarMenu.forEach(element => {
@@ -35,7 +37,9 @@ function SideBar() {
             ))}
           </div>
           <button type="button" className="btn btn-logout" onClick={logout}>
-            <span className="sidebar-item-label">LOGOUT</span>
+            <span className="sidebar-item-label">
+              {t('sidebarItem.LOGOUT')}
+            </span>
             <LogoutIcon />
           </button>
         </div>

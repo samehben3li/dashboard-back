@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 import { IUser } from '../../interfaces';
 import { DELETE_USER } from '../../requests/mutations';
 
@@ -13,6 +14,7 @@ interface IProps {
 function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
   const [deleteUser, { loading }] = useMutation(DELETE_USER);
   const [error, setError] = useState(false);
+  const { t } = useTranslation();
   const handleDelete = async () => {
     setError(false);
     try {
@@ -33,15 +35,17 @@ function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
   return (
     <div className="alert-container">
       <div className="alert-wrapper">
-        {error && <span className="error">something went wrong !</span>}
-        <span>do you want to delete {username} ?</span>
+        {error && (
+          <span className="error">{`${t('errors.SOMETHING_WENT_WRONG')}`}</span>
+        )}
+        <span>{t('titles.QUESTION_DELETE_USER') + username} ?</span>
         <div className="btns">
           <button
             type="button"
             className="btn btn-cancel"
             onClick={() => setAlertDelete(false)}
           >
-            Cancel
+            {`${t('actions.CANCEL')}`}
           </button>
           <button
             type="button"
@@ -49,7 +53,7 @@ function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
             onClick={handleDelete}
             disabled={loading}
           >
-            Delete
+            {`${t('actions.DELETE')}`}
           </button>
         </div>
       </div>
