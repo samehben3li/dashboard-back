@@ -45,6 +45,7 @@ i18n
             NOT_ADMIN: "You're not an Admin",
             INCORRECT_CREDENTIALS: 'Wrong credentials',
             SOMETHING_WENT_WRONG: 'something went wrong !',
+            INFORATION_ALREADY_EXIST: 'this information already exist !',
           },
         },
       },

@@ -33,7 +33,7 @@ function AddUserWrapper({ setAlertAddUser, setUsers }: IProps) {
         setAlertAddUser(false);
       }
     } catch (err) {
-      setError({ status: true, message: 'this information already exist !' });
+      setError({ status: true, message: 'INFORATION_ALREADY_EXIST' });
     }
   };
 
@@ -43,7 +43,9 @@ function AddUserWrapper({ setAlertAddUser, setUsers }: IProps) {
         <span className="alert-title">{`${t('titles.NEW_USER_INFO')}`}</span>
         <div className="hr" />
         <form onSubmit={handleAddUser}>
-          {error.status && <span className="error">{error.message}</span>}
+          {error.status && (
+            <span className="error">{`${t(`errors.${error.message}`)}`}</span>
+          )}
           <div className="field">
             <span>{`${t('login.USERNAME')}`} : </span>
             <input
