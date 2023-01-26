@@ -10,10 +10,11 @@ import { setContext } from '@apollo/client/link/context';
 import Login from './pages/Login';
 import { getToken } from './utils/auth';
 import IContext from './interfaces';
+import serverURL from './utils/constants';
 
 function App() {
   const httpLink = createHttpLink({
-    uri: `${process.env.REACT_APP_SERVER || ''}/`,
+    uri: serverURL,
   });
 
   const authLink = setContext((_, { headers }: IContext): IContext => {
