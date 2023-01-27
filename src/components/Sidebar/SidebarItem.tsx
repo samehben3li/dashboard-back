@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 interface IItem {
   id: number;
@@ -10,21 +10,22 @@ interface IItem {
 }
 interface IProps {
   item: IItem;
-  active: boolean;
 }
 
-function SidebarItem({ item, active }: IProps) {
+function SidebarItem({ item }: IProps) {
   const { t } = useTranslation();
   return (
-    <Link
+    <NavLink
       to={item.path}
-      className={active ? 'sidebar-item-active' : 'sidebar-item'}
+      className={({ isActive }) =>
+        isActive ? 'sidebar-item-active' : 'sidebar-item'
+      }
     >
       <item.icon />
       <span className="sidebar-item-label">
         {t(`sidebarItem.${item.title}`)}
       </span>
-    </Link>
+    </NavLink>
   );
 }
 export default SidebarItem;

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
 import TomatoTrolleyLogo from '../../assets/images/TomatoTrolleyLogo';
 import LogoutIcon from '../../assets/icons/LogoutIcon';
 import useAuth from '../../hooks/useAuth';
@@ -8,18 +7,8 @@ import { sidebarMenu } from '../../utils/constants';
 import SidebarItem from './SidebarItem';
 
 function SideBar() {
-  const location = useLocation();
-  const [active, setActive] = useState(1);
   const { logout, isLoggedIn } = useAuth();
   const { t } = useTranslation();
-
-  useEffect(() => {
-    sidebarMenu.forEach(element => {
-      if (location.pathname === element.path) {
-        setActive(element.id);
-      }
-    });
-  }, [location.pathname]);
 
   return (
     <nav className={`sidebar ${!isLoggedIn ? 'hidden' : ''}`}>
@@ -32,7 +21,7 @@ function SideBar() {
           <div className="sidebar-items">
             {sidebarMenu.map(item => (
               <div key={item.id}>
-                <SidebarItem active={item.id === active} item={item} />
+                <SidebarItem item={item} />
               </div>
             ))}
           </div>
