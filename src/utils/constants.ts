@@ -14,6 +14,6 @@ export const sidebarMenu = [
     id: 2,
     icon: CategoriesIcon,
     path: '/riskcategories',
-    title: 'RISK CATEGORIES',
+    title: 'RISK_CATEGORIES',
   },
 ];
