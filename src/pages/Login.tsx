@@ -49,7 +49,7 @@ function Login() {
               type="text"
               name="email"
               className="input-email"
-              placeholder={`${t('login.email')}`}
+              placeholder={`${t('login.EMAIL')}`}
               onChange={e => setEmail(e.target.value)}
               value={email}
             />
@@ -60,14 +60,14 @@ function Login() {
               type="password"
               name="password"
               className="input-password"
-              placeholder={`${t('login.password')}`}
+              placeholder={`${t('login.PASSWORD')}`}
               onChange={e => setPassword(e.target.value)}
               value={password}
             />
             <div className="input-icon" />
           </div>
           <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? '...' : t('login.login')}
+            {loading ? '...' : t('login.LOGIN')}
           </button>
         </form>
       </div>
