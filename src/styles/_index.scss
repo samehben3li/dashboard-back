@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import 'https://fonts.googleapis.com/css?family=Noto+Sans';
+@import './colors',
+'./container',
+'./main',
+'./table',
+'./form',
+'./logos_icons',
+'./buttons',
+'./alert';
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.error {
+    width: 100%;
+    align-self: center;
+    background: rgba(248, 105, 105, 0.253);
+    text-align: center;
+    color: red;
+    border: 1px solid red;
+}
+
+.hidden {
+    display: none;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.full-width {
+    width: 100%;
+}

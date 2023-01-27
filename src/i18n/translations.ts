@@ -15,13 +15,37 @@ i18n
       en: {
         translation: {
           login: {
-            login: 'Login',
-            email: 'Email Address',
-            password: 'Password',
+            ID: 'ID',
+            LOGIN: 'Login',
+            EMAIL: 'Email',
+            PASSWORD: 'Password',
+            USERNAME: 'Username',
+            IS_ADMIN: 'IS ADMIN',
+          },
+          sidebarItem: {
+            USERS: 'USERS',
+            LOGOUT: 'LOGOUT',
+          },
+          titles: {
+            USERS_LIST: 'Users List',
+            NEW_USER_INFO: 'Information of new user',
+            UPDATE_USER: 'Update user',
+            QUESTION_DELETE_USER: 'do you want to delete ',
+          },
+          actions: {
+            CREATE: 'Create',
+            UPDATE: 'Update',
+            DELETE: 'Delete',
+            CANCEL: 'Cancel',
+          },
+          header: {
+            NEW_USER: 'New User',
           },
           errors: {
-            NOT_ADMIN: 'Your Not Admin !',
+            NOT_ADMIN: "You're not an Admin",
             INCORRECT_CREDENTIALS: 'Wrong credentials',
+            SOMETHING_WENT_WRONG: 'something went wrong !',
+            INFORMATION_ALREADY_EXIST: 'this information already exist !',
           },
         },
       },

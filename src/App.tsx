@@ -1,63 +1,36 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import {
-  ApolloClient,
-  ApolloProvider,
-  createHttpLink,
-  InMemoryCache,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import Login from './pages/login/Login';
-import { IContext } from './interfaces';
-import SideBar from './components/sidebar/Sidebar';
-import { getToken, loggedIn } from './utils/auth';
-import Users from './pages/users/Users';
-import RiskCategories from './pages/riskCategories/RiskCategories';
-import RiskCategory from './pages/riskCategory/RiskCategory';
+import { Routes, Route } from 'react-router-dom';
+import { ApolloProvider } from '@apollo/client';
+import Login from './pages/Login';
+import client from './utils/client';
+import Users from './pages/Users';
+import { Sidebar } from './components/Sidebar';
+import useAuth from './hooks/useAuth';
+import RiskCategories from './pages/RiskCategories';
+import RiskCategory from './pages/RiskCategory';
 
 function App() {
-  const httpLink = createHttpLink({
-    uri: `${process.env.REACT_APP_SERVER || ''}/`,
-  });
-
-  const authLink = setContext((_, { headers }: IContext): IContext => {
-    // get the authentication token from local storage if it exists
-    const token = getToken();
-    // return the headers to the context so httpLink can read them
-    return {
-      headers: {
-        ...headers,
-        authorization: token ? `Bearer ${token}` : '',
-      },
-    };
-  });
-
-  const client = new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache(),
-  });
+  const { isLoggedIn } = useAuth();
 
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <div className="dashboard-container">
-          {loggedIn() && <SideBar />}
-          <div className="dashboard-body">
-            <Routes>
-              <Route path="/" element={loggedIn() ? <Users /> : <Login />} />
-              <Route
-                path="/riskCategories"
-                element={loggedIn() ? <RiskCategories /> : <Login />}
-              />
-              <Route
-                path="/riskCategories/:id"
-                element={loggedIn() ? <RiskCategory /> : <Login />}
-              />
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </div>
+      <div className="container">
+        <Sidebar />
+        <div className="body">
+          <Routes>
+            <Route path="/" element={isLoggedIn ? <Users /> : <Login />} />
+            <Route
+              path="/riskCategories"
+              element={isLoggedIn ? <RiskCategories /> : <Login />}
+            />
+            <Route
+              path="/riskCategories/:id"
+              element={isLoggedIn ? <RiskCategory /> : <Login />}
+            />
+            <Route path="/login" element={<Login />} />
+          </Routes>
         </div>
-      </Router>
+      </div>
     </ApolloProvider>
   );
 }
