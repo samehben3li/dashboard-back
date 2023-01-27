@@ -33,7 +33,7 @@ function AddUserWrapper({ setAlertAddUser, setUsers }: IProps) {
         setAlertAddUser(false);
       }
     } catch (err) {
-      setError({ status: true, message: 'INFORATION_ALREADY_EXIST' });
+      setError({ status: true, message: 'INFORMATION_ALREADY_EXIST' });
     }
   };
 
