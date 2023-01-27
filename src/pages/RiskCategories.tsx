@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import RiskCategoryItem from '../components/RiskCategoryItem';
+import { RiskCategoryItem } from '../components/RiskCategoryItem';
 import { GET_RISK_CATEGORIES } from '../requests/queries';
 import { IRiskCategory } from '../interfaces';
 import DashboardHeader from '../components/DashboardHeader';

@@ -1,3 +1,2 @@
-import RiskCategoryItem from './RiskCategoryItem';
-
-export default RiskCategoryItem;
+export { default as RiskCategoryItem } from './RiskCategoryItem';
+export { default as RiskCategoryType } from './RiskCategoryType';

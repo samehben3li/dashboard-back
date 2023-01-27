@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { GET_RISK_CATEGORY } from '../requests/queries';
 import { IRiskCategory } from '../interfaces';
+import { RiskCategoryType } from '../components/RiskCategoryItem';
 
 function RiskCategory() {
   const [riskCategory, setRiskCategory] = useState<IRiskCategory>();
@@ -33,23 +34,15 @@ function RiskCategory() {
             </button>
           </div>
         </div>
-        <div className="risk-category-container">
-          <div className="risk-category">
-            <span className="risk-category-key">
-              {`${t('riskCategory.NAME')}`} :{' '}
-            </span>
-            <span className="risk-category-value">{riskCategory?.name}</span>
+        <div className="info-container">
+          <div className="info-item">
+            <span className="info-key">{`${t('riskCategory.NAME')}`} : </span>
+            <span className="info-value">{riskCategory?.name}</span>
           </div>
-          <div className="risk-category">
-            <span className="risk-category-key">
-              {`${t('riskCategory.IMAGE')}`} :{' '}
-            </span>
-            <div className="risk-category-value">
-              <img
-                src={riskCategory?.imgUrl}
-                className="risk-category-value-img"
-                alt="category"
-              />
+          <div className="info-item">
+            <span className="info-key">{`${t('riskCategory.IMAGE')}`} : </span>
+            <div className="info-value">
+              <img src={riskCategory?.imgUrl} alt="category" />
             </div>
           </div>
           <div className="content-header">
@@ -66,15 +59,17 @@ function RiskCategory() {
               <th>{`${t('actions.UPDATE')}`}</th>
               <th>{`${t('actions.DELETE')}`}</th>
             </thead>
-            {/* {riskCategory?.riskCategoryTypes?.map((riskCategoryType, index) => (
-            <RiskCategoryType
-              key={index}
-              riskCategoryType={riskCategoryType}
-              index={index}
-              riskCategoryId={id}
-              setRiskCategory={setRiskCategory} 
-            />
-          ))} */}
+            <tbody>
+              {riskCategory?.riskCategoryTypes?.map(
+                (riskCategoryType, index) => (
+                  <RiskCategoryType
+                    key={riskCategoryType.id}
+                    riskCategoryType={riskCategoryType}
+                    index={index}
+                  />
+                ),
+              )}
+            </tbody>
           </table>
         </div>
       </div>

@@ -109,6 +109,37 @@
                         width: 100%;
                     }
                 }
+                .info-container {
+                    margin-top: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+                    .info-item {
+                        display: flex;
+                        align-items: center;
+                        padding-left: 20px;
+                        .info-key {
+                            flex: 1;
+                            font-size: 18px;
+                            font-weight: bold;
+                            line-height: 20px;
+                            color: rgb(65, 65, 65);
+                        }
+                        .info-value {
+                            flex: 5;
+                            font-size: 14px;
+                            font-weight: 500;
+                            color: rgb(60, 60, 60);
+                            img {
+                                max-width: 70px;
+                                height: 70px;
+                                border: 1px solid gray;
+                                border-radius: 7px;
+                                object-fit: contain;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

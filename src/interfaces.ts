@@ -11,7 +11,7 @@ export interface IUser {
   isAdmin: boolean;
 }
 
-interface IInputOptions {
+export interface IInputOptions {
   id: string;
   imgUrl: string;
   name: string;
