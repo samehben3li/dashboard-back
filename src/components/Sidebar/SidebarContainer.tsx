@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-import SidebarItem from './SidebarItem';
+import { SidebarItem } from '.';
 import TomatoTrolleyLogo from '../../assets/images/TomatoTrolleyLogo';
 import LogoutIcon from '../../assets/icons/LogoutIcon';
 import useAuth from '../../hooks/useAuth';
