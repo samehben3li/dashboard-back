@@ -19,6 +19,10 @@ i18n
             email: 'Email Address',
             password: 'Password',
           },
+          errors: {
+            NOT_ADMIN: "You're not an Admin",
+            INCORRECT_CREDENTIALS: 'Wrong credentials',
+          },
         },
       },
     },
