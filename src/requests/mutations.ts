@@ -51,3 +51,9 @@ export const UPDATE_USER = gql`
     }
   }
 `;
+
+export const DELETE_RISK_CATEGORY = gql`
+  mutation Mutation($id: ID!) {
+    deleteRiskCategory(id: $id)
+  }
+`;

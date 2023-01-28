@@ -8,7 +8,7 @@ import DashboardHeader from '../components/DashboardHeader';
 
 function RiskCategories() {
   const [alertAddRiskCategory, setAlertAddRiskCategory] = useState(false);
-  const [riskCategories, setRiskCategories] = useState([]);
+  const [riskCategories, setRiskCategories] = useState<IRiskCategory[]>([]);
   const { data } = useQuery(GET_RISK_CATEGORIES);
   const { t } = useTranslation();
 
@@ -41,6 +41,7 @@ function RiskCategories() {
                 <RiskCategoryItem
                   key={riskcategory.id}
                   riskCategory={riskcategory}
+                  setRiskCategories={setRiskCategories}
                   index={index}
                 />
               ))}

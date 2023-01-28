@@ -37,6 +37,7 @@
         }
     }
     &.btn-primary {
+        width: 100%;
         background: $btn-primary-color;
         color: $white-color;
         &:disabled {
