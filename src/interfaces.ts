@@ -1,3 +1,5 @@
+import { Dispatch } from 'react';
+
 export interface IContext {
   headers: {
     authorization: string;
@@ -19,4 +21,22 @@ export interface IInputOptions {
 
 export interface IRiskCategory extends IInputOptions {
   riskCategoryTypes: Array<IInputOptions>;
+}
+export interface IPayload {
+  id?: string;
+  riskCategories?: IRiskCategory[];
+}
+
+export interface IAction {
+  type: string;
+  payload: IPayload;
+}
+
+export interface AppContextProps {
+  riskCategories: IState['riskCategories'];
+  dispatch: Dispatch<IAction>;
+}
+export interface IState {
+  riskCategories: IRiskCategory[];
+  dispatch: Dispatch<IAction>;
 }

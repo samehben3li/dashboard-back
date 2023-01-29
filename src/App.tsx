@@ -8,29 +8,32 @@ import { Sidebar } from './components/Sidebar';
 import useAuth from './hooks/useAuth';
 import RiskCategories from './pages/RiskCategories';
 import RiskCategory from './pages/RiskCategory';
+import { AppContextProvider } from './context/AppContext';
 
 function App() {
   const { isLoggedIn } = useAuth();
 
   return (
     <ApolloProvider client={client}>
-      <div className="container">
-        <Sidebar />
-        <div className="body">
-          <Routes>
-            <Route path="/" element={isLoggedIn ? <Users /> : <Login />} />
-            <Route
-              path="/riskCategories"
-              element={isLoggedIn ? <RiskCategories /> : <Login />}
-            />
-            <Route
-              path="/riskCategories/:id"
-              element={isLoggedIn ? <RiskCategory /> : <Login />}
-            />
-            <Route path="/login" element={<Login />} />
-          </Routes>
+      <AppContextProvider>
+        <div className="container">
+          <Sidebar />
+          <div className="body">
+            <Routes>
+              <Route path="/" element={isLoggedIn ? <Users /> : <Login />} />
+              <Route
+                path="/riskCategories"
+                element={isLoggedIn ? <RiskCategories /> : <Login />}
+              />
+              <Route
+                path="/riskCategories/:id"
+                element={isLoggedIn ? <RiskCategory /> : <Login />}
+              />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </div>
         </div>
-      </div>
+      </AppContextProvider>
     </ApolloProvider>
   );
 }
