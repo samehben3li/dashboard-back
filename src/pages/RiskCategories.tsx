@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { RiskCategoryItem } from '../components/RiskCategoryItem';
 import { GET_RISK_CATEGORIES } from '../requests/queries';
 import { IRiskCategory } from '../interfaces';
 import DashboardHeader from '../components/DashboardHeader';
+import { AppContext } from '../context/AppContext';
+import { GET_ALL_RISK_CATEGORIES } from '../context/appActions';
 
 function RiskCategories() {
   const [alertAddRiskCategory, setAlertAddRiskCategory] = useState(false);
-  const [riskCategories, setRiskCategories] = useState<IRiskCategory[]>([]);
   const { data } = useQuery(GET_RISK_CATEGORIES);
   const { t } = useTranslation();
+  const { riskCategories, dispatch } = useContext(AppContext);
 
   useEffect(() => {
-    setRiskCategories(data?.getRiskCategories);
-  }, [data]);
+    if (data) {
+      dispatch(GET_ALL_RISK_CATEGORIES(data.getRiskCategories));
+    }
+  }, [data, dispatch]);
 
   return (
     <div className="content">
@@ -41,7 +45,6 @@ function RiskCategories() {
                 <RiskCategoryItem
                   key={riskcategory.id}
                   riskCategory={riskcategory}
-                  setRiskCategories={setRiskCategories}
                   index={index}
                 />
               ))}

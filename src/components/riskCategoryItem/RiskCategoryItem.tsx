@@ -5,11 +5,10 @@ import DeleteRiskCategory from './DeleteRiskCategory';
 
 interface IProps {
   riskCategory: IRiskCategory;
-  setRiskCategories: Dispatch<SetStateAction<IRiskCategory[]>>;
   index: number;
 }
 
-function RiskCategoryItem({ riskCategory, setRiskCategories, index }: IProps) {
+function RiskCategoryItem({ riskCategory, index }: IProps) {
   const [alertDelete, setAlertDelete] = useState(false);
   return (
     <tr>
@@ -17,7 +16,6 @@ function RiskCategoryItem({ riskCategory, setRiskCategories, index }: IProps) {
         {alertDelete && (
           <DeleteRiskCategory
             setAlertDelete={setAlertDelete}
-            setRiskCategories={setRiskCategories}
             riskCategory={riskCategory}
           />
         )}

@@ -1,9 +1,12 @@
 import { IAction, IState } from '../interfaces';
 
-const appReducer = (state: IState, action: IAction) => {
+const appReducer = (state: IState, action: IAction): IState => {
   switch (action.type) {
-    case '':
-      return state;
+    case 'GET_ALL_RISK_CATEGORIES':
+      return {
+        ...state,
+        riskCategories: action.payload.riskCategories,
+      };
     default:
       return state;
   }

@@ -37,6 +37,6 @@ export interface AppContextProps {
   dispatch: Dispatch<IAction>;
 }
 export interface IState {
-  riskCategories: IRiskCategory[];
+  riskCategories: IRiskCategory[] | undefined;
   dispatch: Dispatch<IAction>;
 }

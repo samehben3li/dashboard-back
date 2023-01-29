@@ -6,15 +6,10 @@ import { DELETE_RISK_CATEGORY } from '../../requests/mutations';
 
 interface IProps {
   setAlertDelete: Dispatch<SetStateAction<boolean>>;
-  setRiskCategories: Dispatch<SetStateAction<IRiskCategory[]>>;
   riskCategory: IRiskCategory;
 }
 
-function DeleteRiskCategory({
-  setAlertDelete,
-  setRiskCategories,
-  riskCategory,
-}: IProps) {
+function DeleteRiskCategory({ setAlertDelete, riskCategory }: IProps) {
   const { t } = useTranslation();
   const [deleteRiskCategory, { loading }] = useMutation(DELETE_RISK_CATEGORY);
   const [error, setError] = useState(false);
@@ -28,7 +23,6 @@ function DeleteRiskCategory({
         },
       });
       if (response?.data?.deleteRiskCategory === 'RISK_CATEGORY_DELETED') {
-        setRiskCategories(prev => prev.filter(rc => rc.id !== riskCategory.id));
         setAlertDelete(false);
       }
     } catch (err) {
