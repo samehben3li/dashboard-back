@@ -1,21 +1,26 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 import Login from './pages/Login';
 import client from './utils/client';
+import Users from './pages/Users';
+import { Sidebar } from './components/Sidebar';
+import useAuth from './hooks/useAuth';
 
 function App() {
+  const { isLoggedIn } = useAuth();
+
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <div className="container">
-          <div className="body">
-            <Routes>
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </div>
+      <div className="container">
+        <Sidebar />
+        <div className="body">
+          <Routes>
+            <Route path="/" element={isLoggedIn ? <Users /> : <Login />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
         </div>
-      </Router>
+      </div>
     </ApolloProvider>
   );
 }

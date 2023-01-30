@@ -1,3 +1,10 @@
+.btns {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .btn {
     border-radius: 5px;
     padding: 10px;
@@ -8,6 +15,24 @@
     outline: none;
     cursor: pointer;
     margin-top: 20px;
+    &.btn-header {
+        width: max-content;
+        padding: 0.8em;
+        padding-left: 2em;
+        padding-right: 2em;
+        color: $white-color;
+        font-size: 0.9rem;
+        font-weight: 700;
+        border-radius: 8px;
+        text-transform: uppercase;
+        border: 1px solid $primary-color;
+        background-color: $primary-color;
+        &:hover {
+            color: $primary-color;
+            border: 1px solid $primary-color;
+            background-color: $white-smoke-color;
+        }
+    }
     &.btn-primary {
         background: $btn-primary-color;
         color: $white-color;
@@ -15,5 +40,60 @@
             cursor: not-allowed;
             background-color: $btn-primary-color-disabled;
         }
+    }
+    &.btn-add {
+        padding: 5px 10px;
+        background-color: $white-color;
+        color: $success-color;
+        font-size: 12px;
+        font-weight: 600;
+        border: 1px solid $success-color;
+        &:hover {
+            color: $white-color;
+            background-color: $success-color;
+        }
+        &:disabled {
+            cursor: not-allowed;
+            background-color: $success-light-color;
+        }
+    }
+    &.btn-delete {
+        padding: 5px 10px;
+        background-color: $white-color;
+        color: $delete-color;
+        font-size: 12px;
+        font-weight: 600;
+        border: 1px solid $delete-color;
+        &:hover {
+            color: $white-color;
+            background-color: $delete-color;
+        }
+        &:disabled {
+            cursor: not-allowed;
+            background-color: $delete-light-color;
+            border-color: $delete-light-color;
+        }
+    }
+    &.btn-cancel {
+        padding: 5px 10px;
+        background-color: $white-color;
+        color: $cancel-color;
+        font-size: 12px;
+        font-weight: 600;
+        border: 1px solid $cancel-color;
+        &:hover {
+            color: $white-color;
+            background-color: $cancel-color;
+        }
+    }
+    &.btn-logout {
+        background-color: transparent;
+        border: none;
+        padding: 1.5em;
+        color: $white-color;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
     }
 }

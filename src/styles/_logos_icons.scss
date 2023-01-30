@@ -26,3 +26,48 @@
         opacity: 0.5;
     }
 }
+
+.icon-container {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    height: max-content;
+    padding: 8px 8px;
+    border: 2px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    .icon {
+        font-size: 18px;
+        &.icon-update {
+            color: $update-color;
+        }
+        &.icon-delete {
+            color: $delete-color;
+        }
+    }
+    &.update {
+        border-color: $update-color;
+        background-color: $white-color;
+    }
+    &.delete {
+        border-color: $delete-color;
+        background-color: $white-color;
+    }
+    &:hover {
+        &.update {
+            background-color: $update-color;
+            .icon {
+                color: $white-color;
+            }
+        }
+        &.delete {
+            background-color: $delete-color;
+            .icon {
+                color: $white-color;
+            }
+        }
+    }
+}

@@ -2,7 +2,7 @@ form {
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 15px;
+    gap: 8px;
     .input-group {
         display: flex;
         align-items: center;
@@ -31,6 +31,27 @@ form {
             &.input-password~.input-icon::before {
                 content: "\f023"
             }
+        }
+    }
+    .field {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        input {
+            outline: none;
+            border: none;
+            border-bottom: 1px solid $btn-primary-color;
+            padding: 2px 10px;
+            margin: 5px;
+            color: $black-color;
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 14px;
         }
     }
 }

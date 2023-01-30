@@ -15,7 +15,7 @@ const useAuth = () => {
 
   const logout = () => {
     setToken(null);
-    navigate('/login');
+    navigate('/login', { replace: true });
   };
   return { token, authLogin, isLoggedIn, logout };
 };

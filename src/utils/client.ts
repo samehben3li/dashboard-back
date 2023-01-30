@@ -1,8 +1,8 @@
 import { createHttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import IContext from '../interfaces';
+import { IContext } from '../interfaces';
 import { getToken } from './auth';
-import serverURL from './constants';
+import { serverURL } from './constants';
 
 const httpLink = createHttpLink({
   uri: serverURL,

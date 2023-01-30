@@ -1,7 +1,12 @@
-interface IContext {
+export interface IContext {
   headers: {
     authorization: string;
   };
 }
 
-export default IContext;
+export interface IUser {
+  id: string;
+  username: string;
+  email: string;
+  isAdmin: boolean;
+}

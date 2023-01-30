@@ -19,7 +19,8 @@ const isTokenExpired = (token: string) => {
   }
 };
 
-export const getToken = () => localStorage.getItem('access-token') || '';
+export const getToken = () =>
+  JSON.parse(localStorage.getItem('access-token') || '');
 
 export const loggedIn = () => {
   const token = getToken();

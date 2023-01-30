@@ -3,9 +3,11 @@
 @import './colors',
 './container',
 './main',
+'./table',
 './form',
 './logos_icons',
-'./buttons';
+'./buttons',
+'./alert';
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -24,4 +26,12 @@ code {
     text-align: center;
     color: red;
     border: 1px solid red;
+}
+
+.hidden {
+    display: none;
+}
+
+.link {
+    text-decoration: none;
 }
