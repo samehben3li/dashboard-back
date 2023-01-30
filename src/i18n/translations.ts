@@ -28,6 +28,7 @@ i18n
             NAME: 'name',
             IMAGE: 'image',
             TYPES: 'Types',
+            RISK_CATEGORY_TYPES: 'RISK CATEGORY TYPES',
           },
           sidebarItem: {
             USERS: 'USERS',
@@ -40,12 +41,14 @@ i18n
             UPDATE_USER: 'Update user',
             QUESTION_DELETE_USER: 'do you want to delete ',
             RISK_CATEGORIES_LIST: 'Risk Categories List',
+            ADD_RISk_CATEGORY: 'ADD RISk CATEGORY',
           },
           actions: {
             CREATE: 'Create',
             UPDATE: 'Update',
             DELETE: 'Delete',
             CANCEL: 'Cancel',
+            ADD: 'Add',
             NEW_TYPES: 'New Type',
           },
           header: {

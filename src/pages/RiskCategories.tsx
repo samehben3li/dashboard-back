@@ -4,6 +4,7 @@ import { RiskCategoryItem } from '../components/RiskCategoryItem';
 import { IRiskCategory } from '../interfaces';
 import DashboardHeader from '../components/DashboardHeader';
 import { AppContext } from '../context/AppContext';
+import AddRiskCategory from '../components/RiskCategoryItem/AddRiskCategory';
 
 function RiskCategories() {
   const [alertAddRiskCategory, setAlertAddRiskCategory] = useState(false);
@@ -16,6 +17,8 @@ function RiskCategories() {
         btnText={`${t('header.NEW_RISK_CATEGORY')}`}
         onClick={() => setAlertAddRiskCategory(true)}
       />
+
+      {alertAddRiskCategory && <AddRiskCategory />}
 
       <div className="content-container">
         <div className="content-header">
