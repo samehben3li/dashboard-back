@@ -1,51 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { GET_RISK_CATEGORY } from '../requests/queries';
 import { IRiskCategory } from '../interfaces';
-import { RiskCategoryType } from '../components/RiskCategoryItem';
-import { DELETE_RISK_CATEGORY } from '../requests/mutations';
+import {
+  DeleteRiskCategory,
+  RiskCategoryType,
+} from '../components/RiskCategoryItem';
 
 function RiskCategory() {
   const [riskCategory, setRiskCategory] = useState<IRiskCategory>();
-  const [error, setError] = useState(false);
+  const [alertDelete, setAlertDelete] = useState(false);
   const { id } = useParams();
   const { data } = useQuery(GET_RISK_CATEGORY, {
     variables: {
       id,
     },
   });
-  const [deleteRiskCategory, { loading }] = useMutation(DELETE_RISK_CATEGORY);
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
   useEffect(() => {
     setRiskCategory(data?.getRiskCategory);
   }, [data]);
 
-  const handleDelete = async () => {
-    setError(false);
-    try {
-      const response = await deleteRiskCategory({
-        variables: {
-          id: riskCategory?.id,
-        },
-      });
-      if (response?.data?.deleteRiskCategory === 'RISK_CATEGORY_DELETED') {
-        navigate('/riskcategories');
-      }
-    } catch (err) {
-      setError(true);
-    }
-  };
-
   return (
     <div className="content">
+      {alertDelete && riskCategory && (
+        <DeleteRiskCategory
+          riskCategory={riskCategory}
+          setAlertDelete={setAlertDelete}
+        />
+      )}
       <div className="content-container">
-        {error && (
-          <span className="error">{t('errors.SOMETHING_WENT_WRONG')}</span>
-        )}
         <div className="content-header">
           <h2>{`${t('riskCategory.RISK_CATEGORY')}`}</h2>
           <div className="btns btns-end">
@@ -55,8 +42,7 @@ function RiskCategory() {
             <button
               className="btn btn-delete"
               type="button"
-              onClick={handleDelete}
-              disabled={loading}
+              onClick={() => setAlertDelete(true)}
             >
               {`${t('actions.DELETE')}`}
             </button>

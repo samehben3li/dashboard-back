@@ -1,6 +1,9 @@
 import { useMutation } from '@apollo/client';
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { DELETE_RISK_CATEGORY_ACTION } from '../../context/appActions';
+import { AppContext } from '../../context/AppContext';
 import { IRiskCategory } from '../../interfaces';
 import { DELETE_RISK_CATEGORY } from '../../requests/mutations';
 
@@ -12,7 +15,9 @@ interface IProps {
 function DeleteRiskCategory({ setAlertDelete, riskCategory }: IProps) {
   const { t } = useTranslation();
   const [deleteRiskCategory, { loading }] = useMutation(DELETE_RISK_CATEGORY);
+  const { dispatch } = useContext(AppContext);
   const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
   const handleDelete = async () => {
     setError(false);
@@ -23,7 +28,9 @@ function DeleteRiskCategory({ setAlertDelete, riskCategory }: IProps) {
         },
       });
       if (response?.data?.deleteRiskCategory === 'RISK_CATEGORY_DELETED') {
+        dispatch(DELETE_RISK_CATEGORY_ACTION(riskCategory.id));
         setAlertDelete(false);
+        navigate('/riskcategories');
       }
     } catch (err) {
       setError(true);

@@ -7,6 +7,14 @@ const appReducer = (state: IState, action: IAction): IState => {
         ...state,
         riskCategories: action.payload.riskCategories,
       };
+    case 'DELETE_RISK_CATEGORY': {
+      return {
+        ...state,
+        riskCategories: state.riskCategories?.filter(
+          riskCategory => riskCategory.id !== action.payload.id,
+        ),
+      };
+    }
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IRiskCategory } from '../../interfaces';
 import DeleteRiskCategory from './DeleteRiskCategory';

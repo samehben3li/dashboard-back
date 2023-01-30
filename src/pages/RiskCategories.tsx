@@ -1,24 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useQuery } from '@apollo/client';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RiskCategoryItem } from '../components/RiskCategoryItem';
-import { GET_RISK_CATEGORIES } from '../requests/queries';
 import { IRiskCategory } from '../interfaces';
 import DashboardHeader from '../components/DashboardHeader';
 import { AppContext } from '../context/AppContext';
-import { GET_ALL_RISK_CATEGORIES } from '../context/appActions';
 
 function RiskCategories() {
   const [alertAddRiskCategory, setAlertAddRiskCategory] = useState(false);
-  const { data } = useQuery(GET_RISK_CATEGORIES);
   const { t } = useTranslation();
-  const { riskCategories, dispatch } = useContext(AppContext);
-
-  useEffect(() => {
-    if (data) {
-      dispatch(GET_ALL_RISK_CATEGORIES(data.getRiskCategories));
-    }
-  }, [data, dispatch]);
+  const { riskCategories } = useContext(AppContext);
 
   return (
     <div className="content">
