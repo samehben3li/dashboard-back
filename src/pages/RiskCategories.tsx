@@ -18,7 +18,9 @@ function RiskCategories() {
         onClick={() => setAlertAddRiskCategory(true)}
       />
 
-      {alertAddRiskCategory && <AddRiskCategory />}
+      {alertAddRiskCategory && (
+        <AddRiskCategory setAlertAddRiskCategory={setAlertAddRiskCategory} />
+      )}
 
       <div className="content-container">
         <div className="content-header">

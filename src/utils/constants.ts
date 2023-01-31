@@ -23,3 +23,22 @@ export const initState: IState = {
   riskCategories: [],
   dispatch: () => {},
 };
+
+export const bucketUrl: string =
+  process.env.REACT_APP_AWS_BUCKET_SERVER ||
+  'https://d17acd7teg556d.cloudfront.net/';
+
+export const getContentType = (type: string) => {
+  switch (type) {
+    case 'png':
+      return 'image/png';
+    case 'svg':
+      return 'image/svg+xml';
+    case 'jpeg':
+      return 'image/jpeg';
+    case 'jpg':
+      return 'image/jpeg';
+    default:
+      return 'image/*';
+  }
+};

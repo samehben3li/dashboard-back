@@ -63,27 +63,34 @@ form {
             justify-content: flex-start;
         }
     }
-    table {
-        tbody {
-            td {
-                input {
-                    outline: none;
-                    border: none;
-                    border-bottom: 1px solid $btn-primary-color;
-                    color: $black-color;
-                    font-family: 'Noto Sans', sans-serif;
-                    font-size: 14px;
-                    width: 80%;
-                }
-                .btn.btn-add {
-                    margin-top: 0;
-                }
-            }
+    .sub-field {
+        max-height: 330px;
+        overflow-y: scroll;
+        input {
+            outline: none;
+            border: none;
+            border-bottom: 1px solid $btn-primary-color;
+            color: $black-color;
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 14px;
+            width: 80%;
+        }
+        .btn.btn-add {
+            margin-top: 0;
         }
     }
     .upload-icon {
         font-size: 40px;
         color: $btn-primary-color;
+        cursor: pointer;
+    }
+    .img-upload {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        border: 1px solid $black-color;
+        border-radius: 5px;
+        padding: 2px;
         cursor: pointer;
     }
 }

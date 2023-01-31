@@ -57,3 +57,32 @@ export const DELETE_RISK_CATEGORY = gql`
     deleteRiskCategory(id: $id)
   }
 `;
+
+export const CREATE_RISK_CATEGORY = gql`
+  mutation CreateRiskCategory(
+    $name: String!
+    $imgUrl: String!
+    $riskCategoryTypes: [InputOption!]!
+  ) {
+    createRiskCategory(
+      name: $name
+      imgUrl: $imgUrl
+      riskCategoryTypes: $riskCategoryTypes
+    ) {
+      id
+      name
+      imgUrl
+      riskCategoryTypes {
+        id
+        name
+        imgUrl
+      }
+    }
+  }
+`;
+
+export const GENERATE_UPLOAD_URL = gql`
+  mutation GenerateUploadURL($imgName: String!) {
+    getUploadURL(imgName: $imgName)
+  }
+`;

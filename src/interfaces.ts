@@ -25,6 +25,7 @@ export interface IRiskCategory extends IInputOptions {
 export interface IPayload {
   id?: string;
   riskCategories?: IRiskCategory[];
+  riskCategory?: IRiskCategory;
 }
 
 export interface IAction {
@@ -37,6 +38,6 @@ export interface AppContextProps {
   dispatch: Dispatch<IAction>;
 }
 export interface IState {
-  riskCategories: IRiskCategory[] | undefined;
+  riskCategories: IRiskCategory[];
   dispatch: Dispatch<IAction>;
 }
