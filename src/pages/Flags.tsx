@@ -1,8 +1,18 @@
-import React from 'react';
+import { useQuery } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { GET_ALL_FLAGS } from '../requests/queries';
 
 function Flags() {
   const { t } = useTranslation();
+  const { data } = useQuery(GET_ALL_FLAGS);
+  const [flags, setFlags] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      setFlags(data.getAllFlags);
+    }
+  }, [data]);
   return (
     <div className="content">
       <div className="content-container">
