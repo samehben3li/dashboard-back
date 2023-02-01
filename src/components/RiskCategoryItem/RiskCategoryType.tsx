@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
-import { IInputOptions } from '../../interfaces';
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import { IInputOptions, IRiskCategory } from '../../interfaces';
 import DeleteRiskCategoryType from './DeleteRiskCategoryType';
 
 interface IProps {
+  riskCategoryId: string;
   riskCategoryType: IInputOptions;
   index: number;
+  setRiskCategory: Dispatch<SetStateAction<IRiskCategory>>;
 }
 
-function RiskCategoryType({ index, riskCategoryType }: IProps) {
+function RiskCategoryType({
+  index,
+  riskCategoryType,
+  riskCategoryId,
+  setRiskCategory,
+}: IProps) {
   const [alertDelete, setAlertDelete] = useState(false);
 
   return (
@@ -17,6 +24,8 @@ function RiskCategoryType({ index, riskCategoryType }: IProps) {
           <DeleteRiskCategoryType
             setAlertDelete={setAlertDelete}
             riskCategoryType={riskCategoryType}
+            riskCategoryId={riskCategoryId}
+            setRiskCategory={setRiskCategory}
           />
         )}
         <span>{index + 1}</span>

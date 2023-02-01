@@ -16,3 +16,11 @@ export const ADD_RISK_CATEGORY_ACTION = (riskCategory: IRiskCategory) => ({
   type: 'ADD_RISK_CATEGORY',
   payload: { riskCategory },
 });
+
+export const DELETE_RISK_CATEGORY_TYPE_ACTION = (
+  id: string,
+  idType: string,
+) => ({
+  type: 'DELETE_RISK_CATEGORY_TYPE',
+  payload: { id, idType },
+});

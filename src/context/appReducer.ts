@@ -24,6 +24,23 @@ const appReducer = (state: IState, action: IAction): IState => {
         ],
       };
     }
+    case 'DELETE_RISK_CATEGORY_TYPE': {
+      const newRiskCategories = state.riskCategories.map(riskCategory => {
+        if (riskCategory.id === action.payload.id) {
+          return {
+            ...riskCategory,
+            riskCategoryTypes: riskCategory.riskCategoryTypes.filter(
+              type => type.id !== action.payload.idType,
+            ),
+          };
+        }
+        return riskCategory;
+      });
+      return {
+        ...state,
+        riskCategories: [...newRiskCategories],
+      };
+    }
     default:
       return state;
   }

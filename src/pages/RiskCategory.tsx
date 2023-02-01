@@ -181,6 +181,8 @@ function RiskCategory() {
                     key={riskCategoryType.id}
                     riskCategoryType={riskCategoryType}
                     index={index}
+                    riskCategoryId={riskCategory.id}
+                    setRiskCategory={setRiskCategory}
                   />
                 ),
               )}
