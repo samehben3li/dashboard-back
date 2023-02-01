@@ -27,6 +27,16 @@
     }
 }
 
+.update-img-icon {
+    font-size: 50px;
+    object-fit: contain;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-left: 10px;
+    color: $primary-color-light;
+    cursor: pointer;
+}
+
 .icon-container {
     width: 100%;
     text-align: center;

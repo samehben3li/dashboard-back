@@ -10,8 +10,15 @@ import {
 } from '../components/RiskCategoryItem';
 
 function RiskCategory() {
-  const [riskCategory, setRiskCategory] = useState<IRiskCategory>();
+  const [riskCategory, setRiskCategory] = useState<IRiskCategory>({
+    id: '',
+    name: '',
+    imgUrl: '',
+    riskCategoryTypes: [],
+  });
+  const [image, setImage] = useState<File | null>(null);
   const [alertDelete, setAlertDelete] = useState(false);
+  const [updateMode, setUpdateMode] = useState(false);
   const { id } = useParams();
   const { data } = useQuery(GET_RISK_CATEGORY, {
     variables: {
@@ -35,28 +42,74 @@ function RiskCategory() {
       <div className="content-container">
         <div className="content-header">
           <h2>{`${t('riskCategory.RISK_CATEGORY')}`}</h2>
-          <div className="btns btns-end">
-            <button className="btn btn-update" type="button">
-              {`${t('actions.UPDATE')}`}
-            </button>
-            <button
-              className="btn btn-delete"
-              type="button"
-              onClick={() => setAlertDelete(true)}
-            >
-              {`${t('actions.DELETE')}`}
-            </button>
-          </div>
+          {updateMode ? (
+            <div className="btns btns-end">
+              <button className="btn btn-update" type="button">
+                {`${t('actions.SAVE')}`}
+              </button>
+              <button
+                className="btn btn-cancel"
+                type="button"
+                onClick={() => setUpdateMode(false)}
+              >
+                {`${t('actions.CANCEL')}`}
+              </button>
+            </div>
+          ) : (
+            <div className="btns btns-end">
+              <button
+                className="btn btn-update"
+                type="button"
+                onClick={() => setUpdateMode(true)}
+              >
+                {`${t('actions.UPDATE')}`}
+              </button>
+              <button
+                className="btn btn-delete"
+                type="button"
+                onClick={() => setAlertDelete(true)}
+              >
+                {`${t('actions.DELETE')}`}
+              </button>
+            </div>
+          )}
         </div>
         <div className="info-container">
           <div className="info-item">
             <span className="info-key">{`${t('riskCategory.NAME')}`} : </span>
-            <span className="info-value">{riskCategory?.name}</span>
+            {updateMode ? (
+              <input
+                type="text"
+                value={riskCategory?.name}
+                placeholder={`${t('riskCategory.NAME')}`}
+                onChange={e =>
+                  setRiskCategory(prev => ({ ...prev, name: e.target.value }))
+                }
+              />
+            ) : (
+              <span className="info-value">{riskCategory?.name}</span>
+            )}
           </div>
           <div className="info-item">
             <span className="info-key">{`${t('riskCategory.IMAGE')}`} : </span>
             <div className="info-value">
-              <img src={riskCategory?.imgUrl} alt="category" />
+              <img
+                src={image ? URL.createObjectURL(image) : riskCategory?.imgUrl}
+                alt="category"
+              />
+              {updateMode && (
+                <label htmlFor="risk-category-img">
+                  <i className="fa-solid fa-pen-to-square update-img-icon" />
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="risk-category-img"
+                    onChange={e =>
+                      setImage(e.target.files && e.target.files[0])
+                    }
+                  />
+                </label>
+              )}
             </div>
           </div>
           <div className="content-header">

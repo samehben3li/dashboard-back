@@ -48,6 +48,7 @@ i18n
             UPDATE: 'Update',
             DELETE: 'Delete',
             CANCEL: 'Cancel',
+            SAVE: 'Save',
             ADD: 'Add',
             NEW_TYPES: 'New Type',
           },
