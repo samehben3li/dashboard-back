@@ -30,9 +30,17 @@ i18n
             TYPES: 'Types',
             RISK_CATEGORY_TYPES: 'RISK CATEGORY TYPES',
           },
+          flags: {
+            ID: 'ID',
+            RISK_CATEGORY: 'RISK CATEGORY',
+            RISK_CATEGORY_TYPE: 'RISK CATEGORY TYPE',
+            PLANT_PART: 'PLANT PART',
+            LOCATION: 'LOCATION',
+          },
           sidebarItem: {
             USERS: 'USERS',
             RISK_CATEGORIES: 'RISK CATEGORIES',
+            FLAGS: 'Flags',
             LOGOUT: 'LOGOUT',
           },
           titles: {
@@ -44,6 +52,7 @@ i18n
             ADD_RISk_CATEGORY: 'ADD RISk CATEGORY',
             ADD_RISk_CATEGORY_TYPE: 'ADD RISk CATEGORY TYPE',
             UPDATE_RISk_CATEGORY_TYPE: 'Update RISk CATEGORY TYPE',
+            FLAGS_LIST: 'Flags List',
           },
           actions: {
             CREATE: 'Create',

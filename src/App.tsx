@@ -9,6 +9,7 @@ import useAuth from './hooks/useAuth';
 import RiskCategories from './pages/RiskCategories';
 import RiskCategory from './pages/RiskCategory';
 import { AppContextProvider } from './context/AppContext';
+import Flags from './pages/Flags';
 
 function App() {
   const { isLoggedIn } = useAuth();
@@ -28,6 +29,10 @@ function App() {
               <Route
                 path="/riskCategories/:id"
                 element={isLoggedIn ? <RiskCategory /> : <Login />}
+              />
+              <Route
+                path="/flags"
+                element={isLoggedIn ? <Flags /> : <Login />}
               />
               <Route path="/login" element={<Login />} />
             </Routes>

@@ -1,5 +1,6 @@
 import UserIcon from '../assets/icons/UserIcon';
 import CategoriesIcon from '../assets/icons/CategoryIcon';
+import FlagIcon from '../assets/icons/FlagIcon';
 import { IState } from '../interfaces';
 
 export const serverURL = `${process.env.REACT_APP_SERVER || ''}/`;
@@ -16,6 +17,12 @@ export const sidebarMenu = [
     icon: CategoriesIcon,
     path: '/riskcategories',
     title: 'RISK_CATEGORIES',
+  },
+  {
+    id: 3,
+    icon: FlagIcon,
+    path: '/flags',
+    title: 'FLAGS',
   },
 ];
 
