@@ -42,3 +42,17 @@ export interface IState {
   riskCategories: IRiskCategory[];
   dispatch: Dispatch<IAction>;
 }
+
+interface ILocation {
+  left: string[];
+  right: string[];
+}
+
+export interface IFlag {
+  id?: string;
+  userId?: string;
+  riskCategory: IInputOptions;
+  riskCategoryType: IInputOptions;
+  plantPart: IInputOptions;
+  location: ILocation;
+}
