@@ -81,7 +81,13 @@ function RiskCategory() {
           setAlertDelete={setAlertDelete}
         />
       )}
-      {alertAdd && <AddRiskCategoryType setAlertAdd={setAlertAdd} />}
+      {alertAdd && (
+        <AddRiskCategoryType
+          setAlertAdd={setAlertAdd}
+          riskCategoryId={riskCategory.id}
+          setRiskCategory={setRiskCategory}
+        />
+      )}
       <div className="content-container">
         {error && (
           <span className="error">{`${t('errors.SOMETHING_WENT_WRONG')}`}</span>
