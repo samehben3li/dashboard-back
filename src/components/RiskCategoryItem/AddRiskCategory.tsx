@@ -84,38 +84,42 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
 
   const uploadImgs = async () => {
     riskCategoryTypes.forEach(async element => {
-      await upload(element.imgName, element.img);
+      await upload(element.imgName, element.img as File);
     });
   };
 
-  const addRiskCategory = async () => {
+  const addRiskCategory = () => {
     const { name, img } = riskCategory;
     const fileExtension = img?.name.split('.').pop() || '';
     const imgName = `risk-category/${name}${Date.now()}.${fileExtension}`;
     const imgUrl = `${bucketUrl}${imgName}`;
-    setRiskCategory(prev => ({ ...prev, imgName }));
-    const res = await createRiskCategory({
-      variables: {
-        name,
-        imgUrl,
-        riskCategoryTypes: riskCategory.riskCategoryTypes,
-      },
-    });
-    await upload(riskCategory.imgName, riskCategory.img);
-    return res;
+    setRiskCategory(prev => ({ ...prev, imgName, imgUrl }));
+    return upload(imgName, riskCategory.img as File)
+      .then(() =>
+        createRiskCategory({
+          variables: {
+            name,
+            imgUrl,
+            riskCategoryTypes: riskCategory.riskCategoryTypes,
+          },
+        }),
+      )
+      .then(res => res)
+      .catch(err => {
+        throw err;
+      });
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(false);
-    try {
-      await uploadImgs();
-      const res = await addRiskCategory();
-      dispatch(ADD_RISK_CATEGORY_ACTION(res?.data?.createRiskCategory));
-      setAlertAddRiskCategory(false);
-    } catch (err) {
-      setError(true);
-    }
+    addRiskCategory()
+      .then(res =>
+        dispatch(ADD_RISK_CATEGORY_ACTION(res?.data?.createRiskCategory)),
+      )
+      .then(() => uploadImgs())
+      .then(() => setAlertAddRiskCategory(false))
+      .catch(() => setError(true));
   };
   return (
     <div className="alert-container">

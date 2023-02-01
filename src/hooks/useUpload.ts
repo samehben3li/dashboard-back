@@ -5,16 +5,21 @@ import uploadImg from '../utils/uploadImg';
 
 const useUpload = () => {
   const [getUploadURL] = useMutation(GENERATE_UPLOAD_URL);
-  const upload = async (imgName: string, img: File | null | undefined) => {
-    const uploadURLResponse = await getUploadURL({
+
+  const upload = async (imgName: string, img: File) => {
+    const fileExtension = img?.name.split('.').pop() || '';
+    const contentType = getContentType(fileExtension);
+
+    getUploadURL({
       variables: {
         imgName,
       },
-    });
-    const uploadUrl = uploadURLResponse.data.getUploadURL;
-    const fileExtension = img?.name.split('.').pop() || '';
-    const contentType = getContentType(fileExtension);
-    await uploadImg(img, uploadUrl, contentType);
+    })
+      .then(uploadURLResponse =>
+        uploadImg(img, uploadURLResponse.data.getUploadURL, contentType),
+      )
+      .then(res => res)
+      .catch(err => err);
   };
   return { upload };
 };
