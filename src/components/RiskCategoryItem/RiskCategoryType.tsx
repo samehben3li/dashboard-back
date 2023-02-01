@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IInputOptions } from '../../interfaces';
+import DeleteRiskCategoryType from './DeleteRiskCategoryType';
 
 interface IProps {
   riskCategoryType: IInputOptions;
@@ -7,9 +8,17 @@ interface IProps {
 }
 
 function RiskCategoryType({ index, riskCategoryType }: IProps) {
+  const [alertDelete, setAlertDelete] = useState(false);
+
   return (
     <tr>
       <td>
+        {alertDelete && (
+          <DeleteRiskCategoryType
+            setAlertDelete={setAlertDelete}
+            riskCategoryType={riskCategoryType}
+          />
+        )}
         <span>{index + 1}</span>
       </td>
       <td>
@@ -24,9 +33,13 @@ function RiskCategoryType({ index, riskCategoryType }: IProps) {
         </div>
       </td>
       <td>
-        <div className="icon-container delete">
+        <button
+          type="button"
+          className="icon-container delete"
+          onClick={() => setAlertDelete(true)}
+        >
           <i className="fa-sharp fa-solid fa-trash icon icon-delete" />
-        </div>
+        </button>
       </td>
     </tr>
   );
