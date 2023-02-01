@@ -73,6 +73,11 @@
             color: $update-color;
             background-color: $white-color;
         }
+        &:disabled {
+            cursor: not-allowed;
+            background-color: $update-color-light;
+            color: $update-color;
+        }
     }
     &.btn-delete {
         padding: 10px;

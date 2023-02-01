@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { GET_RISK_CATEGORY } from '../requests/queries';
@@ -8,6 +8,9 @@ import {
   DeleteRiskCategory,
   RiskCategoryType,
 } from '../components/RiskCategoryItem';
+import { bucketUrl } from '../utils/constants';
+import useUpload from '../hooks/useUpload';
+import { UPDATE_RISK_CATEGORY } from '../requests/mutations';
 
 function RiskCategory() {
   const [riskCategory, setRiskCategory] = useState<IRiskCategory>({
@@ -20,6 +23,9 @@ function RiskCategory() {
   const [alertDelete, setAlertDelete] = useState(false);
   const [updateMode, setUpdateMode] = useState(false);
   const { id } = useParams();
+  const { upload } = useUpload();
+  const [updateRiskCategory, { loading }] = useMutation(UPDATE_RISK_CATEGORY);
+  const [error, setError] = useState(false);
   const { data } = useQuery(GET_RISK_CATEGORY, {
     variables: {
       id,
@@ -31,6 +37,40 @@ function RiskCategory() {
     setRiskCategory(data?.getRiskCategory);
   }, [data]);
 
+  const uploadImage = () => {
+    const fileExtension = image?.name.split('.').pop() || '';
+    const imgName = `risk-category/${
+      riskCategory.name
+    }${Date.now()}.${fileExtension}`;
+    const imgUrl = `${bucketUrl}${imgName}`;
+    setRiskCategory(prev => ({ ...prev, imgUrl }));
+    upload(imgName, image as File)
+      .then(res => res)
+      .catch(err => {
+        throw err;
+      });
+    return imgUrl;
+  };
+
+  const handleUpdate = () => {
+    setError(false);
+    let newImgUrl = null;
+    if (image) {
+      newImgUrl = uploadImage();
+    }
+    const { name, imgUrl } = riskCategory;
+    updateRiskCategory({
+      variables: { id, name, imgUrl: newImgUrl || imgUrl },
+    })
+      .then(res => {
+        setRiskCategory(res.data.updateRiskCategory);
+        setUpdateMode(false);
+      })
+      .catch(() => {
+        setError(true);
+      });
+  };
+
   return (
     <div className="content">
       {alertDelete && riskCategory && (
@@ -40,11 +80,19 @@ function RiskCategory() {
         />
       )}
       <div className="content-container">
+        {error && (
+          <span className="error">{`${t('errors.SOMETHING_WENT_WRONG')}`}</span>
+        )}
         <div className="content-header">
           <h2>{`${t('riskCategory.RISK_CATEGORY')}`}</h2>
           {updateMode ? (
             <div className="btns btns-end">
-              <button className="btn btn-update" type="button">
+              <button
+                className="btn btn-update"
+                type="button"
+                disabled={loading}
+                onClick={handleUpdate}
+              >
                 {`${t('actions.SAVE')}`}
               </button>
               <button
