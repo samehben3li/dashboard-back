@@ -43,6 +43,7 @@ i18n
             RISK_CATEGORIES_LIST: 'Risk Categories List',
             ADD_RISk_CATEGORY: 'ADD RISk CATEGORY',
             ADD_RISk_CATEGORY_TYPE: 'ADD RISk CATEGORY TYPE',
+            UPDATE_RISk_CATEGORY_TYPE: 'Update RISk CATEGORY TYPE',
           },
           actions: {
             CREATE: 'Create',

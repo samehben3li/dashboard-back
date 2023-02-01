@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { IInputOptions, IRiskCategory } from '../../interfaces';
 import DeleteRiskCategoryType from './DeleteRiskCategoryType';
+import UpdateRiskCategoryType from './UpdateRiskCategoryType';
 
 interface IProps {
   riskCategoryId: string;
@@ -16,6 +17,7 @@ function RiskCategoryType({
   setRiskCategory,
 }: IProps) {
   const [alertDelete, setAlertDelete] = useState(false);
+  const [alertUpdate, setAlertUpdate] = useState(false);
 
   return (
     <tr>
@@ -28,6 +30,13 @@ function RiskCategoryType({
             setRiskCategory={setRiskCategory}
           />
         )}
+        {alertUpdate && (
+          <UpdateRiskCategoryType
+            setAlertUpdate={setAlertUpdate}
+            riskCategoryType={riskCategoryType}
+            riskCategoryId={riskCategoryId}
+          />
+        )}
         <span>{index + 1}</span>
       </td>
       <td>
@@ -37,9 +46,13 @@ function RiskCategoryType({
         <img src={riskCategoryType.imgUrl} alt="imgUrl" />
       </td>
       <td>
-        <div className="icon-container update">
+        <button
+          type="button"
+          className="icon-container update"
+          onClick={() => setAlertUpdate(true)}
+        >
           <i className="fa-solid fa-pen-to-square icon icon-update" />
-        </div>
+        </button>
       </td>
       <td>
         <button
