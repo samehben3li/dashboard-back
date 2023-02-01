@@ -11,6 +11,7 @@ import {
 import { bucketUrl } from '../utils/constants';
 import useUpload from '../hooks/useUpload';
 import { UPDATE_RISK_CATEGORY } from '../requests/mutations';
+import AddRiskCategoryType from '../components/RiskCategoryItem/AddRiskCategoryType';
 
 function RiskCategory() {
   const [riskCategory, setRiskCategory] = useState<IRiskCategory>({
@@ -21,6 +22,7 @@ function RiskCategory() {
   });
   const [image, setImage] = useState<File | null>(null);
   const [alertDelete, setAlertDelete] = useState(false);
+  const [alertAdd, setAlertAdd] = useState(false);
   const [updateMode, setUpdateMode] = useState(false);
   const { id } = useParams();
   const { upload } = useUpload();
@@ -79,6 +81,7 @@ function RiskCategory() {
           setAlertDelete={setAlertDelete}
         />
       )}
+      {alertAdd && <AddRiskCategoryType setAlertAdd={setAlertAdd} />}
       <div className="content-container">
         {error && (
           <span className="error">{`${t('errors.SOMETHING_WENT_WRONG')}`}</span>
@@ -162,7 +165,11 @@ function RiskCategory() {
           </div>
           <div className="content-header">
             <h3>{`${t('riskCategory.TYPES')}`} </h3>
-            <button className="btn btn-add" type="button">
+            <button
+              className="btn btn-add"
+              type="button"
+              onClick={() => setAlertAdd(true)}
+            >
               {`${t('actions.NEW_TYPES')}`}
             </button>
           </div>

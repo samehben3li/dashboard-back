@@ -210,10 +210,7 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
                     />
                   </td>
                   <td>
-                    <label
-                      htmlFor="risk-category-img-type"
-                      className="add-risk-category-img"
-                    >
+                    <label htmlFor="risk-category-img-type">
                       {riskCategoryType.img ? (
                         <img
                           src={URL.createObjectURL(riskCategoryType.img)}
