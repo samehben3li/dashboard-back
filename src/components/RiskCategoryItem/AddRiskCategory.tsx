@@ -49,6 +49,14 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
   const { upload } = useUpload();
   const { dispatch } = useContext(AppContext);
 
+  const handleDeleteTypes = (name: string) => {
+    setRiskCategoryTypes(prev => prev.filter(r => r.name !== name));
+    setRiskCategory(prev => ({
+      ...prev,
+      riskCategoryTypes: prev.riskCategoryTypes.filter(r => r.name !== name),
+    }));
+  };
+
   const handleAdd = async () => {
     const fileExtension = riskCategoryType.img?.name.split('.').pop() || '';
     const imgName = `risk-category-type/${
@@ -259,11 +267,7 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
                       <button
                         type="button"
                         className="icon-container delete"
-                        onClick={() =>
-                          setRiskCategoryTypes(
-                            riskCategoryTypes.filter(r => r.name !== rct.name),
-                          )
-                        }
+                        onClick={() => handleDeleteTypes(rct.name)}
                       >
                         <i className="fa-sharp fa-solid fa-trash icon icon-delete" />
                       </button>
