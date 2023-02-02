@@ -13,30 +13,36 @@ interface IProps {
 
 function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
   const [deleteUser, { loading }] = useMutation(DELETE_USER);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({ status: false, message: '' });
   const { t } = useTranslation();
   const handleDelete = async () => {
-    setError(false);
+    setError({ status: false, message: '' });
     try {
       const responseMutation = await deleteUser({
         variables: {
           id,
         },
       });
-      if (responseMutation?.data?.deleteUser === 'USER_DELETED') {
+      if (responseMutation?.data?.deleteUser === 'DATA_DELETED') {
         setUsers(prev => prev?.filter(u => u.id !== id));
         setAlertDelete(false);
       }
-    } catch (err) {
-      setError(true);
+    } catch ({ message, ...err }) {
+      setError({
+        status: true,
+        message:
+          message === 'DATA_NOT_FOUND'
+            ? 'USER_NOT_FOUND'
+            : (message as string) || 'SOMETHING_WENT_WRONG',
+      });
     }
   };
 
   return (
     <div className="alert-container">
       <div className="alert-wrapper">
-        {error && (
-          <span className="error">{`${t('errors.SOMETHING_WENT_WRONG')}`}</span>
+        {error.status && (
+          <span className="error">{`${t(`errors.${error.message}`)}`}</span>
         )}
         <span>{t('titles.QUESTION_DELETE_USER') + username} ?</span>
         <div className="btns">

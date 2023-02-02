@@ -26,7 +26,7 @@ function Login() {
       if (mutationResponse?.data?.login?.user?.isAdmin) {
         authLogin(mutationResponse?.data?.login?.accessToken);
       } else {
-        setError({ status: true, message: 'NOT_ADMIN' });
+        setError({ status: true, message: 'NOT_AUTHORIZED' });
       }
     } catch ({ message }) {
       setError({
