@@ -27,7 +27,7 @@ function DeleteRiskCategory({ setAlertDelete, riskCategory }: IProps) {
           id: riskCategory.id,
         },
       });
-      if (response?.data?.deleteRiskCategory === 'RISK_CATEGORY_DELETED') {
+      if (response?.data?.deleteRiskCategory === 'DATA_DELETED') {
         dispatch(DELETE_RISK_CATEGORY_ACTION(riskCategory.id));
         setAlertDelete(false);
         navigate('/riskcategories');
