@@ -70,7 +70,7 @@ i18n
           errors: {
             NOT_AUTHORIZED: "You're not an Admin",
             INCORRECT_CREDENTIALS: 'Wrong credentials',
-            SOMETHING_WENT_WRONG: 'something went wrong !',
+            SOMETHING_WENT_WRONG: 'Something went wrong !',
             INFORMATION_ALREADY_EXIST: 'This information already exist !',
             USER_NOT_FOUND: 'User not found !',
             NOT_LOGGED_IN: 'Not logged in',
