@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { GET_RISK_CATEGORY } from '../requests/queries';
 import { IRiskCategory } from '../interfaces';
@@ -14,6 +14,7 @@ import { UPDATE_RISK_CATEGORY } from '../requests/mutations';
 import AddRiskCategoryType from '../components/RiskCategoryItem/AddRiskCategoryType';
 
 function RiskCategory() {
+  const location = useLocation();
   const [riskCategory, setRiskCategory] = useState<IRiskCategory>({
     id: '',
     name: '',
@@ -23,7 +24,9 @@ function RiskCategory() {
   const [image, setImage] = useState<File | null>(null);
   const [alertDelete, setAlertDelete] = useState(false);
   const [alertAdd, setAlertAdd] = useState(false);
-  const [updateMode, setUpdateMode] = useState(false);
+  const [updateMode, setUpdateMode] = useState(
+    location.state?.isUpdateMode || false,
+  );
   const { id } = useParams();
   const { upload } = useUpload();
   const [updateRiskCategory, { loading }] = useMutation(UPDATE_RISK_CATEGORY);
