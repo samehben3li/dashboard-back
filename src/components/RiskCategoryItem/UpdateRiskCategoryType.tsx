@@ -28,7 +28,7 @@ function UpdateRiskCategoryType({
   const [updateRiskCategoryType, { loading }] = useMutation(
     UPDATE_RISK_CATEGORY_TYPE,
   );
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({ status: false, message: '' });
 
   const uploadImage = () => {
     const fileExtension = image?.name.split('.').pop() || '';
@@ -46,6 +46,7 @@ function UpdateRiskCategoryType({
   };
   const handleUpdate = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError({ status: false, message: '' });
     let newImgUrl = null;
     if (image) {
       newImgUrl = uploadImage();
@@ -63,8 +64,11 @@ function UpdateRiskCategoryType({
       .then(() => {
         setAlertUpdate(false);
       })
-      .catch(() => {
-        setError(true);
+      .catch(({ message }) => {
+        setError({
+          status: true,
+          message: (message as string) || 'SOMETHING_WENT_WRONG',
+        });
       });
   };
   return (
@@ -75,10 +79,8 @@ function UpdateRiskCategoryType({
         )}`}</span>
         <div className="hr" />
         <form onSubmit={handleUpdate}>
-          {error && (
-            <span className="error">{`${t(
-              'errors.SOMETHING_WENT_WRONG',
-            )}`}</span>
+          {error.status && (
+            <span className="error">{`${t(`errors.${error.message}`)}`}</span>
           )}
           <div className="field">
             <span>{`${t('riskCategory.NAME')}`} : </span>
