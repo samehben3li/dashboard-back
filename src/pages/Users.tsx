@@ -20,6 +20,7 @@ function Users() {
         ? { status: true, message: error.message }
         : { status: false, message: '' },
     );
+    setUsers(data?.getUsers);
   }, [data, error]);
 
   return (
