@@ -16,11 +16,11 @@ function DeleteRiskCategory({ setAlertDelete, riskCategory }: IProps) {
   const { t } = useTranslation();
   const [deleteRiskCategory, { loading }] = useMutation(DELETE_RISK_CATEGORY);
   const { dispatch } = useContext(AppContext);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({ status: false, message: '' });
   const navigate = useNavigate();
 
   const handleDelete = async () => {
-    setError(false);
+    setError({ status: false, message: '' });
     try {
       const response = await deleteRiskCategory({
         variables: {
@@ -32,15 +32,18 @@ function DeleteRiskCategory({ setAlertDelete, riskCategory }: IProps) {
         setAlertDelete(false);
         navigate('/riskcategories');
       }
-    } catch (err) {
-      setError(true);
+    } catch ({ message }) {
+      setError({
+        status: true,
+        message: (message as string) || 'SOMETHING_WENT_WRONG',
+      });
     }
   };
   return (
     <div className="alert-container">
       <div className="alert-wrapper">
-        {error && (
-          <span className="error">{t('errors.SOMETHING_WENT_WRONG')}</span>
+        {error.status && (
+          <span className="error">{`${t(`errors.${error.message}`)}`}</span>
         )}
         <span>{t('titles.QUESTION_DELETE_USER') + riskCategory.name} ?</span>
         <div className="btns">
