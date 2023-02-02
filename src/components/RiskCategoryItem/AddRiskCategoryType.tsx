@@ -29,7 +29,7 @@ function AddRiskCategoryType({
     name: '',
     img: null,
   });
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({ status: false, message: '' });
   const [addRiskCategoryType, { loading }] = useMutation(
     ADD_RISK_CATEGORY_TYPE,
   );
@@ -50,7 +50,7 @@ function AddRiskCategoryType({
 
   const handleAdd = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(false);
+    setError({ status: false, message: '' });
     const imgUrl = uploadImage();
     addRiskCategoryType({
       variables: { id: riskCategoryId, name: riskCategoryType.name, imgUrl },
@@ -65,8 +65,11 @@ function AddRiskCategoryType({
         }));
         setAlertAdd(false);
       })
-      .catch(() => {
-        setError(true);
+      .catch(({ message }) => {
+        setError({
+          status: true,
+          message: (message as string) || 'SOMETHING_WENT_WRONG',
+        });
       });
   };
   return (
@@ -77,10 +80,8 @@ function AddRiskCategoryType({
         )}`}</span>
         <div className="hr" />
         <form onSubmit={handleAdd}>
-          {error && (
-            <span className="error">{`${t(
-              'errors.SOMETHING_WENT_WRONG',
-            )}`}</span>
+          {error.status && (
+            <span className="error">{`${t(`errors.${error.message}`)}`}</span>
           )}
           <div className="field">
             <span>{`${t('riskCategory.NAME')}`} : </span>
