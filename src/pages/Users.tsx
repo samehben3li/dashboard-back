@@ -10,12 +10,17 @@ import { GET_USERS } from '../requests/queries';
 function Users() {
   const [alertAddUser, setAlertAddUser] = useState(false);
   const [users, setUsers] = useState<IUser[]>([]);
-  const { data } = useQuery(GET_USERS);
+  const [err, setErr] = useState({ status: false, message: '' });
+  const { data, error } = useQuery(GET_USERS);
   const { t } = useTranslation();
 
   useEffect(() => {
-    setUsers(data?.getUsers);
-  }, [data]);
+    setErr(
+      error?.message
+        ? { status: true, message: error.message }
+        : { status: false, message: '' },
+    );
+  }, [data, error]);
 
   return (
     <div className="content">
@@ -30,6 +35,9 @@ function Users() {
         <div className="content-header">
           <h2>{`${t('titles.USERS_LIST')}`}</h2>
         </div>
+        {err.status && (
+          <span className="error">{`${t(`errors.${err.message}`)}`}</span>
+        )}
 
         <table>
           <thead>
