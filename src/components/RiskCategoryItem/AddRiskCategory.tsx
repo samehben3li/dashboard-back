@@ -42,7 +42,7 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
     imgUrl: '',
     imgName: '',
   });
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({ status: false, message: '' });
   const [riskCategoryTypes, setRiskCategoryTypes] = useState<IState[]>([]);
   const inputImgRef: RefObject<HTMLInputElement> = useRef(null);
   const [createRiskCategory, { loading }] = useMutation(CREATE_RISK_CATEGORY);
@@ -120,14 +120,19 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(false);
+    setError({ status: false, message: '' });
     addRiskCategory()
       .then(res =>
         dispatch(ADD_RISK_CATEGORY_ACTION(res?.data?.createRiskCategory)),
       )
       .then(() => uploadImgs())
       .then(() => setAlertAddRiskCategory(false))
-      .catch(() => setError(true));
+      .catch(({ message }) =>
+        setError({
+          status: true,
+          message: (message as string) || 'SOMETHING_WENT_WRONG',
+        }),
+      );
   };
   return (
     <div className="alert-container">
@@ -137,10 +142,8 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
         )}`}</span>
         <div className="hr" />
         <form onSubmit={handleSubmit}>
-          {error && (
-            <span className="error">{`${t(
-              'errors.SOMETHING_WENT_WRONG',
-            )}`}</span>
+          {error.status && (
+            <span className="error">{`${t(`errors.${error.message}`)}`}</span>
           )}
           <div className="field">
             <span>{`${t('riskCategory.NAME')}`} : </span>
