@@ -11,7 +11,7 @@ interface IProps {
   error: {
     status: boolean;
     message: string;
-  };
+  } | null;
 }
 
 function Container({
@@ -23,7 +23,7 @@ function Container({
 }: IProps) {
   return (
     <Content title={title} dashboardHeader={dashboardHeader}>
-      {error.status && <Error message={error.message} />}
+      {error?.status && <Error message={error.message} />}
       <Table theads={theads}>{children}</Table>
     </Content>
   );

@@ -66,3 +66,11 @@ export const theadsOfUsers: string[] = [
   'actions.UPDATE',
   'actions.DELETE',
 ];
+
+export const theadsOfRiskCategory: string[] = [
+  'riskCategory.ID',
+  'riskCategory.NAME',
+  'riskCategory.IMAGE',
+  'actions.UPDATE',
+  'actions.DELETE',
+];
