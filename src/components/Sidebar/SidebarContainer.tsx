@@ -16,22 +16,15 @@ function SideBar() {
         <div className="sidebar-logo-container">
           <TomatoTrolleyLogo />
         </div>
-
-        <div className="sidebar-container">
-          <div className="sidebar-items">
-            {sidebarMenu.map(item => (
-              <div key={item.id}>
-                <SidebarItem item={item} />
-              </div>
-            ))}
-          </div>
-          <button type="button" className="btn btn-logout" onClick={logout}>
-            <span className="sidebar-item-label">
-              {t('sidebarItem.LOGOUT')}
-            </span>
-            <LogoutIcon />
-          </button>
+        <div className="sidebar-items">
+          {sidebarMenu.map(item => (
+            <SidebarItem item={item} key={item.id} />
+          ))}
         </div>
+        <button type="button" className="btn btn-logout" onClick={logout}>
+          <span className="sidebar-item-label">{t('sidebarItem.LOGOUT')}</span>
+          <LogoutIcon />
+        </button>
       </div>
     </nav>
   );
