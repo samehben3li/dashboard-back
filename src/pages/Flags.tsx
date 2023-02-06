@@ -1,13 +1,13 @@
 import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import Content from '../components/Content';
 import FlagItem from '../components/FlagItem';
+import Table from '../components/Table';
 import { IFlag } from '../interfaces';
 import { GET_ALL_FLAGS } from '../requests/queries';
+import { theadsOfFlags } from '../utils/constants';
 
 function Flags() {
-  const { t } = useTranslation();
   const { data } = useQuery(GET_ALL_FLAGS);
   const [flags, setFlags] = useState<IFlag[]>([]);
 
@@ -17,25 +17,14 @@ function Flags() {
     }
   }, [data]);
   return (
-    <Content title={`${t('titles.FLAGS_LIST')}`}>
-      <table>
-        <thead>
-          <tr>
-            <th>{`${t('flags.ID')}`}</th>
-            <th>{`${t('flags.RISK_CATEGORY')}`}</th>
-            <th>{`${t('flags.RISK_CATEGORY_TYPE')}`}</th>
-            <th>{`${t('flags.PLANT_PART')}`}</th>
-            <th>{`${t('flags.LOCATION')}`}</th>
-          </tr>
-        </thead>
-        {flags?.length !== 0 ? (
-          <tbody>
-            {flags?.map((flag, index) => (
+    <Content title="titles.FLAGS_LIST">
+      <Table theads={theadsOfFlags}>
+        {flags?.length !== 0
+          ? flags?.map((flag, index) => (
               <FlagItem flag={flag} index={index} key={flag.id} />
-            ))}
-          </tbody>
-        ) : null}
-      </table>
+            ))
+          : null}
+      </Table>
     </Content>
   );
 }

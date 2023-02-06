@@ -49,3 +49,11 @@ export const getContentType = (type: string) => {
       return 'image/*';
   }
 };
+
+export const theadsOfFlags: string[] = [
+  'flags.ID',
+  'flags.RISK_CATEGORY',
+  'flags.RISK_CATEGORY_TYPE',
+  'flags.PLANT_PART',
+  'flags.LOCATION',
+];

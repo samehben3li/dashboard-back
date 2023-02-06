@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   title: string;
@@ -6,11 +7,12 @@ interface IProps {
 }
 
 function Content({ title, children }: IProps) {
+  const { t } = useTranslation();
   return (
     <div className="content">
       <div className="content-container">
         <div className="content-header">
-          <h2>{title}</h2>
+          <h2>{`${t(title)}`}</h2>
         </div>
         {children}
       </div>
