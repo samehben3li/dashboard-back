@@ -8,10 +8,11 @@ import {
   DeleteRiskCategory,
   RiskCategoryType,
 } from '../components/RiskCategoryItem';
-import { bucketUrl } from '../utils/constants';
+import { bucketUrl, theadsOfRiskCategory } from '../utils/constants';
 import useUpload from '../hooks/useUpload';
 import { UPDATE_RISK_CATEGORY } from '../requests/mutations';
 import AddRiskCategoryType from '../components/RiskCategoryItem/AddRiskCategoryType';
+import Table from '../components/Table';
 
 function RiskCategory() {
   const location = useLocation();
@@ -189,30 +190,17 @@ function RiskCategory() {
               {`${t('actions.NEW_TYPES')}`}
             </button>
           </div>
-          <table>
-            <thead>
-              <tr>
-                <th>{`${t('riskCategory.ID')}`}</th>
-                <th>{`${t('riskCategory.NAME')}`}</th>
-                <th>{`${t('riskCategory.IMAGE')}`}</th>
-                <th>{`${t('actions.UPDATE')}`}</th>
-                <th>{`${t('actions.DELETE')}`}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {riskCategory?.riskCategoryTypes?.map(
-                (riskCategoryType, index) => (
-                  <RiskCategoryType
-                    key={riskCategoryType.id}
-                    riskCategoryType={riskCategoryType}
-                    index={index}
-                    riskCategoryId={riskCategory.id}
-                    setRiskCategory={setRiskCategory}
-                  />
-                ),
-              )}
-            </tbody>
-          </table>
+          <Table theads={theadsOfRiskCategory}>
+            {riskCategory?.riskCategoryTypes?.map((riskCategoryType, index) => (
+              <RiskCategoryType
+                key={riskCategoryType.id}
+                riskCategoryType={riskCategoryType}
+                index={index}
+                riskCategoryId={riskCategory.id}
+                setRiskCategory={setRiskCategory}
+              />
+            ))}
+          </Table>
         </div>
       </div>
     </div>
