@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   btnText: string;
@@ -6,11 +7,12 @@ interface IProps {
 }
 
 function DashboardHeader({ btnText, onClick }: IProps) {
+  const { t } = useTranslation();
   return (
     <div className="header-container">
       {btnText && (
         <button type="button" className="btn btn-header" onClick={onClick}>
-          {btnText}
+          {`${t(btnText)}`}
         </button>
       )}
     </div>

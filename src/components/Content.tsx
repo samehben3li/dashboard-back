@@ -4,12 +4,14 @@ import { useTranslation } from 'react-i18next';
 interface IProps {
   title: string;
   children: ReactNode;
+  dashboardHeader: ReactNode | undefined;
 }
 
-function Content({ title, children }: IProps) {
+function Content({ title, children, dashboardHeader }: IProps) {
   const { t } = useTranslation();
   return (
     <div className="content">
+      {!!dashboardHeader && dashboardHeader}
       <div className="content-container">
         <div className="content-header">
           <h2>{`${t(title)}`}</h2>

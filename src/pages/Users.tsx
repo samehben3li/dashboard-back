@@ -8,6 +8,7 @@ import { IUser } from '../interfaces';
 import { GET_USERS } from '../requests/queries';
 import Table from '../components/Table';
 import { theadsOfUsers } from '../utils/constants';
+import Content from '../components/Content';
 
 function Users() {
   const [alertAddUser, setAlertAddUser] = useState(false);
@@ -26,35 +27,34 @@ function Users() {
   }, [data, error]);
 
   return (
-    <div className="content">
-      <DashboardHeader
-        btnText={`${t('header.NEW_USER')}`}
-        onClick={() => setAlertAddUser(true)}
-      />
+    <Content
+      title="titles.USERS_LIST"
+      dashboardHeader={
+        <DashboardHeader
+          btnText="header.NEW_USER"
+          onClick={() => setAlertAddUser(true)}
+        />
+      }
+    >
       {alertAddUser && (
         <AddUser setAlertAddUser={setAlertAddUser} setUsers={setUsers} />
       )}
-      <div className="content-container">
-        <div className="content-header">
-          <h2>{`${t('titles.USERS_LIST')}`}</h2>
-        </div>
-        {err.status && (
-          <span className="error">{`${t(`errors.${err.message}`)}`}</span>
-        )}
-        <Table theads={theadsOfUsers}>
-          {users?.length > 0
-            ? users?.map((user, index) => (
-                <UserItem
-                  key={user.id}
-                  user={user}
-                  setUsers={setUsers}
-                  index={index}
-                />
-              ))
-            : null}
-        </Table>
-      </div>
-    </div>
+      {err.status && (
+        <span className="error">{`${t(`errors.${err.message}`)}`}</span>
+      )}
+      <Table theads={theadsOfUsers}>
+        {users?.length > 0
+          ? users?.map((user, index) => (
+              <UserItem
+                key={user.id}
+                user={user}
+                setUsers={setUsers}
+                index={index}
+              />
+            ))
+          : null}
+      </Table>
+    </Content>
   );
 }
 

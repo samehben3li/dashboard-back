@@ -17,7 +17,7 @@ function Flags() {
     }
   }, [data]);
   return (
-    <Content title="titles.FLAGS_LIST">
+    <Content title="titles.FLAGS_LIST" dashboardHeader={null}>
       <Table theads={theadsOfFlags}>
         {flags?.length !== 0
           ? flags?.map((flag, index) => (

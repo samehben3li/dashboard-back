@@ -14,7 +14,7 @@ function RiskCategories() {
   return (
     <div className="content">
       <DashboardHeader
-        btnText={`${t('header.NEW_RISK_CATEGORY')}`}
+        btnText="header.NEW_RISK_CATEGORY"
         onClick={() => setAlertAddRiskCategory(true)}
       />
 
