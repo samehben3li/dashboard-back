@@ -57,3 +57,12 @@ export const theadsOfFlags: string[] = [
   'flags.PLANT_PART',
   'flags.LOCATION',
 ];
+
+export const theadsOfUsers: string[] = [
+  'login.ID',
+  'login.USERNAME',
+  'login.EMAIL',
+  'login.IS_ADMIN',
+  'actions.UPDATE',
+  'actions.DELETE',
+];

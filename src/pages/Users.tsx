@@ -6,6 +6,8 @@ import AddUser from '../components/User/AddUserWrapper';
 import { UserItem } from '../components/User';
 import { IUser } from '../interfaces';
 import { GET_USERS } from '../requests/queries';
+import Table from '../components/Table';
+import { theadsOfUsers } from '../utils/constants';
 
 function Users() {
   const [alertAddUser, setAlertAddUser] = useState(false);
@@ -39,32 +41,18 @@ function Users() {
         {err.status && (
           <span className="error">{`${t(`errors.${err.message}`)}`}</span>
         )}
-
-        <table>
-          <thead>
-            <tr>
-              <th>{`${t('login.ID')}`}</th>
-              <th>{`${t('login.USERNAME')}`}</th>
-              <th>{`${t('login.EMAIL')}`}</th>
-              <th>{`${t('login.IS_ADMIN')}`}</th>
-              <th>{`${t('actions.UPDATE')}`}</th>
-              <th>{`${t('actions.DELETE')}`}</th>
-            </tr>
-          </thead>
-
-          {users?.length > 0 ? (
-            <tbody>
-              {users?.map((user, index) => (
+        <Table theads={theadsOfUsers}>
+          {users?.length > 0
+            ? users?.map((user, index) => (
                 <UserItem
                   key={user.id}
                   user={user}
                   setUsers={setUsers}
                   index={index}
                 />
-              ))}
-            </tbody>
-          ) : null}
-        </table>
+              ))
+            : null}
+        </Table>
       </div>
     </div>
   );
