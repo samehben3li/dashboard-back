@@ -7,8 +7,8 @@ const useUpload = () => {
   const [getUploadURL] = useMutation(GENERATE_UPLOAD_URL);
 
   const upload = async (imgName: string, img: File) => {
-    const fileExtension = img?.name.split('.').pop() || '';
-    const contentType = getContentType(fileExtension);
+    const fileExtension = img?.name.split('.').pop();
+    const contentType = getContentType(fileExtension as string);
 
     getUploadURL({
       variables: {
