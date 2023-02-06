@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { useTranslation } from 'react-i18next';
 import DashboardHeader from '../components/DashboardHeader';
 import AddUser from '../components/User/AddUserWrapper';
 import { UserItem } from '../components/User';
@@ -9,13 +8,13 @@ import { GET_USERS } from '../requests/queries';
 import Table from '../components/Table';
 import { theadsOfUsers } from '../utils/constants';
 import Content from '../components/Content';
+import Error from '../components/Error';
 
 function Users() {
   const [alertAddUser, setAlertAddUser] = useState(false);
   const [users, setUsers] = useState<IUser[]>([]);
   const [err, setErr] = useState({ status: false, message: '' });
   const { data, error } = useQuery(GET_USERS);
-  const { t } = useTranslation();
 
   useEffect(() => {
     setErr(
@@ -39,20 +38,16 @@ function Users() {
       {alertAddUser && (
         <AddUser setAlertAddUser={setAlertAddUser} setUsers={setUsers} />
       )}
-      {err.status && (
-        <span className="error">{`${t(`errors.${err.message}`)}`}</span>
-      )}
+      {err.status && <Error message={err.message} />}
       <Table theads={theadsOfUsers}>
-        {users?.length > 0
-          ? users?.map((user, index) => (
-              <UserItem
-                key={user.id}
-                user={user}
-                setUsers={setUsers}
-                index={index}
-              />
-            ))
-          : null}
+        {users?.map((user, index) => (
+          <UserItem
+            key={user.id}
+            user={user}
+            setUsers={setUsers}
+            index={index}
+          />
+        ))}
       </Table>
     </Content>
   );
