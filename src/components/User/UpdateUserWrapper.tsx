@@ -78,12 +78,16 @@ function UpdateUserWrapper({ setAlertUpdate, user }: IProps) {
           <div className="btns">
             <button
               type="button"
-              className="btn btn-cancel"
+              className="btn btn-cancel full-width"
               onClick={() => setAlertUpdate(false)}
             >
               {`${t('actions.CANCEL')}`}
             </button>
-            <button type="submit" className="btn btn-add" disabled={loading}>
+            <button
+              type="submit"
+              className="btn btn-add full-width"
+              disabled={loading}
+            >
               {`${t('actions.UPDATE')}`}
             </button>
           </div>

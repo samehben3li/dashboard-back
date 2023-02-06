@@ -42,14 +42,14 @@ function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
         <div className="btns">
           <button
             type="button"
-            className="btn btn-cancel"
+            className="btn btn-cancel full-width"
             onClick={() => setAlertDelete(false)}
           >
             {`${t('actions.CANCEL')}`}
           </button>
           <button
             type="button"
-            className="btn btn-delete"
+            className="btn btn-delete full-width"
             onClick={handleDelete}
             disabled={loading}
           >

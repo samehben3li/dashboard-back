@@ -31,5 +31,12 @@
             height: 3px;
             background-color: $success-color;
         }
+        .alert-subtitle {
+            width: 100%;
+            text-align: left;
+            color: $success-color;
+            font-size: 16px;
+            font-weight: 500;
+        }
     }
 }

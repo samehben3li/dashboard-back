@@ -40,10 +40,13 @@ form {
         justify-content: space-between;
         gap: 20px;
         span {
+            flex: 1.5;
+            width: 100%;
             font-size: 14px;
             font-weight: 500;
         }
         input {
+            flex: 3;
             outline: none;
             border: none;
             border-bottom: 1px solid $btn-primary-color;
@@ -53,5 +56,41 @@ form {
             font-family: 'Noto Sans', sans-serif;
             font-size: 14px;
         }
+        label {
+            flex: 3;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+        }
+    }
+    .sub-field {
+        max-height: 330px;
+        overflow-y: scroll;
+        input {
+            outline: none;
+            border: none;
+            border-bottom: 1px solid $btn-primary-color;
+            color: $black-color;
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 14px;
+            width: 80%;
+        }
+        .btn.btn-add {
+            margin-top: 0;
+        }
+    }
+    .upload-icon {
+        font-size: 40px;
+        color: $btn-primary-color;
+        cursor: pointer;
+    }
+    .img-upload {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        border: 1px solid $black-color;
+        border-radius: 5px;
+        padding: 2px;
+        cursor: pointer;
     }
 }

@@ -3,9 +3,9 @@ import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import DashboardHeader from '../components/DashboardHeader';
 import AddUser from '../components/User/AddUserWrapper';
-import User from '../components/User/UserItem';
+import { UserItem } from '../components/User';
 import { IUser } from '../interfaces';
-import GET_USERS from '../requests/queries';
+import { GET_USERS } from '../requests/queries';
 
 function Users() {
   const [alertAddUser, setAlertAddUser] = useState(false);
@@ -44,7 +44,7 @@ function Users() {
           {users?.length > 0 ? (
             <tbody>
               {users?.map((user, index) => (
-                <User
+                <UserItem
                   key={user.id}
                   user={user}
                   setUsers={setUsers}

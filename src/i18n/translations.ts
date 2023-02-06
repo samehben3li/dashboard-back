@@ -22,8 +22,17 @@ i18n
             USERNAME: 'Username',
             IS_ADMIN: 'IS ADMIN',
           },
+          riskCategory: {
+            RISK_CATEGORY: 'Risk Category',
+            ID: 'ID',
+            NAME: 'name',
+            IMAGE: 'image',
+            TYPES: 'Types',
+            RISK_CATEGORY_TYPES: 'RISK CATEGORY TYPES',
+          },
           sidebarItem: {
             USERS: 'USERS',
+            RISK_CATEGORIES: 'RISK CATEGORIES',
             LOGOUT: 'LOGOUT',
           },
           titles: {
@@ -31,15 +40,20 @@ i18n
             NEW_USER_INFO: 'Information of new user',
             UPDATE_USER: 'Update user',
             QUESTION_DELETE_USER: 'do you want to delete ',
+            RISK_CATEGORIES_LIST: 'Risk Categories List',
+            ADD_RISK_CATEGORY: 'ADD RISK CATEGORY',
           },
           actions: {
             CREATE: 'Create',
             UPDATE: 'Update',
             DELETE: 'Delete',
             CANCEL: 'Cancel',
+            ADD: 'Add',
+            NEW_TYPES: 'New Type',
           },
           header: {
             NEW_USER: 'New User',
+            NEW_RISK_CATEGORY: 'New Risk Category',
           },
           errors: {
             NOT_ADMIN: "You're not an Admin",
