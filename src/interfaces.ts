@@ -43,7 +43,7 @@ export interface IState {
   dispatch: Dispatch<IAction>;
 }
 
-interface ILocation {
+export interface ILocation {
   left: string[];
   right: string[];
 }
