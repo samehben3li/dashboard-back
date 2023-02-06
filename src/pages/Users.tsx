@@ -5,10 +5,8 @@ import AddUser from '../components/User/AddUserWrapper';
 import { UserItem } from '../components/User';
 import { IUser } from '../interfaces';
 import { GET_USERS } from '../requests/queries';
-import Table from '../components/Table';
 import { theadsOfUsers } from '../utils/constants';
-import Content from '../components/Content';
-import Error from '../components/Error';
+import Container from '../components/Container';
 
 function Users() {
   const [alertAddUser, setAlertAddUser] = useState(false);
@@ -26,7 +24,7 @@ function Users() {
   }, [data, error]);
 
   return (
-    <Content
+    <Container
       title="titles.USERS_LIST"
       dashboardHeader={
         <DashboardHeader
@@ -34,22 +32,16 @@ function Users() {
           onClick={() => setAlertAddUser(true)}
         />
       }
+      theads={theadsOfUsers}
+      error={err}
     >
       {alertAddUser && (
         <AddUser setAlertAddUser={setAlertAddUser} setUsers={setUsers} />
       )}
-      {err.status && <Error message={err.message} />}
-      <Table theads={theadsOfUsers}>
-        {users?.map((user, index) => (
-          <UserItem
-            key={user.id}
-            user={user}
-            setUsers={setUsers}
-            index={index}
-          />
-        ))}
-      </Table>
-    </Content>
+      {users?.map((user, index) => (
+        <UserItem key={user.id} user={user} setUsers={setUsers} index={index} />
+      ))}
+    </Container>
   );
 }
 
