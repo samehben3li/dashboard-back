@@ -90,11 +90,12 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
     }
   };
 
-  const uploadImgs = async () => {
-    riskCategoryTypes.forEach(async element => {
-      await upload(element.imgName, element.img as File);
-    });
-  };
+  const uploadImgs = async () =>
+    Promise.all(
+      riskCategoryTypes.map(async element => {
+        await upload(element.imgName, element.img as File);
+      }),
+    );
 
   const addRiskCategory = () => {
     const { name, img } = riskCategory;
