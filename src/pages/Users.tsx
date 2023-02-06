@@ -42,12 +42,14 @@ function Users() {
 
         <table>
           <thead>
-            <th>{`${t('login.ID')}`}</th>
-            <th>{`${t('login.USERNAME')}`}</th>
-            <th>{`${t('login.EMAIL')}`}</th>
-            <th>{`${t('login.IS_ADMIN')}`}</th>
-            <th>{`${t('actions.UPDATE')}`}</th>
-            <th>{`${t('actions.DELETE')}`}</th>
+            <tr>
+              <th>{`${t('login.ID')}`}</th>
+              <th>{`${t('login.USERNAME')}`}</th>
+              <th>{`${t('login.EMAIL')}`}</th>
+              <th>{`${t('login.IS_ADMIN')}`}</th>
+              <th>{`${t('actions.UPDATE')}`}</th>
+              <th>{`${t('actions.DELETE')}`}</th>
+            </tr>
           </thead>
 
           {users?.length > 0 ? (

@@ -189,9 +189,11 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
           <div className="sub-field">
             <table>
               <thead>
-                <th>{`${t('riskCategory.NAME')}`}</th>
-                <th>{`${t('riskCategory.IMAGE')}`}</th>
-                <th>{`${t('actions.ADD')}`}</th>
+                <tr>
+                  <th>{`${t('riskCategory.NAME')}`}</th>
+                  <th>{`${t('riskCategory.IMAGE')}`}</th>
+                  <th>{`${t('actions.ADD')}`}</th>
+                </tr>
               </thead>
               <tbody>
                 <tr>

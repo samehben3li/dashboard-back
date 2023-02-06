@@ -23,11 +23,13 @@ function Flags() {
         </div>
         <table>
           <thead>
-            <th>{`${t('flags.ID')}`}</th>
-            <th>{`${t('flags.RISK_CATEGORY')}`}</th>
-            <th>{`${t('flags.RISK_CATEGORY_TYPE')}`}</th>
-            <th>{`${t('flags.PLANT_PART')}`}</th>
-            <th>{`${t('flags.LOCATION')}`}</th>
+            <tr>
+              <th>{`${t('flags.ID')}`}</th>
+              <th>{`${t('flags.RISK_CATEGORY')}`}</th>
+              <th>{`${t('flags.RISK_CATEGORY_TYPE')}`}</th>
+              <th>{`${t('flags.PLANT_PART')}`}</th>
+              <th>{`${t('flags.LOCATION')}`}</th>
+            </tr>
           </thead>
           {flags?.length !== 0 ? (
             <tbody>
