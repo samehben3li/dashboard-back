@@ -9,7 +9,7 @@
         display: flex;
         justify-content: center;
         position: sticky;
-        background-image: linear-gradient($primary-color, $primary-color-light, #89CCF6);
+        background-image: linear-gradient($primary-color, $primary-color-light, $light-blue-color);
         &.hidden {
             display: none;
         }
@@ -123,17 +123,17 @@
                             font-size: 18px;
                             font-weight: bold;
                             line-height: 20px;
-                            color: rgb(65, 65, 65);
+                            color: $dark-gray;
                         }
                         .info-value {
                             flex: 5;
                             font-size: 14px;
                             font-weight: 500;
-                            color: rgb(60, 60, 60);
+                            color: $cancel-color;
                             img {
                                 max-width: 70px;
                                 height: 70px;
-                                border: 1px solid gray;
+                                border: 1px solid $cancel-color;
                                 border-radius: 7px;
                                 object-fit: contain;
                             }
