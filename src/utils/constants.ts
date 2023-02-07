@@ -74,3 +74,18 @@ export const theadsOfRiskCategory: string[] = [
   'actions.UPDATE',
   'actions.DELETE',
 ];
+
+export const inputsOfLogin = [
+  {
+    type: 'text',
+    name: 'email',
+    className: 'input-email',
+    placeholder: 'login.EMAIL',
+  },
+  {
+    type: 'password',
+    name: 'password',
+    className: 'input-password',
+    placeholder: 'login.PASSWORD',
+  },
+];

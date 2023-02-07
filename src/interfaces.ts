@@ -13,6 +13,11 @@ export interface IUser {
   isAdmin: boolean;
 }
 
+export interface ICredentials {
+  email: string;
+  password: string;
+}
+
 export interface IInputOptions {
   id: string;
   imgUrl: string;
@@ -55,4 +60,9 @@ export interface IFlag {
   riskCategoryType: IInputOptions;
   plantPart: IInputOptions;
   location: ILocation;
+}
+
+export interface IError {
+  status: boolean;
+  message: string;
 }
