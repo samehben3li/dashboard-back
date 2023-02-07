@@ -4,6 +4,7 @@ import DoneIcon from '../../assets/icons/DoneIcon';
 import CancelIcon from '../../assets/icons/CancelIcon';
 import DeleteUserWrapper from './DeleteUserWrapper';
 import UpdateUserWrapper from './UpdateUserWrapper';
+import Actions from '../Actions';
 
 interface IProps {
   user: IUser;
@@ -40,24 +41,10 @@ function UserItem({ user, setUsers, index }: IProps) {
       <td>
         <div>{user.isAdmin ? <DoneIcon /> : <CancelIcon />}</div>
       </td>
-      <td>
-        <button
-          type="button"
-          className="icon-container update"
-          onClick={() => setAlertUpdate(true)}
-        >
-          <i className="fa-solid fa-pen-to-square icon icon-update" />
-        </button>
-      </td>
-      <td>
-        <button
-          type="button"
-          className="icon-container delete"
-          onClick={() => setAlertDelete(true)}
-        >
-          <i className="fa-sharp fa-solid fa-trash icon icon-delete" />
-        </button>
-      </td>
+      <Actions
+        updateAction={() => setAlertUpdate(true)}
+        deleteAction={() => setAlertDelete(true)}
+      />
     </tr>
   );
 }
