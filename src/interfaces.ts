@@ -16,6 +16,7 @@ export interface IUser {
 export interface ICredentials {
   email: string;
   password: string;
+  username?: string;
 }
 
 export interface IInputOptions {

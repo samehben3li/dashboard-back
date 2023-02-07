@@ -1,103 +1,163 @@
-import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import React, {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  ReactNode,
+  SetStateAction,
+  useState,
+} from 'react';
 import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import { IUser } from '../../interfaces';
+import { ICredentials, IError, IUser } from '../../interfaces';
 import { ADD_USER } from '../../requests/mutations';
+import Alert from '../Alert';
+import ErrorContainer from '../Error';
+import Buttons from '../Buttons';
 
 interface IProps {
   setAlertAddUser: Dispatch<SetStateAction<boolean>>;
   setUsers: Dispatch<SetStateAction<IUser[]>>;
 }
 
-function AddUserWrapper({ setAlertAddUser, setUsers }: IProps) {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState({ status: false, message: '' });
+interface IPropsInfos {
+  userInfo: ICredentials;
+  setUserInfo: Dispatch<SetStateAction<ICredentials>>;
+}
+
+interface IPropsField {
+  setUserInfo: Dispatch<SetStateAction<ICredentials>>;
+  valueOfInput: string | undefined;
+  title: string;
+  type: string;
+  name: string;
+}
+
+interface IPropsForm {
+  setError: Dispatch<SetStateAction<IError>>;
+  userInfo: ICredentials;
+  children: ReactNode;
+  setUsers: Dispatch<SetStateAction<IUser[]>>;
+  setAlertAddUser: Dispatch<SetStateAction<boolean>>;
+}
+
+const useCreateUser = () => {
   const [createUser, { loading }] = useMutation(ADD_USER);
+  const handleCreateUser = async (userInfo: ICredentials) => {
+    try {
+      const response = await createUser({
+        variables: {
+          ...userInfo,
+        },
+      });
+      return response?.data?.createUser;
+    } catch ({ message }) {
+      throw new Error((message as string) || 'SOMETHING_WENT_WRONG');
+    }
+  };
+  return { handleCreateUser, loading };
+};
+
+function Field({ setUserInfo, title, ...props }: IPropsField) {
   const { t } = useTranslation();
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserInfo(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  return (
+    <div className="field">
+      <span>{`${t(title)}`} : </span>
+      <input {...props} placeholder={`${t(title)}`} onChange={handleChange} />
+    </div>
+  );
+}
+
+function Infos({ userInfo, setUserInfo }: IPropsInfos) {
+  return (
+    <>
+      <Field
+        title="login.USERNAME"
+        name="username"
+        type="text"
+        valueOfInput={userInfo.username}
+        setUserInfo={setUserInfo}
+      />
+      <Field
+        title="login.EMAIL"
+        name="email"
+        type="text"
+        valueOfInput={userInfo.email}
+        setUserInfo={setUserInfo}
+      />
+      <Field
+        title="login.PASSWORD"
+        name="password"
+        type="password"
+        valueOfInput={userInfo.password}
+        setUserInfo={setUserInfo}
+      />
+    </>
+  );
+}
+
+function FormAddUser({
+  children,
+  setError,
+  userInfo,
+  setUsers,
+  setAlertAddUser,
+}: IPropsForm) {
+  const { handleCreateUser, loading } = useCreateUser();
 
   const handleAddUser = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError({ status: false, message: '' });
-    try {
-      const response = await createUser({
-        variables: {
-          username,
-          email,
-          password,
-        },
-      });
-      if (response?.data?.createUser) {
-        setUsers(prev => [...prev, response?.data?.createUser]);
+    handleCreateUser(userInfo)
+      .then(res => {
+        setUsers(prev => [...prev, res]);
         setAlertAddUser(false);
-      }
-    } catch ({ message }) {
-      setError({
-        status: true,
-        message: (message as string) || 'SOMETHING_WENT_WRONG',
-      });
-    }
+      })
+      .catch(({ message }) =>
+        setError({
+          status: true,
+          message: (message as string) || 'SOMETHING_WENT_WRONG',
+        }),
+      );
   };
+  return (
+    <form onSubmit={handleAddUser}>
+      {children}
+      <Buttons
+        setOpenedAlert={setAlertAddUser}
+        loading={loading}
+        action="actions.CREATE"
+      />
+    </form>
+  );
+}
+
+function AddUserWrapper({ setAlertAddUser, setUsers }: IProps) {
+  const [userInfo, setUserInfo] = useState<ICredentials>({
+    username: '',
+    password: '',
+    email: '',
+  });
+  const [error, setError] = useState({ status: false, message: '' });
 
   return (
-    <div className="alert-container">
-      <div className="alert-wrapper">
-        <span className="alert-title">{`${t('titles.NEW_USER_INFO')}`}</span>
-        <div className="hr" />
-        <form onSubmit={handleAddUser}>
-          {error.status && (
-            <span className="error">{`${t(`errors.${error.message}`)}`}</span>
-          )}
-          <div className="field">
-            <span>{`${t('login.USERNAME')}`} : </span>
-            <input
-              type="text"
-              name="username"
-              placeholder={`${t('login.USERNAME')}`}
-              onChange={e => setUsername(e.target.value)}
-              value={username}
-            />
-          </div>
-          <div className="field">
-            <span>{`${t('login.EMAIL')}`} : </span>
-            <input
-              type="text"
-              name="email"
-              placeholder={`${t('login.EMAIL')}`}
-              onChange={e => setEmail(e.target.value)}
-              value={email}
-            />
-          </div>
-          <div className="field">
-            <span>{`${t('login.PASSWORD')}`} : </span>
-            <input
-              type="password"
-              name="password"
-              placeholder={`${t('login.PASSWORD')}`}
-              onChange={e => setPassword(e.target.value)}
-              value={password}
-            />
-          </div>
-          <div className="btns">
-            <button
-              type="button"
-              className="btn btn-cancel full-width"
-              onClick={() => setAlertAddUser(false)}
-            >
-              {`${t('actions.CANCEL')}`}
-            </button>
-            <button
-              type="submit"
-              className="btn btn-add full-width"
-              disabled={loading}
-            >
-              {`${t('actions.CREATE')}`}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <Alert title="titles.NEW_USER_INFO">
+      <FormAddUser
+        setAlertAddUser={setAlertAddUser}
+        setError={setError}
+        setUsers={setUsers}
+        userInfo={userInfo}
+      >
+        {error.status && <ErrorContainer message={error.message} />}
+        <Infos setUserInfo={setUserInfo} userInfo={userInfo} />
+      </FormAddUser>
+    </Alert>
   );
 }
 
