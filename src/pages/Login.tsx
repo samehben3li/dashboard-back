@@ -1,23 +1,19 @@
-import React, {
-  ChangeEvent,
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  useState,
-} from 'react';
+import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Logo from '../components/Logo';
 import Error from '../components/Error';
 import { inputsOfLogin } from '../utils/constants';
 import useLogin from '../hooks/useLogin';
 import Main from '../components/Main';
+import { ICredentials } from '../interfaces';
+import useHandleChange from '../hooks/useHandleChange';
 
 interface IPropsInput {
   type: string;
   name: string;
   className: string;
   placeholder: string;
-  setCredentials: Dispatch<SetStateAction<{ email: string; password: string }>>;
+  setCredentials: Dispatch<SetStateAction<ICredentials>>;
   value: string;
 }
 
@@ -27,13 +23,7 @@ interface IPropsButton {
 
 function InputGroup({ setCredentials, placeholder, ...props }: IPropsInput) {
   const { t } = useTranslation();
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setCredentials(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const handleChange = useHandleChange(setCredentials);
 
   return (
     <div className="input-group">

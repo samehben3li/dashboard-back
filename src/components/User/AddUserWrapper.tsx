@@ -1,5 +1,4 @@
 import React, {
-  ChangeEvent,
   Dispatch,
   FormEvent,
   ReactNode,
@@ -13,6 +12,7 @@ import { ADD_USER } from '../../requests/mutations';
 import Alert from '../Alert';
 import ErrorContainer from '../Error';
 import Buttons from '../Buttons';
+import useHandleChange from '../../hooks/useHandleChange';
 
 interface IProps {
   setAlertAddUser: Dispatch<SetStateAction<boolean>>;
@@ -59,13 +59,7 @@ const useCreateUser = () => {
 
 function Field({ setUserInfo, title, ...props }: IPropsField) {
   const { t } = useTranslation();
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setUserInfo(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const handleChange = useHandleChange(setUserInfo);
   return (
     <div className="field">
       <span>{`${t(title)}`} : </span>
