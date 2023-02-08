@@ -1,10 +1,10 @@
 import { useMutation } from '@apollo/client';
 import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { DELETE_RISK_CATEGORY_TYPE_ACTION } from '../../context/appActions';
 import { AppContext } from '../../context/AppContext';
 import { IInputOptions, IRiskCategory } from '../../interfaces';
 import { DELETE_RISK_CATEGORY_TYPE } from '../../requests/mutations';
+import DeleteAlert from '../Alerts/DeleteAlert';
 
 interface IProps {
   setAlertDelete: Dispatch<SetStateAction<boolean>>;
@@ -20,13 +20,12 @@ function DeleteRiskCategoryType({
   setRiskCategory,
 }: IProps) {
   const [error, setError] = useState({ status: false, message: '' });
-  const { t } = useTranslation();
   const [deleteRiskCategory, { loading }] = useMutation(
     DELETE_RISK_CATEGORY_TYPE,
   );
   const { dispatch } = useContext(AppContext);
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     setError({ status: false, message: '' });
     deleteRiskCategory({
       variables: {
@@ -55,33 +54,13 @@ function DeleteRiskCategoryType({
   };
 
   return (
-    <div className="alert-container">
-      <div className="alert-wrapper">
-        {error.status && (
-          <span className="error">{`${t(`errors.${error.message}`)}`}</span>
-        )}
-        <span>
-          {t('titles.QUESTION_DELETE_USER') + riskCategoryType.name} ?
-        </span>
-        <div className="btns">
-          <button
-            type="button"
-            className="btn btn-cancel full-width"
-            onClick={() => setAlertDelete(false)}
-          >
-            {`${t('actions.CANCEL')}`}
-          </button>
-          <button
-            type="button"
-            className="btn btn-delete full-width"
-            onClick={handleDelete}
-            disabled={loading}
-          >
-            {`${t('actions.DELETE')}`}
-          </button>
-        </div>
-      </div>
-    </div>
+    <DeleteAlert
+      error={error}
+      name={riskCategoryType.name}
+      setAlertDelete={setAlertDelete}
+      onClick={handleDelete}
+      loading={loading}
+    />
   );
 }
 
