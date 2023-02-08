@@ -1,8 +1,10 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import { IUser } from '../../interfaces';
+import { IError, IUser } from '../../interfaces';
 import { DELETE_USER } from '../../requests/mutations';
+import Alert from '../Alert';
+import Error from '../Error';
 
 interface IProps {
   username: string;
@@ -11,10 +13,19 @@ interface IProps {
   setUsers: Dispatch<SetStateAction<IUser[]>>;
 }
 
-function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
+interface IPropsButtons {
+  setAlertDelete: Dispatch<SetStateAction<boolean>>;
+  loading: boolean;
+  onClick: () => Promise<void>;
+}
+
+const useDeleteUser = (
+  setError: Dispatch<SetStateAction<IError>>,
+  setUsers: Dispatch<SetStateAction<IUser[]>>,
+  setAlertDelete: Dispatch<SetStateAction<boolean>>,
+  id: string,
+) => {
   const [deleteUser, { loading }] = useMutation(DELETE_USER);
-  const [error, setError] = useState({ status: false, message: '' });
-  const { t } = useTranslation();
   const handleDelete = async () => {
     setError({ status: false, message: '' });
     try {
@@ -37,33 +48,52 @@ function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
       });
     }
   };
+  return { handleDelete, loading };
+};
+
+function ButtonsDelete({ setAlertDelete, loading, onClick }: IPropsButtons) {
+  const { t } = useTranslation();
+  return (
+    <div className="btns">
+      <button
+        type="button"
+        className="btn btn-cancel full-width"
+        onClick={() => setAlertDelete(false)}
+      >
+        {`${t('actions.CANCEL')}`}
+      </button>
+      <button
+        type="button"
+        className="btn btn-delete full-width"
+        onClick={onClick}
+        disabled={loading}
+      >
+        {`${t('actions.DELETE')}`}
+      </button>
+    </div>
+  );
+}
+
+function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
+  const [error, setError] = useState({ status: false, message: '' });
+  const { t } = useTranslation();
+  const { handleDelete, loading } = useDeleteUser(
+    setError,
+    setUsers,
+    setAlertDelete,
+    id,
+  );
 
   return (
-    <div className="alert-container">
-      <div className="alert-wrapper">
-        {error.status && (
-          <span className="error">{`${t(`errors.${error.message}`)}`}</span>
-        )}
-        <span>{t('titles.QUESTION_DELETE_USER') + username} ?</span>
-        <div className="btns">
-          <button
-            type="button"
-            className="btn btn-cancel full-width"
-            onClick={() => setAlertDelete(false)}
-          >
-            {`${t('actions.CANCEL')}`}
-          </button>
-          <button
-            type="button"
-            className="btn btn-delete full-width"
-            onClick={handleDelete}
-            disabled={loading}
-          >
-            {`${t('actions.DELETE')}`}
-          </button>
-        </div>
-      </div>
-    </div>
+    <Alert title={null}>
+      {error.status && <Error message={error.message} />}
+      <span>{t('titles.QUESTION_DELETE_USER') + username} ?</span>
+      <ButtonsDelete
+        setAlertDelete={setAlertDelete}
+        loading={loading}
+        onClick={handleDelete}
+      />
+    </Alert>
   );
 }
 

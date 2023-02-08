@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface IProps {
-  title: string;
+  title: string | null;
   children: ReactNode;
 }
 
@@ -11,8 +11,12 @@ function Alert({ title, children }: IProps) {
   return (
     <div className="alert-container">
       <div className="alert-wrapper">
-        <span className="alert-title">{`${t(title)}`}</span>
-        <div className="hr" />
+        {!!title && (
+          <>
+            <span className="alert-title">{`${t(title)}`}</span>
+            <div className="hr" />
+          </>
+        )}
         {children}
       </div>
     </div>
