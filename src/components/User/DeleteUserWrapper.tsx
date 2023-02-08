@@ -23,10 +23,9 @@ const useDeleteUser = (
   setError: Dispatch<SetStateAction<IError>>,
   setUsers: Dispatch<SetStateAction<IUser[]>>,
   setAlertDelete: Dispatch<SetStateAction<boolean>>,
-  id: string,
 ) => {
   const [deleteUser, { loading }] = useMutation(DELETE_USER);
-  const handleDelete = async () => {
+  const handleDelete = async (id: string) => {
     setError({ status: false, message: '' });
     try {
       const responseMutation = await deleteUser({
@@ -81,8 +80,9 @@ function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
     setError,
     setUsers,
     setAlertDelete,
-    id,
   );
+
+  const handleClick = () => handleDelete(id);
 
   return (
     <Alert title={null}>
@@ -91,7 +91,7 @@ function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
       <ButtonsDelete
         setAlertDelete={setAlertDelete}
         loading={loading}
-        onClick={handleDelete}
+        onClick={handleClick}
       />
     </Alert>
   );
