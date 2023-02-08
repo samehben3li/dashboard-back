@@ -5,6 +5,7 @@ import useUpload from '../../hooks/useUpload';
 import { IInputOptions } from '../../interfaces';
 import { UPDATE_RISK_CATEGORY_TYPE } from '../../requests/mutations';
 import { bucketUrl } from '../../utils/constants';
+import Buttons from '../Buttons/Buttons';
 import Error from '../Error';
 
 interface IProps {
@@ -117,23 +118,11 @@ function UpdateRiskCategoryType({
               />
             </label>
           </div>
-
-          <div className="btns">
-            <button
-              type="button"
-              className="btn btn-cancel full-width"
-              onClick={() => setAlertUpdate(false)}
-            >
-              {`${t('actions.CANCEL')}`}
-            </button>
-            <button
-              type="submit"
-              className="btn btn-add full-width"
-              disabled={loading}
-            >
-              {`${t('actions.UPDATE')}`}
-            </button>
-          </div>
+          <Buttons
+            setOpenedAlert={setAlertUpdate}
+            loading={loading}
+            action="actions.UPDATE"
+          />
         </form>
       </div>
     </div>

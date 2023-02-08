@@ -14,6 +14,7 @@ import { AppContext } from '../../context/AppContext';
 import useUpload from '../../hooks/useUpload';
 import { CREATE_RISK_CATEGORY } from '../../requests/mutations';
 import { bucketUrl } from '../../utils/constants';
+import Buttons from '../Buttons/Buttons';
 import Error from '../Error';
 
 interface IState {
@@ -275,22 +276,11 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
               </tbody>
             </table>
           </div>
-          <div className="btns">
-            <button
-              type="button"
-              className="btn btn-cancel full-width"
-              onClick={() => setAlertAddRiskCategory(false)}
-            >
-              {`${t('actions.CANCEL')}`}
-            </button>
-            <button
-              type="submit"
-              className="btn btn-add full-width"
-              disabled={loading}
-            >
-              {`${t('actions.CREATE')}`}
-            </button>
-          </div>
+          <Buttons
+            setOpenedAlert={setAlertAddRiskCategory}
+            loading={loading}
+            action="actions.CREATE"
+          />
         </form>
       </div>
     </div>

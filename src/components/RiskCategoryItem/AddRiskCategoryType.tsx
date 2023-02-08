@@ -6,6 +6,7 @@ import { ADD_RISK_CATEGORY_TYPE } from '../../requests/mutations';
 import { bucketUrl } from '../../utils/constants';
 import { IRiskCategory } from '../../interfaces';
 import Error from '../Error';
+import Buttons from '../Buttons/Buttons';
 
 interface IProps {
   riskCategoryId: string;
@@ -123,23 +124,11 @@ function AddRiskCategoryType({
               />
             </label>
           </div>
-
-          <div className="btns">
-            <button
-              type="button"
-              className="btn btn-cancel full-width"
-              onClick={() => setAlertAdd(false)}
-            >
-              {`${t('actions.CANCEL')}`}
-            </button>
-            <button
-              type="submit"
-              className="btn btn-add full-width"
-              disabled={loading}
-            >
-              {`${t('actions.ADD')}`}
-            </button>
-          </div>
+          <Buttons
+            setOpenedAlert={setAlertAdd}
+            loading={loading}
+            action="actions.ADD"
+          />
         </form>
       </div>
     </div>
