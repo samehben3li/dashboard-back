@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IError } from '../../interfaces';
 import ButtonsDelete from '../Buttons/ButtonsDelete';
+import Error from '../Error';
 import Alert from './Alert';
 
 interface IProps {
@@ -16,9 +17,7 @@ function DeleteAlert({ error, name, ...btnProps }: IProps) {
   const { t } = useTranslation();
   return (
     <Alert title={null}>
-      {error.status && (
-        <span className="error">{`${t(`errors.${error.message}`)}`}</span>
-      )}
+      {error.status && <Error message={error.message} />}
       <span>{t('titles.QUESTION_DELETE_USER') + name} ?</span>
       <ButtonsDelete {...btnProps} />
     </Alert>

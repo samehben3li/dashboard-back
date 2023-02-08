@@ -5,6 +5,7 @@ import useUpload from '../../hooks/useUpload';
 import { ADD_RISK_CATEGORY_TYPE } from '../../requests/mutations';
 import { bucketUrl } from '../../utils/constants';
 import { IRiskCategory } from '../../interfaces';
+import Error from '../Error';
 
 interface IProps {
   riskCategoryId: string;
@@ -80,9 +81,7 @@ function AddRiskCategoryType({
         )}`}</span>
         <div className="hr" />
         <form onSubmit={handleAdd}>
-          {error.status && (
-            <span className="error">{`${t(`errors.${error.message}`)}`}</span>
-          )}
+          {error.status && <Error message={error.message} />}
           <div className="field">
             <span>{`${t('riskCategory.NAME')}`} : </span>
             <input

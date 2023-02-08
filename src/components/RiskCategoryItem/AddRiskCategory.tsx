@@ -14,6 +14,7 @@ import { AppContext } from '../../context/AppContext';
 import useUpload from '../../hooks/useUpload';
 import { CREATE_RISK_CATEGORY } from '../../requests/mutations';
 import { bucketUrl } from '../../utils/constants';
+import Error from '../Error';
 
 interface IState {
   name: string;
@@ -142,9 +143,7 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
         )}`}</span>
         <div className="hr" />
         <form onSubmit={handleSubmit}>
-          {error.status && (
-            <span className="error">{`${t(`errors.${error.message}`)}`}</span>
-          )}
+          {error.status && <Error message={error.message} />}
           <div className="field">
             <span>{`${t('riskCategory.NAME')}`} : </span>
             <input

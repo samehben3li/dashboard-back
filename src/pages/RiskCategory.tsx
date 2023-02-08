@@ -13,6 +13,7 @@ import useUpload from '../hooks/useUpload';
 import { UPDATE_RISK_CATEGORY } from '../requests/mutations';
 import AddRiskCategoryType from '../components/RiskCategoryItem/AddRiskCategoryType';
 import Table from '../components/Table';
+import Error from '../components/Error';
 
 function RiskCategory() {
   const location = useLocation();
@@ -100,9 +101,7 @@ function RiskCategory() {
         />
       )}
       <div className="content-container">
-        {error.status && (
-          <span className="error">{`${t(`errors.${error.message}`)}`}</span>
-        )}
+        {error.status && <Error message={error.message} />}
         <div className="content-header">
           <h2>{`${t('riskCategory.RISK_CATEGORY')}`}</h2>
           {updateMode ? (

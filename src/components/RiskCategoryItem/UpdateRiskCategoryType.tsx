@@ -5,6 +5,7 @@ import useUpload from '../../hooks/useUpload';
 import { IInputOptions } from '../../interfaces';
 import { UPDATE_RISK_CATEGORY_TYPE } from '../../requests/mutations';
 import { bucketUrl } from '../../utils/constants';
+import Error from '../Error';
 
 interface IProps {
   setAlertUpdate: Dispatch<SetStateAction<boolean>>;
@@ -79,9 +80,7 @@ function UpdateRiskCategoryType({
         )}`}</span>
         <div className="hr" />
         <form onSubmit={handleUpdate}>
-          {error.status && (
-            <span className="error">{`${t(`errors.${error.message}`)}`}</span>
-          )}
+          {error.status && <Error message={error.message} />}
           <div className="field">
             <span>{`${t('riskCategory.NAME')}`} : </span>
             <input
