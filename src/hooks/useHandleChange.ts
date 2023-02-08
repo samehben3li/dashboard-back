@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
-import { ICredentials } from '../interfaces';
+import { IUser } from '../interfaces';
 
-const useHandleChange = (setState: Dispatch<SetStateAction<ICredentials>>) => {
+const useHandleChange = (setState: Dispatch<SetStateAction<IUser>>) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setState(prev => ({

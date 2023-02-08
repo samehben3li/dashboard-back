@@ -5,7 +5,7 @@ import Error from '../components/Error';
 import { inputsOfLogin } from '../utils/constants';
 import useLogin from '../hooks/useLogin';
 import Main from '../components/Main';
-import { ICredentials } from '../interfaces';
+import { IUser } from '../interfaces';
 import useHandleChange from '../hooks/useHandleChange';
 
 interface IPropsInput {
@@ -13,7 +13,7 @@ interface IPropsInput {
   name: string;
   className: string;
   placeholder: string;
-  setCredentials: Dispatch<SetStateAction<ICredentials>>;
+  setCredentials: Dispatch<SetStateAction<IUser>>;
   value: string;
 }
 

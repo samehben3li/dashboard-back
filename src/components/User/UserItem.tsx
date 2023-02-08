@@ -21,8 +21,8 @@ function UserItem({ user, setUsers, index }: IProps) {
       <td>
         {alertDelete && (
           <DeleteUserWrapper
-            username={user.username}
-            id={user.id}
+            username={user.username as string}
+            id={user.id as string}
             setAlertDelete={setAlertDelete}
             setUsers={setUsers}
           />

@@ -7,16 +7,11 @@ export interface IContext {
 }
 
 export interface IUser {
-  id: string;
-  username: string;
-  email: string;
-  isAdmin: boolean;
-}
-
-export interface ICredentials {
-  email: string;
-  password: string;
+  id?: string;
   username?: string;
+  email: string;
+  isAdmin?: boolean;
+  password: string;
 }
 
 export interface IInputOptions {

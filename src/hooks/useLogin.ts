@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { Dispatch, FormEvent, SetStateAction } from 'react';
-import { ICredentials, IError } from '../interfaces';
+import { IError, IUser } from '../interfaces';
 import { LOGIN } from '../requests/mutations';
 import useAuth from './useAuth';
 
@@ -9,7 +9,7 @@ const useLogin = (setError: Dispatch<SetStateAction<IError>>) => {
   const { authLogin } = useAuth();
   const handleLogin = async (
     e: FormEvent<HTMLFormElement>,
-    credentials: ICredentials,
+    credentials: IUser,
   ) => {
     e.preventDefault();
     setError({ status: false, message: '' });
