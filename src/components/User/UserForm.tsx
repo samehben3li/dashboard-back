@@ -2,7 +2,7 @@ import React, { Dispatch, FormEvent, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import useHandleChange from '../../hooks/useHandleChange';
 import { IError, IUser } from '../../interfaces';
-import Buttons from '../Buttons';
+import Buttons from '../Buttons/Buttons';
 import ErrorContainer from '../Error';
 
 interface IPropsForm {

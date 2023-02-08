@@ -2,7 +2,7 @@ import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { IUser, IError } from '../../interfaces';
 import { ADD_USER } from '../../requests/mutations';
-import Alert from '../Alert';
+import Alert from '../Alerts/Alert';
 import UserForm from './UserForm';
 
 interface IProps {

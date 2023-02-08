@@ -1,22 +1,14 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { useTranslation } from 'react-i18next';
 import { IError, IUser } from '../../interfaces';
 import { DELETE_USER } from '../../requests/mutations';
-import Alert from '../Alert';
-import Error from '../Error';
+import DeleteAlert from '../Alerts/DeleteAlert';
 
 interface IProps {
   username: string;
   id: string;
   setAlertDelete: Dispatch<SetStateAction<boolean>>;
   setUsers: Dispatch<SetStateAction<IUser[]>>;
-}
-
-interface IPropsButtons {
-  setAlertDelete: Dispatch<SetStateAction<boolean>>;
-  loading: boolean;
-  onClick: () => Promise<void>;
 }
 
 const useDeleteUser = (
@@ -50,32 +42,8 @@ const useDeleteUser = (
   return { handleDelete, loading };
 };
 
-function ButtonsDelete({ setAlertDelete, loading, onClick }: IPropsButtons) {
-  const { t } = useTranslation();
-  return (
-    <div className="btns">
-      <button
-        type="button"
-        className="btn btn-cancel full-width"
-        onClick={() => setAlertDelete(false)}
-      >
-        {`${t('actions.CANCEL')}`}
-      </button>
-      <button
-        type="button"
-        className="btn btn-delete full-width"
-        onClick={onClick}
-        disabled={loading}
-      >
-        {`${t('actions.DELETE')}`}
-      </button>
-    </div>
-  );
-}
-
 function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
   const [error, setError] = useState({ status: false, message: '' });
-  const { t } = useTranslation();
   const { handleDelete, loading } = useDeleteUser(
     setError,
     setUsers,
@@ -85,15 +53,13 @@ function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
   const handleClick = () => handleDelete(id);
 
   return (
-    <Alert title={null}>
-      {error.status && <Error message={error.message} />}
-      <span>{t('titles.QUESTION_DELETE_USER') + username} ?</span>
-      <ButtonsDelete
-        setAlertDelete={setAlertDelete}
-        loading={loading}
-        onClick={handleClick}
-      />
-    </Alert>
+    <DeleteAlert
+      setAlertDelete={setAlertDelete}
+      loading={loading}
+      onClick={handleClick}
+      error={error}
+      name={username}
+    />
   );
 }
 
