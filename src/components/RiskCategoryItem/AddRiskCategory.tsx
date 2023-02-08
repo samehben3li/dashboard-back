@@ -16,6 +16,7 @@ import { CREATE_RISK_CATEGORY } from '../../requests/mutations';
 import { bucketUrl } from '../../utils/constants';
 import Buttons from '../Buttons/Buttons';
 import Error from '../Error';
+import InputFile from './InputFile';
 
 interface IState {
   name: string;
@@ -159,7 +160,16 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
           </div>
           <div className="field">
             <span>{`${t('riskCategory.IMAGE')}`} : </span>
-            <label htmlFor="risk-category-img">
+            <InputFile
+              id="risk-category-img"
+              onChange={e =>
+                setRiskCategory(prev => ({
+                  ...prev,
+                  img: e.target.files && e.target.files[0],
+                }))
+              }
+              ref={undefined}
+            >
               {riskCategory.img ? (
                 <img
                   src={URL.createObjectURL(riskCategory.img)}
@@ -169,19 +179,7 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
               ) : (
                 <i className="fa-regular fa-image upload-icon" />
               )}
-              <input
-                type="file"
-                className="hidden"
-                id="risk-category-img"
-                onChange={e =>
-                  setRiskCategory({
-                    ...riskCategory,
-                    img: e.target.files && e.target.files[0],
-                  })
-                }
-                accept="image/png, image/svg+xml, image/jpeg, image/jpg"
-              />
-            </label>
+            </InputFile>
           </div>
           <span className="alert-subtitle">
             {`${t('riskCategory.RISK_CATEGORY_TYPES')}`} :
@@ -212,7 +210,16 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
                     />
                   </td>
                   <td>
-                    <label htmlFor="risk-category-img-type">
+                    <InputFile
+                      id="risk-category-img-type"
+                      onChange={e =>
+                        setRiskCategoryType({
+                          ...riskCategoryType,
+                          img: e.target.files && e.target.files[0],
+                        })
+                      }
+                      ref={inputImgRef}
+                    >
                       {riskCategoryType.img ? (
                         <img
                           src={URL.createObjectURL(riskCategoryType.img)}
@@ -221,20 +228,7 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
                       ) : (
                         <i className="fa-regular fa-image upload-icon" />
                       )}
-                      <input
-                        type="file"
-                        className="hidden"
-                        id="risk-category-img-type"
-                        onChange={e =>
-                          setRiskCategoryType({
-                            ...riskCategoryType,
-                            img: e.target.files && e.target.files[0],
-                          })
-                        }
-                        accept="image/png, image/svg+xml, image/jpeg, image/jpg"
-                        ref={inputImgRef}
-                      />
-                    </label>
+                    </InputFile>
                   </td>
                   <td>
                     <button

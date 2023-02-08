@@ -14,6 +14,7 @@ import { UPDATE_RISK_CATEGORY } from '../requests/mutations';
 import AddRiskCategoryType from '../components/RiskCategoryItem/AddRiskCategoryType';
 import Table from '../components/Table';
 import Error from '../components/Error';
+import InputFile from '../components/RiskCategoryItem/InputFile';
 
 function RiskCategory() {
   const location = useLocation();
@@ -165,17 +166,13 @@ function RiskCategory() {
                 alt="category"
               />
               {updateMode && (
-                <label htmlFor="risk-category-img">
+                <InputFile
+                  id="risk-category-img"
+                  onChange={e => setImage(e.target.files && e.target.files[0])}
+                  ref={undefined}
+                >
                   <i className="fa-solid fa-pen-to-square update-img-icon" />
-                  <input
-                    type="file"
-                    className="hidden"
-                    id="risk-category-img"
-                    onChange={e =>
-                      setImage(e.target.files && e.target.files[0])
-                    }
-                  />
-                </label>
+                </InputFile>
               )}
             </div>
           </div>

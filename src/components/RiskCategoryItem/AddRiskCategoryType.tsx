@@ -7,6 +7,8 @@ import { bucketUrl } from '../../utils/constants';
 import { IRiskCategory } from '../../interfaces';
 import Error from '../Error';
 import Buttons from '../Buttons/Buttons';
+import Alert from '../Alerts/Alert';
+import InputFile from './InputFile';
 
 interface IProps {
   riskCategoryId: string;
@@ -75,63 +77,54 @@ function AddRiskCategoryType({
       });
   };
   return (
-    <div className="alert-container">
-      <div className="alert-wrapper">
-        <span className="alert-title">{`${t(
-          'titles.ADD_RISk_CATEGORY_TYPE',
-        )}`}</span>
-        <div className="hr" />
-        <form onSubmit={handleAdd}>
-          {error.status && <Error message={error.message} />}
-          <div className="field">
-            <span>{`${t('riskCategory.NAME')}`} : </span>
-            <input
-              type="text"
-              name="name"
-              placeholder={`${t('riskCategory.NAME')}`}
-              onChange={e =>
-                setRiskCategoryType({
-                  ...riskCategoryType,
-                  name: e.target.value,
-                })
-              }
-              value={riskCategoryType.name}
-            />
-          </div>
-          <div className="field">
-            <span>{`${t('riskCategory.IMAGE')}`} : </span>
-            <label htmlFor="risk-category-type-img">
-              {riskCategoryType.img ? (
-                <img
-                  src={URL.createObjectURL(riskCategoryType.img)}
-                  alt="risk category"
-                  className="img-upload"
-                />
-              ) : (
-                <i className="fa-regular fa-image upload-icon" />
-              )}
-              <input
-                type="file"
-                className="hidden"
-                id="risk-category-type-img"
-                accept="image/png, image/svg+xml, image/jpeg, image/jpg"
-                onChange={e =>
-                  setRiskCategoryType({
-                    ...riskCategoryType,
-                    img: e.target.files && e.target.files[0],
-                  })
-                }
-              />
-            </label>
-          </div>
-          <Buttons
-            setOpenedAlert={setAlertAdd}
-            loading={loading}
-            action="actions.ADD"
+    <Alert title="titles.ADD_RISk_CATEGORY_TYPE">
+      <form onSubmit={handleAdd}>
+        {error.status && <Error message={error.message} />}
+        <div className="field">
+          <span>{`${t('riskCategory.NAME')}`} : </span>
+          <input
+            type="text"
+            name="name"
+            placeholder={`${t('riskCategory.NAME')}`}
+            onChange={e =>
+              setRiskCategoryType({
+                ...riskCategoryType,
+                name: e.target.value,
+              })
+            }
+            value={riskCategoryType.name}
           />
-        </form>
-      </div>
-    </div>
+        </div>
+        <div className="field">
+          <span>{`${t('riskCategory.IMAGE')}`} : </span>
+          <InputFile
+            id="risk-category-type-img"
+            onChange={e =>
+              setRiskCategoryType({
+                ...riskCategoryType,
+                img: e.target.files && e.target.files[0],
+              })
+            }
+            ref={undefined}
+          >
+            {riskCategoryType.img ? (
+              <img
+                src={URL.createObjectURL(riskCategoryType.img)}
+                alt="risk category"
+                className="img-upload"
+              />
+            ) : (
+              <i className="fa-regular fa-image upload-icon" />
+            )}
+          </InputFile>
+        </div>
+        <Buttons
+          setOpenedAlert={setAlertAdd}
+          loading={loading}
+          action="actions.ADD"
+        />
+      </form>
+    </Alert>
   );
 }
 

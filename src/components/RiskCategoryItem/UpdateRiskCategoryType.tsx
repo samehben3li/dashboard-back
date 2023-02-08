@@ -7,6 +7,7 @@ import { UPDATE_RISK_CATEGORY_TYPE } from '../../requests/mutations';
 import { bucketUrl } from '../../utils/constants';
 import Buttons from '../Buttons/Buttons';
 import Error from '../Error';
+import InputFile from './InputFile';
 
 interface IProps {
   setAlertUpdate: Dispatch<SetStateAction<boolean>>;
@@ -99,7 +100,11 @@ function UpdateRiskCategoryType({
           </div>
           <div className="field">
             <span>{`${t('riskCategory.IMAGE')}`} : </span>
-            <label htmlFor="risk-category-type-img">
+            <InputFile
+              id="risk-category-type-img"
+              onChange={e => setImage(e.target.files && e.target.files[0])}
+              ref={undefined}
+            >
               <img
                 src={
                   image
@@ -109,14 +114,7 @@ function UpdateRiskCategoryType({
                 alt="risk category type"
                 className="img-upload"
               />
-              <input
-                type="file"
-                className="hidden"
-                id="risk-category-type-img"
-                accept="image/png, image/svg+xml, image/jpeg, image/jpg"
-                onChange={e => setImage(e.target.files && e.target.files[0])}
-              />
-            </label>
+            </InputFile>
           </div>
           <Buttons
             setOpenedAlert={setAlertUpdate}
