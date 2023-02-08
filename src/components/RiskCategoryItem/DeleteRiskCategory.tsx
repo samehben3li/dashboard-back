@@ -42,7 +42,7 @@ function DeleteRiskCategory({ setAlertDelete, riskCategory }: IProps) {
         {error && (
           <span className="error">{t('errors.SOMETHING_WENT_WRONG')}</span>
         )}
-        <span>{t('titles.QUESTION_DELETE_USER') + riskCategory.name} ?</span>
+        <span>{t('titles.QUESTION_DELETE', { name: riskCategory.name })}</span>
         <div className="btns">
           <button
             type="button"

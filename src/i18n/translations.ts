@@ -39,7 +39,7 @@ i18n
             USERS_LIST: 'Users List',
             NEW_USER_INFO: 'Information of new user',
             UPDATE_USER: 'Update user',
-            QUESTION_DELETE_USER: 'do you want to delete ',
+            QUESTION_DELETE: 'do you want to delete {{name}} ?',
             RISK_CATEGORIES_LIST: 'Risk Categories List',
             ADD_RISk_CATEGORY: 'ADD RISk CATEGORY',
           },

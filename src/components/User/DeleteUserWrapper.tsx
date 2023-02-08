@@ -38,7 +38,7 @@ function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
         {error && (
           <span className="error">{`${t('errors.SOMETHING_WENT_WRONG')}`}</span>
         )}
-        <span>{t('titles.QUESTION_DELETE_USER') + username} ?</span>
+        <span>{t('titles.QUESTION_DELETE', { name: username })} </span>
         <div className="btns">
           <button
             type="button"

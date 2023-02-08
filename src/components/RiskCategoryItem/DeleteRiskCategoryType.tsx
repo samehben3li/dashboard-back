@@ -56,7 +56,7 @@ function DeleteRiskCategoryType({
           <span className="error">{t('errors.SOMETHING_WENT_WRONG')}</span>
         )}
         <span>
-          {t('titles.QUESTION_DELETE_USER') + riskCategoryType.name} ?
+          {t('titles.QUESTION_DELETE', { name: riskCategoryType.name })}
         </span>
         <div className="btns">
           <button
