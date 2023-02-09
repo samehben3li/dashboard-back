@@ -45,12 +45,12 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
     setRiskCategoryTypes(prev => prev.filter(r => r.name !== name));
     setRiskCategory(prev => ({
       ...prev,
-      types: (prev?.types as ITypes[]).filter(r => r.name !== name),
+      types: (prev.types as ITypes[]).filter(r => r.name !== name),
     }));
   };
 
   const handleAdd = async () => {
-    const fileExtension = riskCategoryType?.img?.name.split('.').pop() || '';
+    const fileExtension = riskCategoryType.img?.name.split('.').pop() || '';
     const imgName = `risk-category-type/${
       riskCategoryType.name
     }${Date.now()}.${fileExtension}`;
@@ -80,7 +80,7 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
   const uploadImgs = async () =>
     Promise.all(
       riskCategoryTypes.map(async element => {
-        await upload(element?.imgName as string, element.img as File);
+        await upload(element.imgName as string, element.img as File);
       }),
     );
 
