@@ -1,18 +1,7 @@
-import React, { Dispatch, FormEvent, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import useHandleChange from '../../hooks/useHandleChange';
-import { IError, IUser } from '../../interfaces';
-import Buttons from '../Buttons/Buttons';
-import ErrorContainer from '../Error';
-
-interface IPropsForm {
-  userInfo: IUser;
-  setAlert: Dispatch<SetStateAction<boolean>>;
-  error: IError;
-  setUserInfo: Dispatch<SetStateAction<IUser>>;
-  loading: boolean;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
-}
+import { IUser } from '../../interfaces';
 
 interface IPropsInfos {
   userInfo: IUser;
@@ -66,25 +55,4 @@ function UserFields({ userInfo, setUserInfo }: IPropsInfos) {
   );
 }
 
-function UserForm({
-  userInfo,
-  setAlert,
-  error,
-  setUserInfo,
-  loading,
-  onSubmit,
-}: IPropsForm) {
-  return (
-    <form onSubmit={onSubmit}>
-      {error.status && <ErrorContainer message={error.message} />}
-      <UserFields setUserInfo={setUserInfo} userInfo={userInfo} />
-      <Buttons
-        setOpenedAlert={setAlert}
-        loading={loading}
-        action="actions.CREATE"
-      />
-    </form>
-  );
-}
-
-export default UserForm;
+export default UserFields;

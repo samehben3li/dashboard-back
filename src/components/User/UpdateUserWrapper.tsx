@@ -3,7 +3,8 @@ import { useMutation } from '@apollo/client';
 import { IError, IUser } from '../../interfaces';
 import { UPDATE_USER } from '../../requests/mutations';
 import Alert from '../Alerts/Alert';
-import UserForm from './UserForm';
+import UserFields from './UserFields';
+import Form from '../Form';
 
 interface IProps {
   setAlertUpdate: Dispatch<SetStateAction<boolean>>;
@@ -48,14 +49,15 @@ function UpdateUserWrapper({ setAlertUpdate, user }: IProps) {
 
   return (
     <Alert title="titles.UPDATE_USER">
-      <UserForm
-        setAlert={setAlertUpdate}
-        userInfo={userInfo}
-        error={error}
-        setUserInfo={setUserInfo}
-        loading={loading}
+      <Form
         onSubmit={onSubmit}
-      />
+        setOpenedAlert={setAlertUpdate}
+        error={error}
+        loading={loading}
+        action="actions.UPDATE"
+      >
+        <UserFields userInfo={userInfo} setUserInfo={setUserInfo} />
+      </Form>
     </Alert>
   );
 }
