@@ -40,14 +40,14 @@ function AddUserWrapper({ setAlertAddUser, setUsers }: IProps) {
   return (
     <div className="alert-container">
       <div className="alert-wrapper">
-        <span className="alert-title">{`${t('titles.NEW_USER_INFO')}`}</span>
+        <span className="alert-title">{t('titles.NEW_USER_INFO')}</span>
         <div className="hr" />
         <form onSubmit={handleAddUser}>
           {error.status && (
-            <span className="error">{`${t(`errors.${error.message}`)}`}</span>
+            <span className="error">{t(`errors.${error.message}`)}</span>
           )}
           <div className="field">
-            <span>{`${t('login.USERNAME')}`} : </span>
+            <span>{t('login.USERNAME')} : </span>
             <input
               type="text"
               name="username"
@@ -57,7 +57,7 @@ function AddUserWrapper({ setAlertAddUser, setUsers }: IProps) {
             />
           </div>
           <div className="field">
-            <span>{`${t('login.EMAIL')}`} : </span>
+            <span>{t('login.EMAIL')} : </span>
             <input
               type="text"
               name="email"
@@ -67,7 +67,7 @@ function AddUserWrapper({ setAlertAddUser, setUsers }: IProps) {
             />
           </div>
           <div className="field">
-            <span>{`${t('login.PASSWORD')}`} : </span>
+            <span>{t('login.PASSWORD')} : </span>
             <input
               type="password"
               name="password"
@@ -82,14 +82,14 @@ function AddUserWrapper({ setAlertAddUser, setUsers }: IProps) {
               className="btn btn-cancel full-width"
               onClick={() => setAlertAddUser(false)}
             >
-              {`${t('actions.CANCEL')}`}
+              {t('actions.CANCEL')}
             </button>
             <button
               type="submit"
               className="btn btn-add full-width"
               disabled={loading}
             >
-              {`${t('actions.CREATE')}`}
+              {t('actions.CREATE')}
             </button>
           </div>
         </form>

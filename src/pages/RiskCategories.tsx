@@ -14,7 +14,7 @@ function RiskCategories() {
   return (
     <div className="content">
       <DashboardHeader
-        btnText={`${t('header.NEW_RISK_CATEGORY')}`}
+        btnText={t('header.NEW_RISK_CATEGORY')}
         onClick={() => setAlertAddRiskCategory(true)}
       />
 
@@ -24,15 +24,15 @@ function RiskCategories() {
 
       <div className="content-container">
         <div className="content-header">
-          <h2>{`${t('titles.RISK_CATEGORIES_LIST')}`}</h2>
+          <h2>{t('titles.RISK_CATEGORIES_LIST')}</h2>
         </div>
         <table>
           <thead>
-            <th>{`${t('riskCategory.ID')}`}</th>
-            <th>{`${t('riskCategory.NAME')}`}</th>
-            <th>{`${t('riskCategory.IMAGE')}`}</th>
-            <th>{`${t('actions.UPDATE')}`}</th>
-            <th>{`${t('actions.DELETE')}`}</th>
+            <th>{t('riskCategory.ID')}</th>
+            <th>{t('riskCategory.NAME')}</th>
+            <th>{t('riskCategory.IMAGE')}</th>
+            <th>{t('actions.UPDATE')}</th>
+            <th>{t('actions.DELETE')}</th>
           </thead>
           {riskCategories?.length !== 0 ? (
             <tbody>
