@@ -9,7 +9,7 @@ import {
   RiskCategoryType,
 } from '../components/RiskCategoryItem';
 import { bucketUrl } from '../utils/constants';
-import useUpload from '../hooks/useUpload';
+import { useUpload } from '../hooks';
 import { UPDATE_RISK_CATEGORY } from '../requests/mutations';
 import AddRiskCategoryType from '../components/RiskCategoryItem/AddRiskCategoryType';
 
