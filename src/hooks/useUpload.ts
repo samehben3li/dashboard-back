@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { GENERATE_UPLOAD_URL } from '../requests/mutations';
-import { getContentType } from '../utils/constants';
+import getContentType from '../utils/getContentType';
 import uploadImg from '../utils/uploadImg';
 
 const useUpload = () => {

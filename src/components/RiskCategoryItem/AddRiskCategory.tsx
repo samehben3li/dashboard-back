@@ -90,11 +90,12 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
     }
   };
 
-  const uploadImgs = async () => {
-    riskCategoryTypes.forEach(async element => {
-      await upload(element.imgName, element.img as File);
-    });
-  };
+  const uploadImgs = async () =>
+    Promise.all(
+      riskCategoryTypes.map(async element => {
+        await upload(element.imgName, element.img as File);
+      }),
+    );
 
   const addRiskCategory = () => {
     const { name, img } = riskCategory;
@@ -135,7 +136,7 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
     <div className="alert-container">
       <div className="alert-wrapper">
         <span className="alert-title">{`${t(
-          'titles.ADD_RISk_CATEGORY',
+          'titles.ADD_RISK_CATEGORY',
         )}`}</span>
         <div className="hr" />
         <form onSubmit={handleSubmit}>

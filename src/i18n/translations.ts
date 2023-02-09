@@ -41,7 +41,7 @@ i18n
             UPDATE_USER: 'Update user',
             QUESTION_DELETE: 'do you want to delete {{name}} ?',
             RISK_CATEGORIES_LIST: 'Risk Categories List',
-            ADD_RISk_CATEGORY: 'ADD RISk CATEGORY',
+            ADD_RISK_CATEGORY: 'ADD RISK CATEGORY',
           },
           actions: {
             CREATE: 'Create',
