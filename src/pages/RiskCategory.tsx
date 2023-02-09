@@ -100,7 +100,7 @@ function TypesContainer({
         />
       </div>
       <Table theads={theadsOfRiskCategory}>
-        {riskCategory.riskCategoryTypes?.map((riskCategoryType, index) => (
+        {riskCategory?.riskCategoryTypes?.map((riskCategoryType, index) => (
           <RiskCategoryType
             key={riskCategoryType.id}
             riskCategoryType={riskCategoryType}
