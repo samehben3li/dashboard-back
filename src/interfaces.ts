@@ -26,6 +26,7 @@ export interface IPayload {
   id?: string;
   riskCategories?: IRiskCategory[];
   riskCategory?: IRiskCategory;
+  idType?: string;
 }
 
 export interface IAction {

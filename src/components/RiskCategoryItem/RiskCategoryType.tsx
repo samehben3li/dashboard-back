@@ -1,15 +1,33 @@
-import React from 'react';
-import { IInputOptions } from '../../interfaces';
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import { IInputOptions, IRiskCategory } from '../../interfaces';
+import DeleteRiskCategoryType from './DeleteRiskCategoryType';
 
 interface IProps {
+  riskCategoryId: string;
   riskCategoryType: IInputOptions;
   index: number;
+  setRiskCategory: Dispatch<SetStateAction<IRiskCategory>>;
 }
 
-function RiskCategoryType({ index, riskCategoryType }: IProps) {
+function RiskCategoryType({
+  index,
+  riskCategoryType,
+  riskCategoryId,
+  setRiskCategory,
+}: IProps) {
+  const [alertDelete, setAlertDelete] = useState(false);
+
   return (
     <tr>
       <td>
+        {alertDelete && (
+          <DeleteRiskCategoryType
+            setAlertDelete={setAlertDelete}
+            riskCategoryType={riskCategoryType}
+            riskCategoryId={riskCategoryId}
+            setRiskCategory={setRiskCategory}
+          />
+        )}
         <span>{index + 1}</span>
       </td>
       <td>
@@ -24,9 +42,13 @@ function RiskCategoryType({ index, riskCategoryType }: IProps) {
         </div>
       </td>
       <td>
-        <div className="icon-container delete">
+        <button
+          type="button"
+          className="icon-container delete"
+          onClick={() => setAlertDelete(true)}
+        >
           <i className="fa-sharp fa-solid fa-trash icon icon-delete" />
-        </div>
+        </button>
       </td>
     </tr>
   );
