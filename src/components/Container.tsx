@@ -22,7 +22,7 @@ function Container({
   error,
 }: IProps) {
   return (
-    <Content title={title} dashboardHeader={dashboardHeader}>
+    <Content title={title} dashboardHeader={dashboardHeader} btns={undefined}>
       {error?.status && <Error message={error.message} />}
       <Table theads={theads}>{children}</Table>
     </Content>

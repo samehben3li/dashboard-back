@@ -5,9 +5,10 @@ interface IProps {
   title: string;
   children: ReactNode;
   dashboardHeader: ReactNode | undefined;
+  btns: ReactNode | undefined;
 }
 
-function Content({ title, children, dashboardHeader }: IProps) {
+function Content({ title, children, dashboardHeader, btns }: IProps) {
   const { t } = useTranslation();
   return (
     <div className="content">
@@ -15,6 +16,7 @@ function Content({ title, children, dashboardHeader }: IProps) {
       <div className="content-container">
         <div className="content-header">
           <h2>{`${t(title)}`}</h2>
+          {!!btns && btns}
         </div>
         {children}
       </div>
