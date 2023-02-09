@@ -16,6 +16,7 @@ import Table from '../components/Table';
 import Error from '../components/Error';
 import InputFile from '../components/RiskCategoryItem/InputFile';
 import Content from '../components/Content';
+import Button from '../components/Buttons/Button';
 
 interface IPropsButtons {
   updateMode: boolean;
@@ -58,30 +59,24 @@ function ButtonActions({
           >
             {`${t('actions.SAVE')}`}
           </button>
-          <button
+          <Button
             className="btn btn-cancel"
-            type="button"
             onClick={() => setUpdateMode(false)}
-          >
-            {`${t('actions.CANCEL')}`}
-          </button>
+            action="actions.CANCEL"
+          />
         </>
       ) : (
         <>
-          <button
+          <Button
             className="btn btn-update"
-            type="button"
             onClick={() => setUpdateMode(true)}
-          >
-            {`${t('actions.UPDATE')}`}
-          </button>
-          <button
+            action="actions.UPDATE"
+          />
+          <Button
             className="btn btn-delete"
-            type="button"
+            action="actions.DELETE"
             onClick={() => setAlertDelete(true)}
-          >
-            {`${t('actions.DELETE')}`}
-          </button>
+          />
         </>
       )}
     </div>
@@ -98,13 +93,11 @@ function TypesContainer({
     <>
       <div className="content-header">
         <h3>{`${t('riskCategory.TYPES')}`} </h3>
-        <button
+        <Button
           className="btn btn-add"
-          type="button"
+          action="actions.NEW_TYPES"
           onClick={() => setAlertAdd(true)}
-        >
-          {`${t('actions.NEW_TYPES')}`}
-        </button>
+        />
       </div>
       <Table theads={theadsOfRiskCategory}>
         {riskCategory.riskCategoryTypes?.map((riskCategoryType, index) => (

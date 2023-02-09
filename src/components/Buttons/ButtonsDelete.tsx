@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
+import Button from './Button';
 
 interface IProps {
   setAlertDelete: Dispatch<SetStateAction<boolean>>;
@@ -11,13 +12,11 @@ function ButtonsDelete({ setAlertDelete, loading, onClick }: IProps) {
   const { t } = useTranslation();
   return (
     <div className="btns">
-      <button
-        type="button"
+      <Button
+        action="actions.CANCEL"
         className="btn btn-cancel full-width"
         onClick={() => setAlertDelete(false)}
-      >
-        {`${t('actions.CANCEL')}`}
-      </button>
+      />
       <button
         type="button"
         className="btn btn-delete full-width"

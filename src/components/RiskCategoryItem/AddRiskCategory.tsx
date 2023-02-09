@@ -20,6 +20,7 @@ import {
   initStateType,
 } from '../../utils/constants';
 import Alert from '../Alerts/Alert';
+import Button from '../Buttons/Button';
 import Form from '../Form';
 import Fields from './Fields';
 
@@ -193,13 +194,11 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
                 </td>
 
                 <td>
-                  <button
-                    type="button"
+                  <Button
+                    action="actions.ADD"
                     className="btn btn-add"
                     onClick={handleAdd}
-                  >
-                    {`${t('actions.ADD')}`}
-                  </button>
+                  />
                 </td>
               </tr>
               {riskCategoryTypes.map(rct => (
