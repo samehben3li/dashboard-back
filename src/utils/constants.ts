@@ -1,7 +1,7 @@
 import UserIcon from '../assets/icons/UserIcon';
 import CategoriesIcon from '../assets/icons/CategoryIcon';
 import FlagIcon from '../assets/icons/FlagIcon';
-import { IState } from '../interfaces';
+import { ICategory, IState, ITypes } from '../interfaces';
 
 export const serverURL = `${process.env.REACT_APP_SERVER || ''}/`;
 
@@ -89,3 +89,14 @@ export const inputsOfLogin = [
     placeholder: 'login.PASSWORD',
   },
 ];
+
+export const initStateCategory: ICategory = {
+  name: '',
+  imgUrl: '',
+  types: [],
+};
+
+export const initStateType: ITypes = {
+  name: '',
+  imgUrl: '',
+};

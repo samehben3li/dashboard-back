@@ -23,6 +23,19 @@ export interface IInputOptions {
 export interface IRiskCategory extends IInputOptions {
   riskCategoryTypes: Array<IInputOptions>;
 }
+
+export interface ITypes {
+  id?: string;
+  name: string;
+  imgUrl: string;
+  img?: File | null;
+  imgName?: string;
+}
+
+export interface ICategory extends ITypes {
+  types?: ITypes[];
+}
+
 export interface IPayload {
   id?: string;
   riskCategories?: IRiskCategory[];

@@ -12,22 +12,17 @@ import { useTranslation } from 'react-i18next';
 import { ADD_RISK_CATEGORY_ACTION } from '../../context/appActions';
 import { AppContext } from '../../context/AppContext';
 import useUpload from '../../hooks/useUpload';
+import { ICategory, ITypes } from '../../interfaces';
 import { CREATE_RISK_CATEGORY } from '../../requests/mutations';
-import { bucketUrl } from '../../utils/constants';
-import Buttons from '../Buttons/Buttons';
-import Error from '../Error';
+import {
+  bucketUrl,
+  initStateCategory,
+  initStateType,
+} from '../../utils/constants';
+import Alert from '../Alerts/Alert';
+import Form from '../Form';
+import Fields from './Fields';
 import InputFile from './InputFile';
-
-interface IState {
-  name: string;
-  img?: File | null;
-  imgUrl?: string;
-  imgName: string;
-}
-
-interface IRiskCategory extends IState {
-  riskCategoryTypes: { name: string; imgUrl: string }[];
-}
 
 interface IProps {
   setAlertAddRiskCategory: Dispatch<SetStateAction<boolean>>;
@@ -35,18 +30,12 @@ interface IProps {
 
 function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
   const { t } = useTranslation();
-  const [riskCategory, setRiskCategory] = useState<IRiskCategory>({
-    name: '',
-    imgName: '',
-    riskCategoryTypes: [],
-  });
-  const [riskCategoryType, setRiskCategoryType] = useState<IState>({
-    name: '',
-    imgUrl: '',
-    imgName: '',
-  });
+  const [riskCategory, setRiskCategory] =
+    useState<ICategory>(initStateCategory);
+  const [riskCategoryType, setRiskCategoryType] =
+    useState<ITypes>(initStateType);
   const [error, setError] = useState({ status: false, message: '' });
-  const [riskCategoryTypes, setRiskCategoryTypes] = useState<IState[]>([]);
+  const [riskCategoryTypes, setRiskCategoryTypes] = useState<ITypes[]>([]);
   const inputImgRef: RefObject<HTMLInputElement> = useRef(null);
   const [createRiskCategory, { loading }] = useMutation(CREATE_RISK_CATEGORY);
   const { upload } = useUpload();
@@ -56,20 +45,20 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
     setRiskCategoryTypes(prev => prev.filter(r => r.name !== name));
     setRiskCategory(prev => ({
       ...prev,
-      riskCategoryTypes: prev.riskCategoryTypes.filter(r => r.name !== name),
+      types: (prev?.types as ITypes[]).filter(r => r.name !== name),
     }));
   };
 
   const handleAdd = async () => {
-    const fileExtension = riskCategoryType.img?.name.split('.').pop() || '';
+    const fileExtension = riskCategoryType?.img?.name.split('.').pop() || '';
     const imgName = `risk-category-type/${
       riskCategoryType.name
     }${Date.now()}.${fileExtension}`;
     const imgUrl = `${bucketUrl}${imgName}`;
     setRiskCategory(prev => ({
       ...prev,
-      riskCategoryTypes: [
-        ...prev.riskCategoryTypes,
+      types: [
+        ...(prev.types as ITypes[]),
         { name: riskCategoryType.name, imgUrl },
       ],
     }));
@@ -82,22 +71,18 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
         imgUrl,
       },
     ]);
-    setRiskCategoryType({
-      name: '',
-      img: null,
-      imgUrl: '',
-      imgName: '',
-    });
+    setRiskCategoryType(initStateType);
     if (inputImgRef.current) {
       inputImgRef.current.value = '';
     }
   };
 
-  const uploadImgs = async () => {
-    riskCategoryTypes.forEach(async element => {
-      await upload(element.imgName, element.img as File);
-    });
-  };
+  const uploadImgs = async () =>
+    Promise.all(
+      riskCategoryTypes.map(async element => {
+        await upload(element?.imgName as string, element.img as File);
+      }),
+    );
 
   const addRiskCategory = () => {
     const { name, img } = riskCategory;
@@ -111,7 +96,7 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
           variables: {
             name,
             imgUrl,
-            riskCategoryTypes: riskCategory.riskCategoryTypes,
+            riskCategoryTypes: riskCategory.types,
           },
         }),
       )
@@ -138,146 +123,110 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
       );
   };
   return (
-    <div className="alert-container">
-      <div className="alert-wrapper">
-        <span className="alert-title">{`${t(
-          'titles.ADD_RISk_CATEGORY',
-        )}`}</span>
-        <div className="hr" />
-        <form onSubmit={handleSubmit}>
-          {error.status && <Error message={error.message} />}
-          <div className="field">
-            <span>{`${t('riskCategory.NAME')}`} : </span>
-            <input
-              type="text"
-              name="name"
-              onChange={e =>
-                setRiskCategory({ ...riskCategory, name: e.target.value })
-              }
-              value={riskCategory.name}
-              placeholder={`${t('riskCategory.NAME')}`}
-            />
-          </div>
-          <div className="field">
-            <span>{`${t('riskCategory.IMAGE')}`} : </span>
-            <InputFile
-              id="risk-category-img"
-              onChange={e =>
-                setRiskCategory(prev => ({
-                  ...prev,
-                  img: e.target.files && e.target.files[0],
-                }))
-              }
-              ref={undefined}
-            >
-              {riskCategory.img ? (
-                <img
-                  src={URL.createObjectURL(riskCategory.img)}
-                  alt="risk category"
-                  className="img-upload"
-                />
-              ) : (
-                <i className="fa-regular fa-image upload-icon" />
-              )}
-            </InputFile>
-          </div>
-          <span className="alert-subtitle">
-            {`${t('riskCategory.RISK_CATEGORY_TYPES')}`} :
-          </span>
-          <div className="sub-field">
-            <table>
-              <thead>
-                <tr>
-                  <th>{`${t('riskCategory.NAME')}`}</th>
-                  <th>{`${t('riskCategory.IMAGE')}`}</th>
-                  <th>{`${t('actions.ADD')}`}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
+    <Alert title="titles.ADD_RISk_CATEGORY">
+      <Form
+        onSubmit={handleSubmit}
+        setOpenedAlert={setAlertAddRiskCategory}
+        error={error}
+        action="actions.CREATE"
+        loading={loading}
+      >
+        <Fields
+          setState={setRiskCategory}
+          state={riskCategory}
+          id="risk-category-img"
+        />
+        <span className="alert-subtitle">
+          {`${t('riskCategory.RISK_CATEGORY_TYPES')}`} :
+        </span>
+        <div className="sub-field">
+          <table>
+            <thead>
+              <tr>
+                <th>{`${t('riskCategory.NAME')}`}</th>
+                <th>{`${t('riskCategory.IMAGE')}`}</th>
+                <th>{`${t('actions.ADD')}`}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder={`${t('riskCategory.NAME')}`}
+                    onChange={e =>
+                      setRiskCategoryType({
+                        ...riskCategoryType,
+                        name: e.target.value,
+                      })
+                    }
+                    value={riskCategoryType.name}
+                  />
+                </td>
+                <td>
+                  <InputFile
+                    id="risk-category-img-type"
+                    onChange={e =>
+                      setRiskCategoryType({
+                        ...riskCategoryType,
+                        img: e.target.files && e.target.files[0],
+                      })
+                    }
+                    ref={inputImgRef}
+                  >
+                    {riskCategoryType.img ? (
+                      <img
+                        src={URL.createObjectURL(riskCategoryType.img)}
+                        alt="risk category type"
+                      />
+                    ) : (
+                      <i className="fa-regular fa-image upload-icon" />
+                    )}
+                  </InputFile>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    className="btn btn-add"
+                    onClick={handleAdd}
+                  >
+                    {`${t('actions.ADD')}`}
+                  </button>
+                </td>
+              </tr>
+              {riskCategoryTypes.map(rct => (
+                <tr key={rct.name}>
                   <td>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder={`${t('riskCategory.NAME')}`}
-                      onChange={e =>
-                        setRiskCategoryType({
-                          ...riskCategoryType,
-                          name: e.target.value,
-                        })
-                      }
-                      value={riskCategoryType.name}
-                    />
+                    <span>{rct.name}</span>
                   </td>
                   <td>
-                    <InputFile
-                      id="risk-category-img-type"
-                      onChange={e =>
-                        setRiskCategoryType({
-                          ...riskCategoryType,
-                          img: e.target.files && e.target.files[0],
-                        })
-                      }
-                      ref={inputImgRef}
-                    >
-                      {riskCategoryType.img ? (
-                        <img
-                          src={URL.createObjectURL(riskCategoryType.img)}
-                          alt="risk category type"
-                        />
-                      ) : (
-                        <i className="fa-regular fa-image upload-icon" />
-                      )}
-                    </InputFile>
+                    {rct.img ? (
+                      <img
+                        src={URL.createObjectURL(rct.img)}
+                        alt="risk category type"
+                        className="img-upload"
+                      />
+                    ) : (
+                      <i className="fa-regular fa-image upload-icon" />
+                    )}
                   </td>
                   <td>
                     <button
                       type="button"
-                      className="btn btn-add"
-                      onClick={handleAdd}
+                      className="icon-container delete"
+                      onClick={() => handleDeleteTypes(rct.name)}
                     >
-                      {`${t('actions.ADD')}`}
+                      <i className="fa-sharp fa-solid fa-trash icon icon-delete" />
                     </button>
                   </td>
                 </tr>
-                {riskCategoryTypes.map(rct => (
-                  <tr key={rct.name}>
-                    <td>
-                      <span>{rct.name}</span>
-                    </td>
-                    <td>
-                      {rct.img ? (
-                        <img
-                          src={URL.createObjectURL(rct.img)}
-                          alt="risk category type"
-                          className="img-upload"
-                        />
-                      ) : (
-                        <i className="fa-regular fa-image upload-icon" />
-                      )}
-                    </td>
-                    <td>
-                      <button
-                        type="button"
-                        className="icon-container delete"
-                        onClick={() => handleDeleteTypes(rct.name)}
-                      >
-                        <i className="fa-sharp fa-solid fa-trash icon icon-delete" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <Buttons
-            setOpenedAlert={setAlertAddRiskCategory}
-            loading={loading}
-            action="actions.CREATE"
-          />
-        </form>
-      </div>
-    </div>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Form>
+    </Alert>
   );
 }
 
