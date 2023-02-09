@@ -22,7 +22,6 @@ import {
 import Alert from '../Alerts/Alert';
 import Form from '../Form';
 import Fields from './Fields';
-import InputFile from './InputFile';
 
 interface IProps {
   setAlertAddRiskCategory: Dispatch<SetStateAction<boolean>>;
@@ -165,15 +164,9 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
                   />
                 </td>
                 <td>
-                  <InputFile
-                    id="risk-category-img-type"
-                    onChange={e =>
-                      setRiskCategoryType({
-                        ...riskCategoryType,
-                        img: e.target.files && e.target.files[0],
-                      })
-                    }
-                    ref={inputImgRef}
+                  <label
+                    htmlFor="risk-category-img-type"
+                    className="add-risk-category-img"
                   >
                     {riskCategoryType.img ? (
                       <img
@@ -183,8 +176,22 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
                     ) : (
                       <i className="fa-regular fa-image upload-icon" />
                     )}
-                  </InputFile>
+                    <input
+                      type="file"
+                      className="hidden"
+                      id="risk-category-img-type"
+                      onChange={e =>
+                        setRiskCategoryType({
+                          ...riskCategoryType,
+                          img: e.target.files && e.target.files[0],
+                        })
+                      }
+                      accept="image/png, image/svg+xml, image/jpeg, image/jpg"
+                      ref={inputImgRef}
+                    />
+                  </label>
                 </td>
+
                 <td>
                   <button
                     type="button"

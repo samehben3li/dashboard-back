@@ -169,7 +169,6 @@ function RiskCategory() {
                 <InputFile
                   id="risk-category-img"
                   onChange={e => setImage(e.target.files && e.target.files[0])}
-                  ref={undefined}
                 >
                   <i className="fa-solid fa-pen-to-square update-img-icon" />
                 </InputFile>

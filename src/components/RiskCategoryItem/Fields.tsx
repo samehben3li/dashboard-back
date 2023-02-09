@@ -33,7 +33,6 @@ function Fields({ setState, state, id }: IPropsFields) {
               img: e.target.files && e.target.files[0],
             })
           }
-          ref={undefined}
         >
           {state.img || state.imgUrl ? (
             <img

@@ -105,7 +105,6 @@ function AddRiskCategoryType({
                 img: e.target.files && e.target.files[0],
               })
             }
-            ref={undefined}
           >
             {riskCategoryType.img ? (
               <img
