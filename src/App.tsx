@@ -5,15 +5,13 @@ import Login from './pages/Login';
 import client from './utils/client';
 import Users from './pages/Users';
 import { Sidebar } from './components/Sidebar';
-import useAuth from './hooks/useAuth';
 import RiskCategories from './pages/RiskCategories';
 import RiskCategory from './pages/RiskCategory';
 import { AppContextProvider } from './context/AppContext';
 import Flags from './pages/Flags';
+import ProtectedRoute from './utils/ProtectedRoute';
 
 function App() {
-  const { isLoggedIn } = useAuth();
-
   return (
     <ApolloProvider client={client}>
       <AppContextProvider>
@@ -21,18 +19,37 @@ function App() {
           <Sidebar />
           <div className="body">
             <Routes>
-              <Route path="/" element={isLoggedIn ? <Users /> : <Login />} />
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <Users />
+                  </ProtectedRoute>
+                }
+              />
               <Route
                 path="/riskCategories"
-                element={isLoggedIn ? <RiskCategories /> : <Login />}
+                element={
+                  <ProtectedRoute>
+                    <RiskCategories />
+                  </ProtectedRoute>
+                }
               />
               <Route
                 path="/riskCategories/:id"
-                element={isLoggedIn ? <RiskCategory /> : <Login />}
+                element={
+                  <ProtectedRoute>
+                    <RiskCategory />
+                  </ProtectedRoute>
+                }
               />
               <Route
                 path="/flags"
-                element={isLoggedIn ? <Flags /> : <Login />}
+                element={
+                  <ProtectedRoute>
+                    <Flags />
+                  </ProtectedRoute>
+                }
               />
               <Route path="/login" element={<Login />} />
             </Routes>
