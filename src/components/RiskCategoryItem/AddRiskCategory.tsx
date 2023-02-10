@@ -11,7 +11,7 @@ import React, {
 import { useTranslation } from 'react-i18next';
 import { ADD_RISK_CATEGORY_ACTION } from '../../context/appActions';
 import { AppContext } from '../../context/AppContext';
-import useUpload from '../../hooks/useUpload';
+import { useUpload } from '../../hooks';
 import { CREATE_RISK_CATEGORY } from '../../requests/mutations';
 import { bucketUrl } from '../../utils/constants';
 
@@ -135,18 +135,14 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
   return (
     <div className="alert-container">
       <div className="alert-wrapper">
-        <span className="alert-title">{`${t(
-          'titles.ADD_RISK_CATEGORY',
-        )}`}</span>
+        <span className="alert-title">{t('titles.ADD_RISK_CATEGORY')}</span>
         <div className="hr" />
         <form onSubmit={handleSubmit}>
           {error && (
-            <span className="error">{`${t(
-              'errors.SOMETHING_WENT_WRONG',
-            )}`}</span>
+            <span className="error">{t('errors.SOMETHING_WENT_WRONG')}</span>
           )}
           <div className="field">
-            <span>{`${t('riskCategory.NAME')}`} : </span>
+            <span>{t('riskCategory.NAME')} : </span>
             <input
               type="text"
               name="name"
@@ -158,11 +154,8 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
             />
           </div>
           <div className="field">
-            <span>{`${t('riskCategory.IMAGE')}`} : </span>
-            <label
-              htmlFor="risk-category-img"
-              className="add-risk-category-img"
-            >
+            <span>{t('riskCategory.IMAGE')} : </span>
+            <label htmlFor="risk-category-img">
               {riskCategory.img ? (
                 <img
                   src={URL.createObjectURL(riskCategory.img)}
@@ -187,14 +180,14 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
             </label>
           </div>
           <span className="alert-subtitle">
-            {`${t('riskCategory.RISK_CATEGORY_TYPES')}`} :
+            {t('riskCategory.RISK_CATEGORY_TYPES')} :
           </span>
           <div className="sub-field">
             <table>
               <thead>
-                <th>{`${t('riskCategory.NAME')}`}</th>
-                <th>{`${t('riskCategory.IMAGE')}`}</th>
-                <th>{`${t('actions.ADD')}`}</th>
+                <th>{t('riskCategory.NAME')}</th>
+                <th>{t('riskCategory.IMAGE')}</th>
+                <th>{t('actions.ADD')}</th>
               </thead>
               <tbody>
                 <tr>
@@ -213,10 +206,7 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
                     />
                   </td>
                   <td>
-                    <label
-                      htmlFor="risk-category-img-type"
-                      className="add-risk-category-img"
-                    >
+                    <label htmlFor="risk-category-img-type">
                       {riskCategoryType.img ? (
                         <img
                           src={URL.createObjectURL(riskCategoryType.img)}
@@ -246,7 +236,7 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
                       className="btn btn-add"
                       onClick={handleAdd}
                     >
-                      {`${t('actions.ADD')}`}
+                      {t('actions.ADD')}
                     </button>
                   </td>
                 </tr>
@@ -286,14 +276,14 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
               className="btn btn-cancel full-width"
               onClick={() => setAlertAddRiskCategory(false)}
             >
-              {`${t('actions.CANCEL')}`}
+              {t('actions.CANCEL')}
             </button>
             <button
               type="submit"
               className="btn btn-add full-width"
               disabled={loading}
             >
-              {`${t('actions.CREATE')}`}
+              {t('actions.CREATE')}
             </button>
           </div>
         </form>

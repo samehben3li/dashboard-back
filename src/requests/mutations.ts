@@ -108,6 +108,34 @@ export const DELETE_RISK_CATEGORY_TYPE = gql`
   }
 `;
 
+export const ADD_RISK_CATEGORY_TYPE = gql`
+  mutation AddRiskCategoryType($id: ID!, $name: String!, $imgUrl: String!) {
+    addRiskCategoryType(id: $id, name: $name, imgUrl: $imgUrl) {
+      id
+      imgUrl
+      name
+    }
+  }
+`;
+
+export const UPDATE_RISK_CATEGORY_TYPE = gql`
+  mutation UpdateRiskCategoryType(
+    $riskCategoryId: ID!
+    $riskCategoryTypeId: ID!
+    $riskCategoryType: InputOption
+  ) {
+    updateRiskCategoryType(
+      riskCategoryId: $riskCategoryId
+      riskCategoryTypeId: $riskCategoryTypeId
+      riskCategoryType: $riskCategoryType
+    ) {
+      id
+      imgUrl
+      name
+    }
+  }
+`;
+
 export const GENERATE_UPLOAD_URL = gql`
   mutation GenerateUploadURL($imgName: String!) {
     getUploadURL(imgName: $imgName)

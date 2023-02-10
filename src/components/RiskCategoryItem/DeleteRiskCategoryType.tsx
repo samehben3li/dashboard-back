@@ -64,7 +64,7 @@ function DeleteRiskCategoryType({
             className="btn btn-cancel full-width"
             onClick={() => setAlertDelete(false)}
           >
-            {`${t('actions.CANCEL')}`}
+            {t('actions.CANCEL')}
           </button>
           <button
             type="button"
@@ -72,7 +72,7 @@ function DeleteRiskCategoryType({
             onClick={handleDelete}
             disabled={loading}
           >
-            {`${t('actions.DELETE')}`}
+            {t('actions.DELETE')}
           </button>
         </div>
       </div>

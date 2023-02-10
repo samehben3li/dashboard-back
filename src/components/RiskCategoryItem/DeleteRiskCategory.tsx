@@ -49,7 +49,7 @@ function DeleteRiskCategory({ setAlertDelete, riskCategory }: IProps) {
             className="btn btn-cancel full-width"
             onClick={() => setAlertDelete(false)}
           >
-            {`${t('actions.CANCEL')}`}
+            {t('actions.CANCEL')}
           </button>
           <button
             type="button"
@@ -57,7 +57,7 @@ function DeleteRiskCategory({ setAlertDelete, riskCategory }: IProps) {
             onClick={handleDelete}
             disabled={loading}
           >
-            {`${t('actions.DELETE')}`}
+            {t('actions.DELETE')}
           </button>
         </div>
       </div>

@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import client from './utils/client';
 import Users from './pages/Users';
 import { Sidebar } from './components/Sidebar';
-import useAuth from './hooks/useAuth';
+import { useAuth } from './hooks';
 import RiskCategories from './pages/RiskCategories';
 import RiskCategory from './pages/RiskCategory';
 import { AppContextProvider } from './context/AppContext';

@@ -39,14 +39,14 @@ function UpdateUserWrapper({ setAlertUpdate, user }: IProps) {
   return (
     <div className="alert-container">
       <div className="alert-wrapper">
-        <div className="alert-title">{`${t('titles.UPDATE_USER')}`}</div>
+        <div className="alert-title">{t('titles.UPDATE_USER')}</div>
         <div className="hr" />
         <form onSubmit={handleUpdate}>
           {error.status && (
-            <span className="error">{`${t(`errors.${error.message}`)}`}</span>
+            <span className="error">{t(`errors.${error.message}`)}</span>
           )}
           <div className="field">
-            <span>{`${t('login.USERNAME')}`} : </span>
+            <span>{t('login.USERNAME')} : </span>
             <input
               type="text"
               name="username"
@@ -56,7 +56,7 @@ function UpdateUserWrapper({ setAlertUpdate, user }: IProps) {
             />
           </div>
           <div className="field">
-            <span>{`${t('login.EMAIL')}`} : </span>
+            <span>{t('login.EMAIL')} : </span>
             <input
               type="text"
               name="email"
@@ -66,7 +66,7 @@ function UpdateUserWrapper({ setAlertUpdate, user }: IProps) {
             />
           </div>
           <div className="field">
-            <span>{`${t('login.PASSWORD')}`} : </span>
+            <span>{t('login.PASSWORD')} : </span>
             <input
               type="password"
               name="password"
@@ -81,14 +81,14 @@ function UpdateUserWrapper({ setAlertUpdate, user }: IProps) {
               className="btn btn-cancel full-width"
               onClick={() => setAlertUpdate(false)}
             >
-              {`${t('actions.CANCEL')}`}
+              {t('actions.CANCEL')}
             </button>
             <button
               type="submit"
               className="btn btn-add full-width"
               disabled={loading}
             >
-              {`${t('actions.UPDATE')}`}
+              {t('actions.UPDATE')}
             </button>
           </div>
         </form>
