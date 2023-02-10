@@ -20,7 +20,7 @@ function Users() {
   return (
     <div className="content">
       <DashboardHeader
-        btnText={`${t('header.NEW_USER')}`}
+        btnText={t('header.NEW_USER')}
         onClick={() => setAlertAddUser(true)}
       />
       {alertAddUser && (
@@ -28,17 +28,17 @@ function Users() {
       )}
       <div className="content-container">
         <div className="content-header">
-          <h2>{`${t('titles.USERS_LIST')}`}</h2>
+          <h2>{t('titles.USERS_LIST')}</h2>
         </div>
 
         <table>
           <thead>
-            <th>{`${t('login.ID')}`}</th>
-            <th>{`${t('login.USERNAME')}`}</th>
-            <th>{`${t('login.EMAIL')}`}</th>
-            <th>{`${t('login.IS_ADMIN')}`}</th>
-            <th>{`${t('actions.UPDATE')}`}</th>
-            <th>{`${t('actions.DELETE')}`}</th>
+            <th>{t('login.ID')}</th>
+            <th>{t('login.USERNAME')}</th>
+            <th>{t('login.EMAIL')}</th>
+            <th>{t('login.IS_ADMIN')}</th>
+            <th>{t('actions.UPDATE')}</th>
+            <th>{t('actions.DELETE')}</th>
           </thead>
 
           {users?.length > 0 ? (
