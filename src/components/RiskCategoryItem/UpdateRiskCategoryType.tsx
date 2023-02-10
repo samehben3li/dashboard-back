@@ -71,7 +71,7 @@ function UpdateRiskCategoryType({
     <div className="alert-container">
       <div className="alert-wrapper">
         <span className="alert-title">{`${t(
-          'titles.UPDATE_RISk_CATEGORY_TYPE',
+          'titles.UPDATE_RISK_CATEGORY_TYPE',
         )}`}</span>
         <div className="hr" />
         <form onSubmit={handleUpdate}>

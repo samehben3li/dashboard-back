@@ -73,7 +73,7 @@ function AddRiskCategoryType({
     <div className="alert-container">
       <div className="alert-wrapper">
         <span className="alert-title">{`${t(
-          'titles.ADD_RISk_CATEGORY_TYPE',
+          'titles.ADD_RISK_CATEGORY_TYPE',
         )}`}</span>
         <div className="hr" />
         <form onSubmit={handleAdd}>
