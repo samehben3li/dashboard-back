@@ -48,7 +48,7 @@ function Users() {
                   key={user.id}
                   user={user}
                   setUsers={setUsers}
-                  index={index}
+                  index={index + 1}
                 />
               ))}
             </tbody>

@@ -193,7 +193,7 @@ function RiskCategory() {
                   <RiskCategoryType
                     key={riskCategoryType.id}
                     riskCategoryType={riskCategoryType}
-                    index={index}
+                    index={index + 1}
                     riskCategoryId={riskCategory.id}
                     setRiskCategory={setRiskCategory}
                   />

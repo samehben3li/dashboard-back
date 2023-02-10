@@ -132,7 +132,7 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
   return (
     <div className="alert-container">
       <div className="alert-wrapper">
-        <span className="alert-title">{t('titles.ADD_RISk_CATEGORY')}</span>
+        <span className="alert-title">{t('titles.ADD_RISK_CATEGORY')}</span>
         <div className="hr" />
         <form onSubmit={handleSubmit}>
           {error && (

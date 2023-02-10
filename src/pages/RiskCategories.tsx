@@ -40,7 +40,7 @@ function RiskCategories() {
                 <RiskCategoryItem
                   key={riskcategory.id}
                   riskCategory={riskcategory}
-                  index={index}
+                  index={index + 1}
                 />
               ))}
             </tbody>
