@@ -90,10 +90,10 @@ function RiskCategory() {
       )}
       <div className="content-container">
         {error && (
-          <span className="error">{`${t('errors.SOMETHING_WENT_WRONG')}`}</span>
+          <span className="error">{t('errors.SOMETHING_WENT_WRONG')}</span>
         )}
         <div className="content-header">
-          <h2>{`${t('riskCategory.RISK_CATEGORY')}`}</h2>
+          <h2>{t('riskCategory.RISK_CATEGORY')}</h2>
           {updateMode ? (
             <div className="btns btns-end">
               <button
@@ -102,14 +102,14 @@ function RiskCategory() {
                 disabled={loading}
                 onClick={handleUpdate}
               >
-                {`${t('actions.SAVE')}`}
+                {t('actions.SAVE')}
               </button>
               <button
                 className="btn btn-cancel"
                 type="button"
                 onClick={() => setUpdateMode(false)}
               >
-                {`${t('actions.CANCEL')}`}
+                {t('actions.CANCEL')}
               </button>
             </div>
           ) : (
@@ -119,21 +119,21 @@ function RiskCategory() {
                 type="button"
                 onClick={() => setUpdateMode(true)}
               >
-                {`${t('actions.UPDATE')}`}
+                {t('actions.UPDATE')}
               </button>
               <button
                 className="btn btn-delete"
                 type="button"
                 onClick={() => setAlertDelete(true)}
               >
-                {`${t('actions.DELETE')}`}
+                {t('actions.DELETE')}
               </button>
             </div>
           )}
         </div>
         <div className="info-container">
           <div className="info-item">
-            <span className="info-key">{`${t('riskCategory.NAME')}`} : </span>
+            <span className="info-key">{t('riskCategory.NAME')} : </span>
             {updateMode ? (
               <input
                 type="text"
@@ -148,7 +148,7 @@ function RiskCategory() {
             )}
           </div>
           <div className="info-item">
-            <span className="info-key">{`${t('riskCategory.IMAGE')}`} : </span>
+            <span className="info-key">{t('riskCategory.IMAGE')} : </span>
             <div className="info-value">
               <img
                 src={image ? URL.createObjectURL(image) : riskCategory?.imgUrl}
@@ -170,22 +170,22 @@ function RiskCategory() {
             </div>
           </div>
           <div className="content-header">
-            <h3>{`${t('riskCategory.TYPES')}`} </h3>
+            <h3>{t('riskCategory.TYPES')} </h3>
             <button
               className="btn btn-add"
               type="button"
               onClick={() => setAlertAdd(true)}
             >
-              {`${t('actions.NEW_TYPES')}`}
+              {t('actions.NEW_TYPES')}
             </button>
           </div>
           <table>
             <thead>
-              <th>{`${t('riskCategory.ID')}`}</th>
-              <th>{`${t('riskCategory.NAME')}`}</th>
-              <th>{`${t('riskCategory.IMAGE')}`}</th>
-              <th>{`${t('actions.UPDATE')}`}</th>
-              <th>{`${t('actions.DELETE')}`}</th>
+              <th>{t('riskCategory.ID')}</th>
+              <th>{t('riskCategory.NAME')}</th>
+              <th>{t('riskCategory.IMAGE')}</th>
+              <th>{t('actions.UPDATE')}</th>
+              <th>{t('actions.DELETE')}</th>
             </thead>
             <tbody>
               {riskCategory?.riskCategoryTypes?.map(

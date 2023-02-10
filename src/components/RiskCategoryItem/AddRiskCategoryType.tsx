@@ -72,18 +72,16 @@ function AddRiskCategoryType({
   return (
     <div className="alert-container">
       <div className="alert-wrapper">
-        <span className="alert-title">{`${t(
-          'titles.ADD_RISK_CATEGORY_TYPE',
-        )}`}</span>
+        <span className="alert-title">
+          {t('titles.ADD_RISK_CATEGORY_TYPE')}
+        </span>
         <div className="hr" />
         <form onSubmit={handleAdd}>
           {error && (
-            <span className="error">{`${t(
-              'errors.SOMETHING_WENT_WRONG',
-            )}`}</span>
+            <span className="error">{t('errors.SOMETHING_WENT_WRONG')}</span>
           )}
           <div className="field">
-            <span>{`${t('riskCategory.NAME')}`} : </span>
+            <span>{t('riskCategory.NAME')} : </span>
             <input
               type="text"
               name="name"
@@ -98,7 +96,7 @@ function AddRiskCategoryType({
             />
           </div>
           <div className="field">
-            <span>{`${t('riskCategory.IMAGE')}`} : </span>
+            <span>{t('riskCategory.IMAGE')} : </span>
             <label htmlFor="risk-category-type-img">
               {riskCategoryType.img ? (
                 <img
@@ -130,14 +128,14 @@ function AddRiskCategoryType({
               className="btn btn-cancel full-width"
               onClick={() => setAlertAdd(false)}
             >
-              {`${t('actions.CANCEL')}`}
+              {t('actions.CANCEL')}
             </button>
             <button
               type="submit"
               className="btn btn-add full-width"
               disabled={loading}
             >
-              {`${t('actions.ADD')}`}
+              {t('actions.ADD')}
             </button>
           </div>
         </form>
