@@ -5,6 +5,7 @@ import LogoutIcon from '../../assets/icons/LogoutIcon';
 import useAuth from '../../hooks/useAuth';
 import { sidebarMenu } from '../../utils/constants';
 import SidebarItem from './SidebarItem';
+import Button from '../Buttons/Button';
 
 function SideBar() {
   const { logout, isLoggedIn } = useAuth();
@@ -21,10 +22,15 @@ function SideBar() {
             <SidebarItem item={item} key={item.id} />
           ))}
         </div>
-        <button type="button" className="btn btn-logout" onClick={logout}>
+        <Button
+          isSubmit={false}
+          disabled={false}
+          className="btn btn-logout"
+          onClick={logout}
+        >
           <span className="sidebar-item-label">{t('sidebarItem.LOGOUT')}</span>
           <LogoutIcon />
-        </button>
+        </Button>
       </div>
     </nav>
   );

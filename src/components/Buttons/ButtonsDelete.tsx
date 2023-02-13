@@ -13,18 +13,21 @@ function ButtonsDelete({ setAlertDelete, loading, onClick }: IProps) {
   return (
     <div className="btns">
       <Button
-        action="actions.CANCEL"
         className="btn btn-cancel full-width"
         onClick={() => setAlertDelete(false)}
-      />
-      <button
-        type="button"
+        isSubmit={false}
+        disabled={false}
+      >
+        {t('actions.CANCEL')}
+      </Button>
+      <Button
+        isSubmit={false}
         className="btn btn-delete full-width"
         onClick={onClick}
         disabled={loading}
       >
-        {`${t('actions.DELETE')}`}
-      </button>
+        {t('actions.DELETE')}
+      </Button>
     </div>
   );
 }

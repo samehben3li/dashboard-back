@@ -1,17 +1,17 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { ReactNode } from 'react';
 
 interface IProps {
+  isSubmit: boolean | undefined;
   className: string;
-  action: string;
-  onClick: () => void;
+  children: ReactNode | string;
+  onClick: (() => void) | undefined;
+  disabled: boolean | false;
 }
 
-function Button({ action, ...props }: IProps) {
-  const { t } = useTranslation();
+function Button({ children, isSubmit, ...props }: IProps) {
   return (
-    <button type="button" {...props}>
-      {`${t(action)}`}
+    <button type={isSubmit ? 'submit' : 'button'} {...props}>
+      {children}
     </button>
   );
 }

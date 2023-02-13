@@ -51,32 +51,41 @@ function ButtonActions({
     <div className="btns btns-end">
       {updateMode ? (
         <>
-          <button
+          <Button
             className="btn btn-update"
-            type="button"
+            isSubmit={false}
             disabled={loading}
             onClick={handleUpdate}
           >
-            {`${t('actions.SAVE')}`}
-          </button>
+            {t('actions.SAVE')}
+          </Button>
           <Button
             className="btn btn-cancel"
             onClick={() => setUpdateMode(false)}
-            action="actions.CANCEL"
-          />
+            isSubmit={false}
+            disabled={false}
+          >
+            {t('actions.CANCEL')}
+          </Button>
         </>
       ) : (
         <>
           <Button
             className="btn btn-update"
             onClick={() => setUpdateMode(true)}
-            action="actions.UPDATE"
-          />
+            isSubmit={false}
+            disabled={false}
+          >
+            {t('actions.UPDATE')}
+          </Button>
           <Button
             className="btn btn-delete"
-            action="actions.DELETE"
             onClick={() => setAlertDelete(true)}
-          />
+            isSubmit={false}
+            disabled={false}
+          >
+            {t('actions.DELETE')}
+          </Button>
         </>
       )}
     </div>
@@ -95,9 +104,12 @@ function TypesContainer({
         <h3>{`${t('riskCategory.TYPES')}`} </h3>
         <Button
           className="btn btn-add"
-          action="actions.NEW_TYPES"
           onClick={() => setAlertAdd(true)}
-        />
+          isSubmit={false}
+          disabled={false}
+        >
+          {t('actions.NEW_TYPES')}
+        </Button>
       </div>
       <Table theads={theadsOfRiskCategory}>
         {riskCategory?.riskCategoryTypes?.map((riskCategoryType, index) => (

@@ -7,6 +7,7 @@ import useLogin from '../hooks/useLogin';
 import Main from '../components/Main';
 import { IUser } from '../interfaces';
 import useHandleChange from '../hooks/useHandleChange';
+import Button from '../components/Buttons/Button';
 
 interface IPropsInput {
   type: string;
@@ -15,10 +16,6 @@ interface IPropsInput {
   placeholder: string;
   setCredentials: Dispatch<SetStateAction<IUser>>;
   value: string;
-}
-
-interface IPropsButton {
-  loading: boolean;
 }
 
 function InputGroup({ setCredentials, placeholder, ...props }: IPropsInput) {
@@ -37,23 +34,14 @@ function InputGroup({ setCredentials, placeholder, ...props }: IPropsInput) {
   );
 }
 
-function ButtonLogin({ loading }: IPropsButton) {
-  const { t } = useTranslation();
-  return (
-    <button type="submit" className="btn btn-primary" disabled={loading}>
-      {loading ? '...' : t('login.LOGIN')}
-    </button>
-  );
-}
-
 function Login() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [error, setError] = useState({ status: false, message: '' });
   const { loading, handleLogin } = useLogin(setError);
+  const { t } = useTranslation();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) =>
     handleLogin(e, credentials);
-
   return (
     <Main>
       <Logo />
@@ -68,7 +56,14 @@ function Login() {
             }
           />
         ))}
-        <ButtonLogin loading={loading} />
+        <Button
+          isSubmit
+          className="btn btn-primary"
+          disabled={loading}
+          onClick={undefined}
+        >
+          {loading ? '...' : t('login.LOGIN')}
+        </Button>
       </form>
     </Main>
   );

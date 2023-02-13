@@ -195,10 +195,13 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
 
                 <td>
                   <Button
-                    action="actions.ADD"
                     className="btn btn-add"
                     onClick={handleAdd}
-                  />
+                    isSubmit={false}
+                    disabled={false}
+                  >
+                    {t('actions.ADD')}
+                  </Button>
                 </td>
               </tr>
               {riskCategoryTypes.map(rct => (
@@ -218,13 +221,14 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
                     )}
                   </td>
                   <td>
-                    <button
-                      type="button"
+                    <Button
+                      isSubmit={false}
                       className="icon-container delete"
                       onClick={() => handleDeleteTypes(rct.name)}
+                      disabled={false}
                     >
                       <i className="fa-sharp fa-solid fa-trash icon icon-delete" />
-                    </button>
+                    </Button>
                   </td>
                 </tr>
               ))}

@@ -5,10 +5,9 @@ import useUpload from '../../hooks/useUpload';
 import { ADD_RISK_CATEGORY_TYPE } from '../../requests/mutations';
 import { bucketUrl } from '../../utils/constants';
 import { IRiskCategory } from '../../interfaces';
-import Error from '../Error';
-import Buttons from '../Buttons/Buttons';
 import Alert from '../Alerts/Alert';
 import InputFile from './InputFile';
+import Form from '../Form';
 
 interface IProps {
   riskCategoryId: string;
@@ -52,7 +51,7 @@ function AddRiskCategoryType({
     return imgUrl;
   };
 
-  const handleAdd = (e: FormEvent<HTMLFormElement>) => {
+  const handleAdd = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError({ status: false, message: '' });
     const imgUrl = uploadImage();
@@ -78,8 +77,13 @@ function AddRiskCategoryType({
   };
   return (
     <Alert title="titles.ADD_RISk_CATEGORY_TYPE">
-      <form onSubmit={handleAdd}>
-        {error.status && <Error message={error.message} />}
+      <Form
+        onSubmit={handleAdd}
+        setOpenedAlert={setAlertAdd}
+        loading={loading}
+        action="actions.ADD"
+        error={error}
+      >
         <div className="field">
           <span>{`${t('riskCategory.NAME')}`} : </span>
           <input
@@ -117,12 +121,7 @@ function AddRiskCategoryType({
             )}
           </InputFile>
         </div>
-        <Buttons
-          setOpenedAlert={setAlertAdd}
-          loading={loading}
-          action="actions.ADD"
-        />
-      </form>
+      </Form>
     </Alert>
   );
 }

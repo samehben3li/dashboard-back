@@ -15,15 +15,19 @@ function Buttons({ setOpenedAlert, loading, action }: IProps) {
       <Button
         className="btn btn-cancel full-width"
         onClick={() => setOpenedAlert(false)}
-        action="actions.CANCEL"
-      />
-      <button
-        type="submit"
+        isSubmit={false}
+        disabled={false}
+      >
+        {t('actions.CANCEL')}
+      </Button>
+      <Button
+        isSubmit
         className="btn btn-add full-width"
         disabled={loading}
+        onClick={undefined}
       >
-        {`${t(action)}`}
-      </button>
+        {t(action)}
+      </Button>
     </div>
   );
 }

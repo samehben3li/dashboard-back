@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from './Buttons/Button';
 
 interface IPropsActions {
   updateAction: () => void;
@@ -14,9 +15,14 @@ interface IPropsButton {
 function ButtonAction({ iconClassName, onClick, className }: IPropsButton) {
   return (
     <td>
-      <button type="button" className={className} onClick={onClick}>
+      <Button
+        isSubmit={false}
+        className={className}
+        disabled={false}
+        onClick={onClick}
+      >
         <i className={iconClassName} />
-      </button>
+      </Button>
     </td>
   );
 }
