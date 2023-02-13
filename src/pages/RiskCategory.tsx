@@ -12,11 +12,11 @@ import { bucketUrl, theadsOfRiskCategory } from '../utils/constants';
 import useUpload from '../hooks/useUpload';
 import { UPDATE_RISK_CATEGORY } from '../requests/mutations';
 import AddRiskCategoryType from '../components/RiskCategoryItem/AddRiskCategoryType';
-import Table from '../components/Table';
-import Error from '../components/Error';
-import InputFile from '../components/RiskCategoryItem/InputFile';
-import Content from '../components/Content';
-import Button from '../components/Buttons/Button';
+import Table from '../components/common/Table';
+import Error from '../components/common/Error';
+import InputFile from '../components/common/InputFile';
+import Content from '../components/common/Content';
+import Button from '../components/common/Buttons/Button';
 
 interface IPropsButtons {
   updateMode: boolean;

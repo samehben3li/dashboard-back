@@ -9,7 +9,7 @@ interface IPropsFields {
   id: string;
 }
 
-function Fields({ setState, state, id }: IPropsFields) {
+function RiskCategoryFields({ setState, state, id }: IPropsFields) {
   const { t } = useTranslation();
   return (
     <>
@@ -49,4 +49,4 @@ function Fields({ setState, state, id }: IPropsFields) {
   );
 }
 
-export default Fields;
+export default RiskCategoryFields;

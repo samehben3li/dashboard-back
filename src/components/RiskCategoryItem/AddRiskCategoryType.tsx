@@ -5,9 +5,9 @@ import useUpload from '../../hooks/useUpload';
 import { ADD_RISK_CATEGORY_TYPE } from '../../requests/mutations';
 import { bucketUrl } from '../../utils/constants';
 import { IRiskCategory } from '../../interfaces';
-import Alert from '../Alerts/Alert';
-import InputFile from './InputFile';
-import Form from '../Form';
+import Alert from '../common/Alerts/Alert';
+import InputFile from '../common/InputFile';
+import Form from '../common/Form';
 
 interface IProps {
   riskCategoryId: string;

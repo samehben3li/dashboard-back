@@ -5,7 +5,7 @@ import LogoutIcon from '../../assets/icons/LogoutIcon';
 import useAuth from '../../hooks/useAuth';
 import { sidebarMenu } from '../../utils/constants';
 import SidebarItem from './SidebarItem';
-import Button from '../Buttons/Button';
+import Button from '../common/Buttons/Button';
 
 function SideBar() {
   const { logout, isLoggedIn } = useAuth();

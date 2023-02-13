@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import DashboardHeader from '../components/DashboardHeader';
+import DashboardHeader from '../components/common/DashboardHeader';
 import AddUser from '../components/User/AddUserWrapper';
 import { UserItem } from '../components/User';
 import { IError, IUser } from '../interfaces';
 import { GET_USERS } from '../requests/queries';
 import { theadsOfUsers } from '../utils/constants';
-import Container from '../components/Container';
+import Container from '../components/common/Container';
 
 interface IPropsContainer {
   err: IError;

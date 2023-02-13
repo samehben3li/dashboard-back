@@ -19,10 +19,10 @@ import {
   initStateCategory,
   initStateType,
 } from '../../utils/constants';
-import Alert from '../Alerts/Alert';
-import Button from '../Buttons/Button';
-import Form from '../Form';
-import Fields from './Fields';
+import Alert from '../common/Alerts/Alert';
+import Button from '../common/Buttons/Button';
+import Form from '../common/Form';
+import Fields from '../common/RiskCategoryFields';
 
 interface IProps {
   setAlertAddRiskCategory: Dispatch<SetStateAction<boolean>>;

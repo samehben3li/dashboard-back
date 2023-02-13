@@ -1,5 +1,5 @@
 import React, { Dispatch, FormEvent, ReactNode, SetStateAction } from 'react';
-import { IError } from '../interfaces';
+import { IError } from '../../interfaces';
 import Buttons from './Buttons/Buttons';
 import Error from './Error';
 

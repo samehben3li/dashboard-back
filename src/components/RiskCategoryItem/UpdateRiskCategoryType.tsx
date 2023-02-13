@@ -4,9 +4,9 @@ import useUpload from '../../hooks/useUpload';
 import { IInputOptions, ITypes } from '../../interfaces';
 import { UPDATE_RISK_CATEGORY_TYPE } from '../../requests/mutations';
 import { bucketUrl } from '../../utils/constants';
-import Alert from '../Alerts/Alert';
-import Form from '../Form';
-import Fields from './Fields';
+import Alert from '../common/Alerts/Alert';
+import Form from '../common/Form';
+import Fields from '../common/RiskCategoryFields';
 
 interface IProps {
   setAlertUpdate: Dispatch<SetStateAction<boolean>>;

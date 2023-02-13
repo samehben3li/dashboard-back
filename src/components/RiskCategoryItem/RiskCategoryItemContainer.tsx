@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IRiskCategory } from '../../interfaces';
-import Actions from '../Actions';
+import Actions from '../common/Actions';
 import DeleteRiskCategory from './DeleteRiskCategory';
 
 interface IProps {

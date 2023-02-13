@@ -1,13 +1,13 @@
 import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Logo from '../components/Logo';
-import Error from '../components/Error';
+import Logo from '../components/common/Logo';
+import Error from '../components/common/Error';
 import { inputsOfLogin } from '../utils/constants';
 import useLogin from '../hooks/useLogin';
-import Main from '../components/Main';
+import Main from '../components/common/Main';
 import { IUser } from '../interfaces';
 import useHandleChange from '../hooks/useHandleChange';
-import Button from '../components/Buttons/Button';
+import Button from '../components/common/Buttons/Button';
 
 interface IPropsInput {
   type: string;

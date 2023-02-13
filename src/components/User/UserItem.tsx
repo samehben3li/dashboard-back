@@ -4,7 +4,7 @@ import DoneIcon from '../../assets/icons/DoneIcon';
 import CancelIcon from '../../assets/icons/CancelIcon';
 import DeleteUserWrapper from './DeleteUserWrapper';
 import UpdateUserWrapper from './UpdateUserWrapper';
-import Actions from '../Actions';
+import Actions from '../common/Actions';
 
 interface IProps {
   user: IUser;

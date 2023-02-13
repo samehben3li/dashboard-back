@@ -1,5 +1,5 @@
 import React from 'react';
-import TomatoTrolleyLogo from '../assets/images/TomatoTrolleyLogo';
+import TomatoTrolleyLogo from '../../assets/images/TomatoTrolleyLogo';
 
 function Logo() {
   return (
