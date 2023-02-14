@@ -19,7 +19,7 @@ function DeleteRiskCategoryType({
   riskCategoryId,
   setRiskCategory,
 }: IProps) {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({ status: false, message: '' });
   const { t } = useTranslation();
   const [deleteRiskCategory, { loading }] = useMutation(
     DELETE_RISK_CATEGORY_TYPE,
@@ -27,7 +27,7 @@ function DeleteRiskCategoryType({
   const { dispatch } = useContext(AppContext);
 
   const handleDelete = () => {
-    setError(false);
+    setError({ status: false, message: '' });
     deleteRiskCategory({
       variables: {
         riskCategoryTypeId: riskCategoryType.id,
@@ -46,14 +46,19 @@ function DeleteRiskCategoryType({
         }));
         setAlertDelete(false);
       })
-      .catch(() => setError(true));
+      .catch(({ message }) =>
+        setError({
+          status: true,
+          message: (message as string) || 'SOMETHING_WENT_WRONG',
+        }),
+      );
   };
 
   return (
     <div className="alert-container">
       <div className="alert-wrapper">
-        {error && (
-          <span className="error">{t('errors.SOMETHING_WENT_WRONG')}</span>
+        {error.status && (
+          <span className="error">{t(`errors.${error.message}`)}</span>
         )}
         <span>
           {t('titles.QUESTION_DELETE_USER') + riskCategoryType.name} ?

@@ -32,8 +32,11 @@ function AddUserWrapper({ setAlertAddUser, setUsers }: IProps) {
         setUsers(prev => [...prev, response?.data?.createUser]);
         setAlertAddUser(false);
       }
-    } catch (err) {
-      setError({ status: true, message: 'INFORMATION_ALREADY_EXIST' });
+    } catch ({ message }) {
+      setError({
+        status: true,
+        message: (message as string) || 'SOMETHING_WENT_WRONG',
+      });
     }
   };
 

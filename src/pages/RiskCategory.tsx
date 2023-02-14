@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { GET_RISK_CATEGORY } from '../requests/queries';
 import { IRiskCategory } from '../interfaces';
@@ -14,6 +14,7 @@ import { UPDATE_RISK_CATEGORY } from '../requests/mutations';
 import AddRiskCategoryType from '../components/RiskCategoryItem/AddRiskCategoryType';
 
 function RiskCategory() {
+  const location = useLocation();
   const [riskCategory, setRiskCategory] = useState<IRiskCategory>({
     id: '',
     name: '',
@@ -23,21 +24,27 @@ function RiskCategory() {
   const [image, setImage] = useState<File | null>(null);
   const [alertDelete, setAlertDelete] = useState(false);
   const [alertAdd, setAlertAdd] = useState(false);
-  const [updateMode, setUpdateMode] = useState(false);
+  const [updateMode, setUpdateMode] = useState(
+    location.state?.isUpdateMode || false,
+  );
   const { id } = useParams();
   const { upload } = useUpload();
   const [updateRiskCategory, { loading }] = useMutation(UPDATE_RISK_CATEGORY);
-  const [error, setError] = useState(false);
-  const { data } = useQuery(GET_RISK_CATEGORY, {
+  const [error, setError] = useState({ status: false, message: '' });
+  const { data, error: err } = useQuery(GET_RISK_CATEGORY, {
     variables: {
       id,
     },
   });
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setRiskCategory(data?.getRiskCategory);
-  }, [data]);
+    if (err) {
+      navigate('/riskcategories');
+    }
+  }, [data, err, navigate]);
 
   const uploadImage = () => {
     const fileExtension = image?.name.split('.').pop() || '';
@@ -48,14 +55,14 @@ function RiskCategory() {
     setRiskCategory(prev => ({ ...prev, imgUrl }));
     upload(imgName, image as File)
       .then(res => res)
-      .catch(err => {
-        throw err;
+      .catch(errs => {
+        throw errs;
       });
     return imgUrl;
   };
 
   const handleUpdate = () => {
-    setError(false);
+    setError({ status: false, message: '' });
     let newImgUrl = null;
     if (image) {
       newImgUrl = uploadImage();
@@ -68,8 +75,11 @@ function RiskCategory() {
         setRiskCategory(res.data.updateRiskCategory);
         setUpdateMode(false);
       })
-      .catch(() => {
-        setError(true);
+      .catch(({ message }) => {
+        setError({
+          status: true,
+          message: (message as string) || 'SOMETHING_WENT_WRONG',
+        });
       });
   };
 
@@ -89,8 +99,8 @@ function RiskCategory() {
         />
       )}
       <div className="content-container">
-        {error && (
-          <span className="error">{t('errors.SOMETHING_WENT_WRONG')}</span>
+        {error.status && (
+          <span className="error">{t(`errors.${error.message}`)}</span>
         )}
         <div className="content-header">
           <h2>{t('riskCategory.RISK_CATEGORY')}</h2>

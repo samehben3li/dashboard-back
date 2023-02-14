@@ -30,9 +30,11 @@ function UpdateUserWrapper({ setAlertUpdate, user }: IProps) {
         },
       });
       setAlertUpdate(false);
-    } catch (err) {
-      // i will add error handler after merging pr of backend (rendring new error)
-      setError({ status: true, message: 'SOMETHING_WENT_WRONG' });
+    } catch ({ message }) {
+      setError({
+        status: true,
+        message: (message as string) || 'SOMETHING_WENT_WRONG',
+      });
     }
   };
 
