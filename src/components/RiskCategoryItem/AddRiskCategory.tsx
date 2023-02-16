@@ -11,7 +11,7 @@ import React, {
 import { useTranslation } from 'react-i18next';
 import { ADD_RISK_CATEGORY_ACTION } from '../../context/appActions';
 import { AppContext } from '../../context/AppContext';
-import useUpload from '../../hooks/useUpload';
+import { useUpload } from '../../hooks';
 import { ICategory, ITypes } from '../../interfaces';
 import { CREATE_RISK_CATEGORY } from '../../requests/mutations';
 import {
@@ -19,10 +19,7 @@ import {
   initStateCategory,
   initStateType,
 } from '../../utils/constants';
-import Alert from '../common/Alerts/Alert';
-import Button from '../common/Buttons/Button';
-import Form from '../common/Form';
-import Fields from '../common/RiskCategoryFields';
+import { Alert, Button, Form, RiskCategoryFields } from '../common';
 
 interface IProps {
   setAlertAddRiskCategory: Dispatch<SetStateAction<boolean>>;
@@ -131,7 +128,7 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
         action="actions.CREATE"
         loading={loading}
       >
-        <Fields
+        <RiskCategoryFields
           setState={setRiskCategory}
           state={riskCategory}
           id="risk-category-img"

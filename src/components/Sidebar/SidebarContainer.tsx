@@ -2,10 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import TomatoTrolleyLogo from '../../assets/images/TomatoTrolleyLogo';
 import LogoutIcon from '../../assets/icons/LogoutIcon';
-import useAuth from '../../hooks/useAuth';
 import { sidebarMenu } from '../../utils/constants';
 import SidebarItem from './SidebarItem';
-import Button from '../common/Buttons/Button';
+import { Button } from '../common';
+import { useAuth } from '../../hooks';
 
 function SideBar() {
   const { logout, isLoggedIn } = useAuth();

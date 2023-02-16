@@ -1,12 +1,8 @@
 import React, { FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Logo from '../components/common/Logo';
-import Error from '../components/common/Error';
 import { inputsOfLogin } from '../utils/constants';
-import useLogin from '../hooks/useLogin';
-import Main from '../components/common/Main';
-import Button from '../components/common/Buttons/Button';
-import InputGroup from '../components/common/InputGroup';
+import { Button, Error, InputGroup, Logo, Main } from '../components/common';
+import { useLogin } from '../hooks';
 
 function Login() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });

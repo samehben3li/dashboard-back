@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { RiskCategoryItem } from '../components/RiskCategoryItem';
 import { IRiskCategory } from '../interfaces';
-import DashboardHeader from '../components/common/DashboardHeader';
 import { AppContext } from '../context/AppContext';
 import AddRiskCategory from '../components/RiskCategoryItem/AddRiskCategory';
-import Container from '../components/common/Container';
+import { Container, DashboardHeader } from '../components/common';
 import { theadsOfRiskCategory } from '../utils/constants';
 
 function RiskCategories() {

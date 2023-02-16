@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
+import { useAuth } from '../hooks';
 import Flags from '../pages/Flags';
 import Login from '../pages/Login';
 import RiskCategories from '../pages/RiskCategories';

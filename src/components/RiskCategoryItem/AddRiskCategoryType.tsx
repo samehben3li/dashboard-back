@@ -1,13 +1,11 @@
 import { useMutation } from '@apollo/client';
 import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import useUpload from '../../hooks/useUpload';
 import { ADD_RISK_CATEGORY_TYPE } from '../../requests/mutations';
 import { bucketUrl } from '../../utils/constants';
 import { IRiskCategory } from '../../interfaces';
-import Alert from '../common/Alerts/Alert';
-import InputFile from '../common/InputFile';
-import Form from '../common/Form';
+import { Alert, Form, InputFile } from '../common';
+import { useUpload } from '../../hooks';
 
 interface IProps {
   riskCategoryId: string;

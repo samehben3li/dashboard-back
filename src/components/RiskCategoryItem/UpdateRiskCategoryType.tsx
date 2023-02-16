@@ -1,12 +1,10 @@
 import { useMutation } from '@apollo/client';
 import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
-import useUpload from '../../hooks/useUpload';
+import { useUpload } from '../../hooks';
 import { IInputOptions, ITypes } from '../../interfaces';
 import { UPDATE_RISK_CATEGORY_TYPE } from '../../requests/mutations';
 import { bucketUrl } from '../../utils/constants';
-import Alert from '../common/Alerts/Alert';
-import Form from '../common/Form';
-import Fields from '../common/RiskCategoryFields';
+import { Alert, Form, RiskCategoryFields } from '../common';
 
 interface IProps {
   setAlertUpdate: Dispatch<SetStateAction<boolean>>;
@@ -79,7 +77,7 @@ function UpdateRiskCategoryType({
         action="actions.UPDATE"
         error={error}
       >
-        <Fields
+        <RiskCategoryFields
           setState={setNewRiskCategoryType}
           state={newRiskCategoryType}
           id="risk-category-type-img"

@@ -4,7 +4,7 @@ import { DELETE_RISK_CATEGORY_TYPE_ACTION } from '../../context/appActions';
 import { AppContext } from '../../context/AppContext';
 import { IInputOptions, IRiskCategory } from '../../interfaces';
 import { DELETE_RISK_CATEGORY_TYPE } from '../../requests/mutations';
-import DeleteAlert from '../common/Alerts/DeleteAlert';
+import { DeleteAlert } from '../common';
 
 interface IProps {
   setAlertDelete: Dispatch<SetStateAction<boolean>>;

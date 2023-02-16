@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { IInputOptions, IRiskCategory } from '../../interfaces';
-import Actions from '../common/Actions';
+import { Actions } from '../common';
 import DeleteRiskCategoryType from './DeleteRiskCategoryType';
 import UpdateRiskCategoryType from './UpdateRiskCategoryType';
 

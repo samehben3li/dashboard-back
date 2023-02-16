@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
-import Container from '../components/common/Container';
+import { Container } from '../components/common';
 import FlagItem from '../components/FlagItem';
 import { IFlag } from '../interfaces';
 import { GET_ALL_FLAGS } from '../requests/queries';

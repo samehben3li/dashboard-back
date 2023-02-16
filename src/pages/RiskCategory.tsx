@@ -9,14 +9,10 @@ import {
   RiskCategoryType,
 } from '../components/RiskCategoryItem';
 import { bucketUrl, theadsOfRiskCategory } from '../utils/constants';
-import useUpload from '../hooks/useUpload';
 import { UPDATE_RISK_CATEGORY } from '../requests/mutations';
 import AddRiskCategoryType from '../components/RiskCategoryItem/AddRiskCategoryType';
-import Table from '../components/common/Table';
-import Error from '../components/common/Error';
-import InputFile from '../components/common/InputFile';
-import Content from '../components/common/Content';
-import Button from '../components/common/Buttons/Button';
+import { Button, Content, Error, InputFile, Table } from '../components/common';
+import { useUpload } from '../hooks';
 
 interface IPropsButtons {
   updateMode: boolean;

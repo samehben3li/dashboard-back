@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useDeleteUser } from '../../hooks';
 import { IUser } from '../../interfaces';
-import DeleteAlert from '../common/Alerts/DeleteAlert';
+import { DeleteAlert } from '../common';
 
 interface IProps {
   username: string;
