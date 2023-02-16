@@ -42,14 +42,14 @@ function DeleteRiskCategory({ setAlertDelete, riskCategory }: IProps) {
         {error && (
           <span className="error">{t('errors.SOMETHING_WENT_WRONG')}</span>
         )}
-        <span>{t('titles.QUESTION_DELETE_USER') + riskCategory.name} ?</span>
+        <span>{t('titles.QUESTION_DELETE', { name: riskCategory.name })}</span>
         <div className="btns">
           <button
             type="button"
             className="btn btn-cancel full-width"
             onClick={() => setAlertDelete(false)}
           >
-            {`${t('actions.CANCEL')}`}
+            {t('actions.CANCEL')}
           </button>
           <button
             type="button"
@@ -57,7 +57,7 @@ function DeleteRiskCategory({ setAlertDelete, riskCategory }: IProps) {
             onClick={handleDelete}
             disabled={loading}
           >
-            {`${t('actions.DELETE')}`}
+            {t('actions.DELETE')}
           </button>
         </div>
       </div>

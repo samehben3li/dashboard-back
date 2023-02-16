@@ -138,6 +138,15 @@
                                 object-fit: contain;
                             }
                         }
+                        input {
+                            flex: 5;
+                            font-size: 14px;
+                            color: rgb(60, 60, 60);
+                            font-weight: 500;
+                            border: none;
+                            border-bottom: 1px solid $primary-color-light;
+                            outline: none;
+                        }
                     }
                 }
             }

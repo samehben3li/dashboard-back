@@ -36,16 +36,16 @@ function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
     <div className="alert-container">
       <div className="alert-wrapper">
         {error && (
-          <span className="error">{`${t('errors.SOMETHING_WENT_WRONG')}`}</span>
+          <span className="error">{t('errors.SOMETHING_WENT_WRONG')}</span>
         )}
-        <span>{t('titles.QUESTION_DELETE_USER') + username} ?</span>
+        <span>{t('titles.QUESTION_DELETE', { name: username })} </span>
         <div className="btns">
           <button
             type="button"
             className="btn btn-cancel full-width"
             onClick={() => setAlertDelete(false)}
           >
-            {`${t('actions.CANCEL')}`}
+            {t('actions.CANCEL')}
           </button>
           <button
             type="button"
@@ -53,7 +53,7 @@ function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
             onClick={handleDelete}
             disabled={loading}
           >
-            {`${t('actions.DELETE')}`}
+            {t('actions.DELETE')}
           </button>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import Logo from '../components/Logo';
-import useAuth from '../hooks/useAuth';
+import { useAuth } from '../hooks';
 import { LOGIN } from '../requests/mutations';
 
 function Login() {

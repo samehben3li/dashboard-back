@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { GET_RISK_CATEGORY } from '../requests/queries';
@@ -8,11 +8,26 @@ import {
   DeleteRiskCategory,
   RiskCategoryType,
 } from '../components/RiskCategoryItem';
+import { bucketUrl } from '../utils/constants';
+import { useUpload } from '../hooks';
+import { UPDATE_RISK_CATEGORY } from '../requests/mutations';
+import AddRiskCategoryType from '../components/RiskCategoryItem/AddRiskCategoryType';
 
 function RiskCategory() {
-  const [riskCategory, setRiskCategory] = useState<IRiskCategory>();
+  const [riskCategory, setRiskCategory] = useState<IRiskCategory>({
+    id: '',
+    name: '',
+    imgUrl: '',
+    riskCategoryTypes: [],
+  });
+  const [image, setImage] = useState<File | null>(null);
   const [alertDelete, setAlertDelete] = useState(false);
+  const [alertAdd, setAlertAdd] = useState(false);
+  const [updateMode, setUpdateMode] = useState(false);
   const { id } = useParams();
+  const { upload } = useUpload();
+  const [updateRiskCategory, { loading }] = useMutation(UPDATE_RISK_CATEGORY);
+  const [error, setError] = useState(false);
   const { data } = useQuery(GET_RISK_CATEGORY, {
     variables: {
       id,
@@ -24,6 +39,40 @@ function RiskCategory() {
     setRiskCategory(data?.getRiskCategory);
   }, [data]);
 
+  const uploadImage = () => {
+    const fileExtension = image?.name.split('.').pop();
+    const imgName = `risk-category/${riskCategory.name}${Date.now()}${
+      fileExtension ? `.${fileExtension}` : ''
+    }`;
+    const imgUrl = `${bucketUrl}${imgName}`;
+    setRiskCategory(prev => ({ ...prev, imgUrl }));
+    upload(imgName, image as File)
+      .then(res => res)
+      .catch(err => {
+        throw err;
+      });
+    return imgUrl;
+  };
+
+  const handleUpdate = () => {
+    setError(false);
+    let newImgUrl = null;
+    if (image) {
+      newImgUrl = uploadImage();
+    }
+    const { name, imgUrl } = riskCategory;
+    updateRiskCategory({
+      variables: { id, name, imgUrl: newImgUrl || imgUrl },
+    })
+      .then(res => {
+        setRiskCategory(res.data.updateRiskCategory);
+        setUpdateMode(false);
+      })
+      .catch(() => {
+        setError(true);
+      });
+  };
+
   return (
     <div className="content">
       {alertDelete && riskCategory && (
@@ -32,46 +81,111 @@ function RiskCategory() {
           setAlertDelete={setAlertDelete}
         />
       )}
+      {alertAdd && (
+        <AddRiskCategoryType
+          setAlertAdd={setAlertAdd}
+          riskCategoryId={riskCategory.id}
+          setRiskCategory={setRiskCategory}
+        />
+      )}
       <div className="content-container">
+        {error && (
+          <span className="error">{t('errors.SOMETHING_WENT_WRONG')}</span>
+        )}
         <div className="content-header">
-          <h2>{`${t('riskCategory.RISK_CATEGORY')}`}</h2>
-          <div className="btns btns-end">
-            <button className="btn btn-update" type="button">
-              {`${t('actions.UPDATE')}`}
-            </button>
-            <button
-              className="btn btn-delete"
-              type="button"
-              onClick={() => setAlertDelete(true)}
-            >
-              {`${t('actions.DELETE')}`}
-            </button>
-          </div>
+          <h2>{t('riskCategory.RISK_CATEGORY')}</h2>
+          {updateMode ? (
+            <div className="btns btns-end">
+              <button
+                className="btn btn-update"
+                type="button"
+                disabled={loading}
+                onClick={handleUpdate}
+              >
+                {t('actions.SAVE')}
+              </button>
+              <button
+                className="btn btn-cancel"
+                type="button"
+                onClick={() => setUpdateMode(false)}
+              >
+                {t('actions.CANCEL')}
+              </button>
+            </div>
+          ) : (
+            <div className="btns btns-end">
+              <button
+                className="btn btn-update"
+                type="button"
+                onClick={() => setUpdateMode(true)}
+              >
+                {t('actions.UPDATE')}
+              </button>
+              <button
+                className="btn btn-delete"
+                type="button"
+                onClick={() => setAlertDelete(true)}
+              >
+                {t('actions.DELETE')}
+              </button>
+            </div>
+          )}
         </div>
         <div className="info-container">
           <div className="info-item">
-            <span className="info-key">{`${t('riskCategory.NAME')}`} : </span>
-            <span className="info-value">{riskCategory?.name}</span>
+            <span className="info-key">{t('riskCategory.NAME')} : </span>
+            {updateMode ? (
+              <input
+                type="text"
+                value={riskCategory?.name}
+                placeholder={`${t('riskCategory.NAME')}`}
+                onChange={e =>
+                  setRiskCategory(prev => ({ ...prev, name: e.target.value }))
+                }
+              />
+            ) : (
+              <span className="info-value">{riskCategory?.name}</span>
+            )}
           </div>
           <div className="info-item">
-            <span className="info-key">{`${t('riskCategory.IMAGE')}`} : </span>
+            <span className="info-key">{t('riskCategory.IMAGE')} : </span>
             <div className="info-value">
-              <img src={riskCategory?.imgUrl} alt="category" />
+              <img
+                src={image ? URL.createObjectURL(image) : riskCategory?.imgUrl}
+                alt="category"
+              />
+              {updateMode && (
+                <label htmlFor="risk-category-img">
+                  <i className="fa-solid fa-pen-to-square update-img-icon" />
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="risk-category-img"
+                    onChange={e =>
+                      setImage(e.target.files && e.target.files[0])
+                    }
+                  />
+                </label>
+              )}
             </div>
           </div>
           <div className="content-header">
-            <h3>{`${t('riskCategory.TYPES')}`} </h3>
-            <button className="btn btn-add" type="button">
-              {`${t('actions.NEW_TYPES')}`}
+            <h3>{t('riskCategory.TYPES')} </h3>
+            <button
+              className="btn btn-add"
+              type="button"
+              onClick={() => setAlertAdd(true)}
+            >
+              {t('actions.NEW_TYPES')}
             </button>
           </div>
           <table>
             <thead>
-              <th>{`${t('riskCategory.ID')}`}</th>
-              <th>{`${t('riskCategory.NAME')}`}</th>
-              <th>{`${t('riskCategory.IMAGE')}`}</th>
-              <th>{`${t('actions.UPDATE')}`}</th>
-              <th>{`${t('actions.DELETE')}`}</th>
+              <th>{t('riskCategory.ID')}</th>
+              <th>{t('riskCategory.NAME')}</th>
+              <th>{t('riskCategory.IMAGE')}</th>
+              <th>{t('actions.UPDATE')}</th>
+              <th>{t('actions.DELETE')}</th>
             </thead>
             <tbody>
               {riskCategory?.riskCategoryTypes?.map(
@@ -79,7 +193,9 @@ function RiskCategory() {
                   <RiskCategoryType
                     key={riskCategoryType.id}
                     riskCategoryType={riskCategoryType}
-                    index={index}
+                    index={index + 1}
+                    riskCategoryId={riskCategory.id}
+                    setRiskCategory={setRiskCategory}
                   />
                 ),
               )}
