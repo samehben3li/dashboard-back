@@ -17,7 +17,7 @@ function Form({ children, error, onSubmit, ...btnProps }: IPropsForm) {
     <form onSubmit={onSubmit}>
       {error.status && <Error message={error.message} />}
       {children}
-      <Buttons {...btnProps} />
+      <Buttons isSubmit onClick={undefined} {...btnProps} />
     </form>
   );
 }

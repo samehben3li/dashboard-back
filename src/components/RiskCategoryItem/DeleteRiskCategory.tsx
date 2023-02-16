@@ -40,7 +40,7 @@ function DeleteRiskCategory({ setAlertDelete, riskCategory }: IProps) {
   };
   return (
     <DeleteAlert
-      setAlertDelete={setAlertDelete}
+      setOpenedAlert={setAlertDelete}
       onClick={handleDelete}
       loading={loading}
       error={error}

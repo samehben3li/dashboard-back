@@ -57,7 +57,7 @@ function DeleteRiskCategoryType({
     <DeleteAlert
       error={error}
       name={riskCategoryType.name}
-      setAlertDelete={setAlertDelete}
+      setOpenedAlert={setAlertDelete}
       onClick={handleDelete}
       loading={loading}
     />

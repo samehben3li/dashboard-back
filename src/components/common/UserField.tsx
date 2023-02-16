@@ -11,13 +11,23 @@ interface IPropsField {
   name: string;
 }
 
-function UserField({ setUserInfo, title, ...props }: IPropsField) {
+function UserField({
+  setUserInfo,
+  title,
+  valueOfInput,
+  ...props
+}: IPropsField) {
   const { t } = useTranslation();
   const handleChange = useHandleChange(setUserInfo);
   return (
     <div className="field">
       <span>{`${t(title)}`} : </span>
-      <input {...props} placeholder={`${t(title)}`} onChange={handleChange} />
+      <input
+        {...props}
+        placeholder={`${t(title)}`}
+        value={valueOfInput}
+        onChange={handleChange}
+      />
     </div>
   );
 }

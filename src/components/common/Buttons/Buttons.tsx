@@ -6,9 +6,17 @@ interface IProps {
   setOpenedAlert: Dispatch<SetStateAction<boolean>>;
   loading: boolean;
   action: string;
+  isSubmit: boolean;
+  onClick: (() => Promise<void>) | undefined;
 }
 
-function Buttons({ setOpenedAlert, loading, action }: IProps) {
+function Buttons({
+  setOpenedAlert,
+  loading,
+  action,
+  isSubmit,
+  onClick,
+}: IProps) {
   const { t } = useTranslation();
   return (
     <div className="btns">
@@ -21,10 +29,12 @@ function Buttons({ setOpenedAlert, loading, action }: IProps) {
         {t('actions.CANCEL')}
       </Button>
       <Button
-        isSubmit
-        className="btn btn-add full-width"
+        isSubmit={isSubmit}
+        className={
+          isSubmit ? 'btn btn-add full-width' : 'btn btn-delete full-width'
+        }
         disabled={loading}
-        onClick={undefined}
+        onClick={onClick}
       >
         {t(action)}
       </Button>

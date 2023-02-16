@@ -22,7 +22,7 @@ function DeleteUserWrapper({ username, id, setAlertDelete, setUsers }: IProps) {
 
   return (
     <DeleteAlert
-      setAlertDelete={setAlertDelete}
+      setOpenedAlert={setAlertDelete}
       loading={loading}
       onClick={handleClick}
       error={error}
