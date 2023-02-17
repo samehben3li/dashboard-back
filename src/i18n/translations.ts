@@ -50,7 +50,7 @@ i18n
             QUESTION_DELETE_USER: 'do you want to delete ',
             RISK_CATEGORIES_LIST: 'Risk Categories List',
             ADD_RISk_CATEGORY: 'ADD RISk CATEGORY',
-            ADD_RISk_CATEGORY_TYPE: 'ADD RISk CATEGORY TYPE',
+            ADD_RISK_CATEGORY_TYPE: 'ADD RISk CATEGORY TYPE',
             UPDATE_RISk_CATEGORY_TYPE: 'Update RISk CATEGORY TYPE',
             FLAGS_LIST: 'Flags List',
           },

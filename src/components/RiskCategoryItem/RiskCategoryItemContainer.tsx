@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IRiskCategory } from '../../interfaces';
+import { Actions } from '../common';
 import DeleteRiskCategory from './DeleteRiskCategory';
 
 interface IProps {
@@ -30,28 +31,14 @@ function RiskCategoryItem({ riskCategory, index }: IProps) {
       <td>
         <img src={riskCategory.imgUrl} alt="imgUrl" />
       </td>
-      <td>
-        <button
-          type="button"
-          className="icon-container update"
-          onClick={() =>
-            navigate(`/riskcategories/${riskCategory.id}`, {
-              state: { isUpdateMode: true },
-            })
-          }
-        >
-          <i className="fa-solid fa-pen-to-square icon icon-update" />
-        </button>
-      </td>
-      <td>
-        <button
-          type="button"
-          className="icon-container delete"
-          onClick={() => setAlertDelete(true)}
-        >
-          <i className="fa-sharp fa-solid fa-trash icon icon-delete" />
-        </button>
-      </td>
+      <Actions
+        deleteAction={() => setAlertDelete(true)}
+        updateAction={() =>
+          navigate(`/riskcategories/${riskCategory.id}`, {
+            state: { isUpdateMode: true },
+          })
+        }
+      />
     </tr>
   );
 }
