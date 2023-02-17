@@ -38,7 +38,7 @@ function RiskCategoryType({
             riskCategoryId={riskCategoryId}
           />
         )}
-        <span>{index + 1}</span>
+        <span>{index}</span>
       </td>
       <td>
         <span>{riskCategoryType.name}</span>

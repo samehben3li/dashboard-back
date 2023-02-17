@@ -18,7 +18,7 @@ function DeleteAlert({ error, name, ...btnProps }: IProps) {
   return (
     <Alert title={null}>
       {error.status && <Error message={error.message} />}
-      <span>{t('titles.QUESTION_DELETE_USER') + name} ?</span>
+      <span>{t('titles.QUESTION_DELETE', { name })}</span>
       <Buttons {...btnProps} action={t('actions.DELETE')} isSubmit={false} />
     </Alert>
   );

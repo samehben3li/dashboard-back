@@ -151,10 +151,10 @@ function RiskCategory() {
   }, [data, err, navigate]);
 
   const uploadImage = () => {
-    const fileExtension = image?.name.split('.').pop() || '';
-    const imgName = `risk-category/${
-      riskCategory.name
-    }${Date.now()}.${fileExtension}`;
+    const fileExtension = image?.name.split('.').pop();
+    const imgName = `risk-category/${riskCategory.name}${Date.now()}${
+      fileExtension ? `.${fileExtension}` : ''
+    }`;
     const imgUrl = `${bucketUrl}${imgName}`;
     setRiskCategory(prev => ({ ...prev, imgUrl }));
     upload(imgName, image as File)

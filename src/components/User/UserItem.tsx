@@ -30,7 +30,7 @@ function UserItem({ user, setUsers, index }: IProps) {
         {alertUpdate && (
           <UpdateUserWrapper setAlertUpdate={setAlertUpdate} user={user} />
         )}
-        <span>{index + 1}</span>
+        <span>{index}</span>
       </td>
       <td>
         <span>{user.username}</span>

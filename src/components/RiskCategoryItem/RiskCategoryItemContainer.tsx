@@ -21,7 +21,7 @@ function RiskCategoryItem({ riskCategory, index }: IProps) {
             riskCategory={riskCategory}
           />
         )}
-        <span>{index + 1}</span>
+        <span>{index}</span>
       </td>
       <td>
         <Link to={`/riskcategories/${riskCategory.id}`} className="link">
