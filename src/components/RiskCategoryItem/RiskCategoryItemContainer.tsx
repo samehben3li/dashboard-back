@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IRiskCategory } from '../../interfaces';
+import { Actions } from '../common';
 import DeleteRiskCategory from './DeleteRiskCategory';
 
 interface IProps {
@@ -10,6 +11,7 @@ interface IProps {
 
 function RiskCategoryItem({ riskCategory, index }: IProps) {
   const [alertDelete, setAlertDelete] = useState(false);
+  const navigate = useNavigate();
   return (
     <tr>
       <td>
@@ -29,20 +31,14 @@ function RiskCategoryItem({ riskCategory, index }: IProps) {
       <td>
         <img src={riskCategory.imgUrl} alt="imgUrl" />
       </td>
-      <td>
-        <div className="icon-container update">
-          <i className="fa-solid fa-pen-to-square icon icon-update" />
-        </div>
-      </td>
-      <td>
-        <button
-          type="button"
-          className="icon-container delete"
-          onClick={() => setAlertDelete(true)}
-        >
-          <i className="fa-sharp fa-solid fa-trash icon icon-delete" />
-        </button>
-      </td>
+      <Actions
+        deleteAction={() => setAlertDelete(true)}
+        updateAction={() =>
+          navigate(`/riskcategories/${riskCategory.id}`, {
+            state: { isUpdateMode: true },
+          })
+        }
+      />
     </tr>
   );
 }

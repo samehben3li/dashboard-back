@@ -40,3 +40,29 @@ export const GET_RISK_CATEGORY = gql`
     }
   }
 `;
+
+export const GET_ALL_FLAGS = gql`
+  query GetAllFlags {
+    getAllFlags {
+      createdAt
+      id
+      location {
+        left
+        right
+      }
+      plantPart {
+        name
+        imgUrl
+      }
+      riskCategory {
+        name
+        imgUrl
+      }
+      riskCategoryType {
+        name
+        imgUrl
+      }
+      userId
+    }
+  }
+`;

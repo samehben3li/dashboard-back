@@ -1,77 +1,41 @@
 import React, { FormEvent, useState } from 'react';
-import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import Logo from '../components/Logo';
-import { useAuth } from '../hooks';
-import { LOGIN } from '../requests/mutations';
+import { inputsOfLogin } from '../utils/constants';
+import { Button, Error, InputGroup, Logo, Main } from '../components/common';
+import { useLogin } from '../hooks';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { t } = useTranslation();
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [error, setError] = useState({ status: false, message: '' });
-  const [login, { loading }] = useMutation(LOGIN);
-  const { authLogin } = useAuth();
+  const { loading, handleLogin } = useLogin(setError);
+  const { t } = useTranslation();
 
-  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError({ status: false, message: '' });
-    try {
-      const mutationResponse = await login({
-        variables: {
-          email,
-          password,
-        },
-      });
-      if (mutationResponse?.data?.login?.user?.isAdmin) {
-        authLogin(mutationResponse?.data?.login?.accessToken);
-      } else {
-        setError({ status: true, message: 'NOT_ADMIN' });
-      }
-    } catch ({ message }) {
-      setError({
-        status: true,
-        message: message as string | 'INCORRECT_CREDENTIALS',
-      });
-    }
-  };
-
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) =>
+    handleLogin(e, credentials);
   return (
-    <div className="main">
-      <div className="modal">
-        <Logo />
-        <form onSubmit={handleLogin}>
-          {error.status && (
-            <span className="error">{t(`errors.${error.message}`)}</span>
-          )}
-          <div className="input-group">
-            <input
-              type="text"
-              name="email"
-              className="input-email"
-              placeholder={`${t('login.EMAIL')}`}
-              onChange={e => setEmail(e.target.value)}
-              value={email}
-            />
-            <div className="input-icon" />
-          </div>
-          <div className="input-group">
-            <input
-              type="password"
-              name="password"
-              className="input-password"
-              placeholder={`${t('login.PASSWORD')}`}
-              onChange={e => setPassword(e.target.value)}
-              value={password}
-            />
-            <div className="input-icon" />
-          </div>
-          <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? '...' : t('login.LOGIN')}
-          </button>
-        </form>
-      </div>
-    </div>
+    <Main>
+      <Logo />
+      <form onSubmit={handleSubmit}>
+        {error.status && <Error message={error.message} />}
+        {inputsOfLogin.map(input => (
+          <InputGroup
+            {...input}
+            setCredentials={setCredentials}
+            value={
+              input.name === 'email' ? credentials.email : credentials.password
+            }
+          />
+        ))}
+        <Button
+          isSubmit
+          className="btn btn-primary"
+          disabled={loading}
+          onClick={undefined}
+        >
+          {loading ? '...' : t('login.LOGIN')}
+        </Button>
+      </form>
+    </Main>
   );
 }
 

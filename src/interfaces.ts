@@ -7,10 +7,11 @@ export interface IContext {
 }
 
 export interface IUser {
-  id: string;
-  username: string;
+  id?: string;
+  username?: string;
   email: string;
-  isAdmin: boolean;
+  isAdmin?: boolean;
+  password: string;
 }
 
 export interface IInputOptions {
@@ -22,6 +23,19 @@ export interface IInputOptions {
 export interface IRiskCategory extends IInputOptions {
   riskCategoryTypes: Array<IInputOptions>;
 }
+
+export interface ITypes {
+  id?: string;
+  name: string;
+  imgUrl: string;
+  img?: File | null;
+  imgName?: string;
+}
+
+export interface ICategory extends ITypes {
+  types?: ITypes[];
+}
+
 export interface IPayload {
   id?: string;
   riskCategories?: IRiskCategory[];
@@ -41,4 +55,23 @@ export interface AppContextProps {
 export interface IState {
   riskCategories: IRiskCategory[];
   dispatch: Dispatch<IAction>;
+}
+
+export interface ILocation {
+  left: string[];
+  right: string[];
+}
+
+export interface IFlag {
+  id?: string;
+  userId?: string;
+  riskCategory: IInputOptions;
+  riskCategoryType: IInputOptions;
+  plantPart: IInputOptions;
+  location: ILocation;
+}
+
+export interface IError {
+  status: boolean;
+  message: string;
 }
