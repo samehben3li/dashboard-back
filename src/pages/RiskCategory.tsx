@@ -11,9 +11,15 @@ import {
 import { bucketUrl, theadsOfRiskCategory } from '../utils/constants';
 import { UPDATE_RISK_CATEGORY } from '../requests/mutations';
 import AddRiskCategoryType from '../components/RiskCategoryItem/AddRiskCategoryType';
-import { Button, Content, Error, InputFile, Table } from '../components/common';
+import {
+  Button,
+  CancelButton,
+  Content,
+  Error,
+  RiskCategoryInfo,
+  Table,
+} from '../components/common';
 import { useUpload } from '../hooks';
-import CancelButton from '../components/common/Buttons/CancelButton';
 
 interface IPropsButtons {
   updateMode: boolean;
@@ -137,7 +143,6 @@ function RiskCategory() {
       id,
     },
   });
-  const { t } = useTranslation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -212,45 +217,19 @@ function RiskCategory() {
         />
       )}
       {error.status && <Error message={error.message} />}
-      <div className="info-container">
-        <div className="info-item">
-          <span className="info-key">{t('riskCategory.NAME')} : </span>
-          {updateMode ? (
-            <input
-              type="text"
-              value={riskCategory?.name}
-              placeholder={`${t('riskCategory.NAME')}`}
-              onChange={e =>
-                setRiskCategory(prev => ({ ...prev, name: e.target.value }))
-              }
-            />
-          ) : (
-            <span className="info-value">{riskCategory?.name}</span>
-          )}
-        </div>
-        <div className="info-item">
-          <span className="info-key">{t('riskCategory.IMAGE')} : </span>
-          <div className="info-value">
-            <img
-              src={image ? URL.createObjectURL(image) : riskCategory?.imgUrl}
-              alt="category"
-            />
-            {updateMode && (
-              <InputFile
-                id="risk-category-img"
-                onChange={e => setImage(e.target.files && e.target.files[0])}
-              >
-                <i className="fa-solid fa-pen-to-square update-img-icon" />
-              </InputFile>
-            )}
-          </div>
-        </div>
+      <RiskCategoryInfo
+        updateMode={updateMode}
+        riskCategory={riskCategory}
+        setRiskCategory={setRiskCategory}
+        image={image}
+        setImage={setImage}
+      >
         <TypesContainer
           setAlertAdd={setAlertAdd}
           riskCategory={riskCategory}
           setRiskCategory={setRiskCategory}
         />
-      </div>
+      </RiskCategoryInfo>
     </Content>
   );
 }
