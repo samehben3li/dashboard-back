@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from './Button';
+import CancelButton from './CancelButton';
 
 interface IProps {
   setOpenedAlert: Dispatch<SetStateAction<boolean>>;
@@ -20,14 +21,10 @@ function Buttons({
   const { t } = useTranslation();
   return (
     <div className="btns">
-      <Button
-        className="btn btn-cancel full-width"
-        onClick={() => setOpenedAlert(false)}
-        isSubmit={false}
-        disabled={false}
-      >
-        {t('actions.CANCEL')}
-      </Button>
+      <CancelButton
+        setOpenedAlert={setOpenedAlert}
+        addedClassName="full-width"
+      />
       <Button
         isSubmit={isSubmit}
         className={

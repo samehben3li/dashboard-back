@@ -13,6 +13,7 @@ import { UPDATE_RISK_CATEGORY } from '../requests/mutations';
 import AddRiskCategoryType from '../components/RiskCategoryItem/AddRiskCategoryType';
 import { Button, Content, Error, InputFile, Table } from '../components/common';
 import { useUpload } from '../hooks';
+import CancelButton from '../components/common/Buttons/CancelButton';
 
 interface IPropsButtons {
   updateMode: boolean;
@@ -55,14 +56,10 @@ function ButtonActions({
           >
             {t('actions.SAVE')}
           </Button>
-          <Button
-            className="btn btn-cancel"
-            onClick={() => setUpdateMode(false)}
-            isSubmit={false}
-            disabled={false}
-          >
-            {t('actions.CANCEL')}
-          </Button>
+          <CancelButton
+            setOpenedAlert={setUpdateMode}
+            addedClassName={undefined}
+          />
         </>
       ) : (
         <>
