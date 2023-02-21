@@ -1,11 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import TomatoTrolleyLogo from '../../assets/images/TomatoTrolleyLogo';
-import LogoutIcon from '../../assets/icons/LogoutIcon';
 import { sidebarMenu } from '../../utils/constants';
 import SidebarItem from './SidebarItem';
 import { Button } from '../common';
 import { useAuth } from '../../hooks';
+import IconTemplate from '../../assets/icons/IconTemplate';
+import { logoutIconInfo } from '../../assets/icons/iconsInfo';
 
 function SideBar() {
   const { logout, isLoggedIn } = useAuth();
@@ -29,7 +30,7 @@ function SideBar() {
           onClick={logout}
         >
           <span className="sidebar-item-label">{t('sidebarItem.LOGOUT')}</span>
-          <LogoutIcon />
+          <IconTemplate iconInfo={logoutIconInfo} />
         </Button>
       </div>
     </nav>

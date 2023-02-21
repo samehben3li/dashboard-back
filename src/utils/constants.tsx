@@ -1,26 +1,30 @@
-import UserIcon from '../assets/icons/UserIcon';
-import CategoriesIcon from '../assets/icons/CategoryIcon';
-import FlagIcon from '../assets/icons/FlagIcon';
+import React from 'react';
 import { ICategory, IState, ITypes } from '../interfaces';
+import IconTemplate from '../assets/icons/IconTemplate';
+import {
+  categoryIconInfo,
+  flagIconInfo,
+  userIconInfo,
+} from '../assets/icons/iconsInfo';
 
 export const serverURL = `${process.env.REACT_APP_SERVER || ''}/`;
 
 export const sidebarMenu = [
   {
     id: 1,
-    icon: UserIcon,
+    icon: () => <IconTemplate iconInfo={userIconInfo} />,
     path: '/',
     title: 'USERS',
   },
   {
     id: 2,
-    icon: CategoriesIcon,
+    icon: () => <IconTemplate iconInfo={categoryIconInfo} />,
     path: '/riskcategories',
     title: 'RISK_CATEGORIES',
   },
   {
     id: 3,
-    icon: FlagIcon,
+    icon: () => <IconTemplate iconInfo={flagIconInfo} />,
     path: '/flags',
     title: 'FLAGS',
   },

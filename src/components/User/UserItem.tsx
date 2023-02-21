@@ -1,10 +1,10 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { IUser } from '../../interfaces';
-import DoneIcon from '../../assets/icons/DoneIcon';
-import CancelIcon from '../../assets/icons/CancelIcon';
 import DeleteUserWrapper from './DeleteUserWrapper';
 import UpdateUserWrapper from './UpdateUserWrapper';
 import { Actions } from '../common';
+import IconTemplate from '../../assets/icons/IconTemplate';
+import { cancelIconInfo, doneIconInfo } from '../../assets/icons/iconsInfo';
 
 interface IProps {
   user: IUser;
@@ -39,7 +39,13 @@ function UserItem({ user, setUsers, index }: IProps) {
         <span>{user.email}</span>
       </td>
       <td>
-        <div>{user.isAdmin ? <DoneIcon /> : <CancelIcon />}</div>
+        <div>
+          {user.isAdmin ? (
+            <IconTemplate iconInfo={doneIconInfo} />
+          ) : (
+            <IconTemplate iconInfo={cancelIconInfo} />
+          )}
+        </div>
       </td>
       <Actions
         updateAction={() => setAlertUpdate(true)}
