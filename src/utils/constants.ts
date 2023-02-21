@@ -60,6 +60,12 @@ export const theadsOfRiskCategory: string[] = [
   'actions.DELETE',
 ];
 
+export const theadsOfAddTypes: string[] = [
+  'riskCategory.NAME',
+  'riskCategory.IMAGE',
+  'actions.ADD',
+];
+
 export const inputsOfLogin = [
   {
     type: 'text',

@@ -18,8 +18,9 @@ import {
   bucketUrl,
   initStateCategory,
   initStateType,
+  theadsOfAddTypes,
 } from '../../utils/constants';
-import { Alert, Button, Form, RiskCategoryFields } from '../common';
+import { Alert, Button, Form, RiskCategoryFields, Table } from '../common';
 
 interface IProps {
   setAlertAddRiskCategory: Dispatch<SetStateAction<boolean>>;
@@ -139,100 +140,91 @@ function AddRiskCategory({ setAlertAddRiskCategory }: IProps) {
           {t('riskCategory.RISK_CATEGORY_TYPES')} :
         </span>
         <div className="sub-field">
-          <table>
-            <thead>
-              <tr>
-                <th>{t('riskCategory.NAME')}</th>
-                <th>{t('riskCategory.IMAGE')}</th>
-                <th>{t('actions.ADD')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
+          <Table theads={theadsOfAddTypes}>
+            <tr>
+              <td>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder={`${t('riskCategory.NAME')}`}
+                  onChange={e =>
+                    setRiskCategoryType({
+                      ...riskCategoryType,
+                      name: e.target.value,
+                    })
+                  }
+                  value={riskCategoryType.name}
+                />
+              </td>
+              <td>
+                <label
+                  htmlFor="risk-category-img-type"
+                  className="add-risk-category-img"
+                >
+                  {riskCategoryType.img ? (
+                    <img
+                      src={URL.createObjectURL(riskCategoryType.img)}
+                      alt="risk category type"
+                    />
+                  ) : (
+                    <i className="fa-regular fa-image upload-icon" />
+                  )}
                   <input
-                    type="text"
-                    name="name"
-                    placeholder={`${t('riskCategory.NAME')}`}
+                    type="file"
+                    className="hidden"
+                    id="risk-category-img-type"
                     onChange={e =>
                       setRiskCategoryType({
                         ...riskCategoryType,
-                        name: e.target.value,
+                        img: e.target.files && e.target.files[0],
                       })
                     }
-                    value={riskCategoryType.name}
+                    accept="image/png, image/svg+xml, image/jpeg, image/jpg"
+                    ref={inputImgRef}
                   />
+                </label>
+              </td>
+
+              <td>
+                <Button
+                  className="btn btn-add"
+                  onClick={handleAdd}
+                  isSubmit={false}
+                  disabled={false}
+                >
+                  {t('actions.ADD')}
+                </Button>
+              </td>
+            </tr>
+            {riskCategoryTypes.map(rct => (
+              <tr key={rct.name}>
+                <td>
+                  <span>{rct.name}</span>
                 </td>
                 <td>
-                  <label
-                    htmlFor="risk-category-img-type"
-                    className="add-risk-category-img"
-                  >
-                    {riskCategoryType.img ? (
-                      <img
-                        src={URL.createObjectURL(riskCategoryType.img)}
-                        alt="risk category type"
-                      />
-                    ) : (
-                      <i className="fa-regular fa-image upload-icon" />
-                    )}
-                    <input
-                      type="file"
-                      className="hidden"
-                      id="risk-category-img-type"
-                      onChange={e =>
-                        setRiskCategoryType({
-                          ...riskCategoryType,
-                          img: e.target.files && e.target.files[0],
-                        })
-                      }
-                      accept="image/png, image/svg+xml, image/jpeg, image/jpg"
-                      ref={inputImgRef}
+                  {rct.img ? (
+                    <img
+                      src={URL.createObjectURL(rct.img)}
+                      alt="risk category type"
+                      className="img-upload"
                     />
-                  </label>
+                  ) : (
+                    <i className="fa-regular fa-image upload-icon" />
+                  )}
                 </td>
-
                 <td>
                   <Button
-                    className="btn btn-add"
-                    onClick={handleAdd}
                     isSubmit={false}
+                    className="icon-container delete"
+                    onClick={() => handleDeleteTypes(rct.name)}
                     disabled={false}
                   >
-                    {t('actions.ADD')}
+                    <i className="fa-sharp fa-solid fa-trash icon icon-delete" />
                   </Button>
                 </td>
               </tr>
-              {riskCategoryTypes.map(rct => (
-                <tr key={rct.name}>
-                  <td>
-                    <span>{rct.name}</span>
-                  </td>
-                  <td>
-                    {rct.img ? (
-                      <img
-                        src={URL.createObjectURL(rct.img)}
-                        alt="risk category type"
-                        className="img-upload"
-                      />
-                    ) : (
-                      <i className="fa-regular fa-image upload-icon" />
-                    )}
-                  </td>
-                  <td>
-                    <Button
-                      isSubmit={false}
-                      className="icon-container delete"
-                      onClick={() => handleDeleteTypes(rct.name)}
-                      disabled={false}
-                    >
-                      <i className="fa-sharp fa-solid fa-trash icon icon-delete" />
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            ))}
+          </Table>
         </div>
       </Form>
     </Alert>
