@@ -1,25 +1,20 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import Button from './Buttons/Button';
+import React, { Dispatch, SetStateAction } from 'react';
+import ButtonOpenAlert from './Buttons/ButtonOpenAlert';
 
 interface IProps {
   btnText: string;
-  onClick: () => void;
+  setOpenedAlert: Dispatch<SetStateAction<boolean>>;
 }
 
-function DashboardHeader({ btnText, onClick }: IProps) {
-  const { t } = useTranslation();
+function DashboardHeader({ btnText, setOpenedAlert }: IProps) {
   return (
     <div className="header-container">
       {btnText && (
-        <Button
-          className="btn btn-header"
-          onClick={onClick}
-          isSubmit={false}
-          disabled={false}
-        >
-          {t(btnText)}
-        </Button>
+        <ButtonOpenAlert
+          className="header"
+          setOpenedAlert={setOpenedAlert}
+          action={btnText}
+        />
       )}
     </div>
   );

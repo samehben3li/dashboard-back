@@ -16,7 +16,7 @@ function RiskCategories() {
       dashboardHeader={
         <DashboardHeader
           btnText="header.NEW_RISK_CATEGORY"
-          onClick={() => setAlertAddRiskCategory(true)}
+          setOpenedAlert={setAlertAddRiskCategory}
         />
       }
       theads={theadsOfRiskCategory}

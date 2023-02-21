@@ -21,7 +21,7 @@ function UsersContainer({ users, setUsers, err }: IPropsContainer) {
       dashboardHeader={
         <DashboardHeader
           btnText="header.NEW_USER"
-          onClick={() => setAlertAddUser(true)}
+          setOpenedAlert={setAlertAddUser}
         />
       }
       theads={theadsOfUsers}

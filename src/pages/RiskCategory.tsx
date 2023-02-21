@@ -13,6 +13,7 @@ import { UPDATE_RISK_CATEGORY } from '../requests/mutations';
 import AddRiskCategoryType from '../components/RiskCategoryItem/AddRiskCategoryType';
 import {
   Button,
+  ButtonOpenAlert,
   CancelButton,
   Content,
   Error,
@@ -69,22 +70,16 @@ function ButtonActions({
         </>
       ) : (
         <>
-          <Button
-            className="btn btn-update"
-            onClick={() => setUpdateMode(true)}
-            isSubmit={false}
-            disabled={false}
-          >
-            {t('actions.UPDATE')}
-          </Button>
-          <Button
-            className="btn btn-delete"
-            onClick={() => setAlertDelete(true)}
-            isSubmit={false}
-            disabled={false}
-          >
-            {t('actions.DELETE')}
-          </Button>
+          <ButtonOpenAlert
+            className="update"
+            setOpenedAlert={setUpdateMode}
+            action="actions.UPDATE"
+          />
+          <ButtonOpenAlert
+            className="delete"
+            setOpenedAlert={setAlertDelete}
+            action="actions.DELETE"
+          />
         </>
       )}
     </div>
@@ -101,14 +96,11 @@ function TypesContainer({
     <>
       <div className="content-header">
         <h3>{t('riskCategory.TYPES')} </h3>
-        <Button
-          className="btn btn-add"
-          onClick={() => setAlertAdd(true)}
-          isSubmit={false}
-          disabled={false}
-        >
-          {t('actions.NEW_TYPES')}
-        </Button>
+        <ButtonOpenAlert
+          className="add"
+          setOpenedAlert={setAlertAdd}
+          action="actions.NEW_TYPES"
+        />
       </div>
       <Table theads={theadsOfRiskCategory}>
         {riskCategory?.riskCategoryTypes?.map((riskCategoryType, index) => (

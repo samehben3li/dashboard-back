@@ -2,6 +2,7 @@ export { default as Alert } from './Alerts/Alert';
 export { default as DeleteAlert } from './Alerts/DeleteAlert';
 export { default as Buttons } from './Buttons/Buttons';
 export { default as Button } from './Buttons/Button';
+export { default as ButtonOpenAlert } from './Buttons/ButtonOpenAlert';
 export { default as CancelButton } from './Buttons/CancelButton';
 export { default as Actions } from './Actions';
 export { default as Container } from './Container';
