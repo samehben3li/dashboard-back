@@ -1,5 +1,6 @@
 export { default as Alert } from './Alerts/Alert';
 export { default as DeleteAlert } from './Alerts/DeleteAlert';
+export { default as AlertOfUser } from './Alerts/AlertOfUser';
 export { default as Buttons } from './Buttons/Buttons';
 export { default as Button } from './Buttons/Button';
 export { default as ButtonOpenAlert } from './Buttons/ButtonOpenAlert';

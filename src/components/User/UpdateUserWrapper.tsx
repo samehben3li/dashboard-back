@@ -2,7 +2,7 @@ import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { IError, IUser } from '../../interfaces';
 import { UPDATE_USER } from '../../requests/mutations';
-import { Alert, Form, UserFields } from '../common';
+import { AlertOfUser } from '../common';
 
 interface IProps {
   setAlertUpdate: Dispatch<SetStateAction<boolean>>;
@@ -46,17 +46,16 @@ function UpdateUserWrapper({ setAlertUpdate, user }: IProps) {
     handleUpdate(e, userInfo);
 
   return (
-    <Alert title="titles.UPDATE_USER">
-      <Form
-        onSubmit={onSubmit}
-        setOpenedAlert={setAlertUpdate}
-        error={error}
-        loading={loading}
-        action="actions.UPDATE"
-      >
-        <UserFields userInfo={userInfo} setUserInfo={setUserInfo} />
-      </Form>
-    </Alert>
+    <AlertOfUser
+      title="UPDATE_USER"
+      onSubmit={onSubmit}
+      error={error}
+      loading={loading}
+      action="UPDATE"
+      userInfo={userInfo}
+      setOpenedAlert={setAlertUpdate}
+      setUserInfo={setUserInfo}
+    />
   );
 }
 
